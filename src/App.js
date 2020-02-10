@@ -1,6 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+
+import Header from "./Components/Header/Header";
+
+import Nav from "./Components/Nav/Nav";
+
+import Profile from "./Components/Profile/Profile";
+
+import Rating from "./Components/Rating/Rating";
+
+import Activity from "./Components/Activity/Activity";
+
+import Footer from "./Components/Footer/Footer";
+import {BrowserRouter, Route} from "react-router-dom";
+
+
+const App = () => {
+    return (
+        <BrowserRouter>
+            <div className="App">
+                <Header/>
+                <Nav/>
+                <Route path="/profile" component={Profile}/>
+                <Route path="/rating" component={Rating}/>
+                <Route path="/activity" component={Activity}/>
+                <Footer/>
+            </div>
+        </BrowserRouter>
+    );
+};
+
+export default App;
+
+
+/*
+import logo from './logo.svg';
 
 function App() {
   return (
@@ -22,5 +57,4 @@ function App() {
     </div>
   );
 }
-
-export default App;
+*/

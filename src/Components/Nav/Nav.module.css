@@ -1,0 +1,18 @@
+.links {
+    border: 2px solid #47BA7E;
+    background-color: #FF6A71;
+}
+
+.containerNav {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.link {
+    text-decoration: none;
+    color: #47BA7E;
+}
+
+.activeLink {
+    color: #fff;
+}
