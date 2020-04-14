@@ -11,7 +11,7 @@ import Profile from "./Components/Profile/Profile";
 import Rating from "./Components/Rating/Rating";
 
 import Activity from "./Components/Activity/Activity";
-
+import Post from "./Components/Activity/Posts/Post";
 import Footer from "./Components/Footer/Footer";
 import {BrowserRouter, Route} from "react-router-dom";
 
