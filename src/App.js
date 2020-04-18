@@ -15,16 +15,16 @@ import Post from "./Components/Activity/Posts/Post";
 import Footer from "./Components/Footer/Footer";
 import {BrowserRouter, Route} from "react-router-dom";
 
-
-const App = () => {
+/*как сделать чтобы урл http://localhost:3000/ перенаправлялся на http://localhost:3000/profile */
+const App = (props) => {
     return (
         <BrowserRouter>
             <div className="App">
                 <Header/>
                 <Nav/>
-                <Route path="/profile" component={Profile}/>
-                <Route path="/rating" component={Rating}/>
-                <Route path="/activity" component={Activity}/>
+                <Route path="/profile" render={() => <Profile/>}/>
+                <Route path="/rating" render={() => <Rating/>} />
+                <Route path="/activity" render={() => <Activity users={props.users} messages={props.messages} />} />
                 <Footer/>
             </div>
         </BrowserRouter>
