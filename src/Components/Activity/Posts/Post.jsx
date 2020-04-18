@@ -7,9 +7,10 @@ const Post = (props) => {
 
 
         <div className={stylesPost.posts}>
-            <div>
-                <img src="https://images.app.goo.gl/NPxc7wY86oQJkqUc8" alt="lapenko"/>
-            </div>
+            <span>
+                <img className={stylesPost.posts__image} src={props.userImage} alt="lapenko"/>
+                <span className={stylesPost.posts__author}>{props.userName}: </span>
+            </span>
             {props.message}
         </div>
     );
