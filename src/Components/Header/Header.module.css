@@ -4,17 +4,104 @@
     background-color: #F9CB00;
 }
 
-.logo {
-    display: block;
-    margin: auto 0;
-    width: 50px;
+.header__logo {
+    height: 60px;
+    font-size: 30px;
+    color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
-.headerContainer {
+.header__settings {
+    font-size: 30px;
+    color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header__container {
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
 }
 
-.name {
+.header__title {
     color: white;
+    font-size: 30px;
+    font-family: 'Kaushan Script', cursive;
+    cursor: pointer;
+}
+
+.header__settingsContentUnvisible {
+    display: none;
+}
+
+.header__settingsContentVisible {
+    display: block;
+    height: 100px;
+
+    background-color: white;
+
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
+.colora {
+    background-color: #F9CB00;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.colorb {
+    background-color: #0D0A0E;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.colorc {
+    background-color: #E9B100;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.colord {
+    background-color: #FF6A22;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.colore {
+    background-color: #FF6A71;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.colorf {
+    background-color: #82B2BB;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.colorg {
+    background-color: #47BA7E;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.colorh {
+    background-color: #276899;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
 }

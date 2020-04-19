@@ -7,62 +7,6 @@
     margin: 0 auto;
 }
 
-.colora {
-    background-color: #F9CB00;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-}
-
-.colorb {
-    background-color: #0D0A0E;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-}
-
-.colorc {
-    background-color: #E9B100;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-}
-
-.colord {
-    background-color: #FF6A22;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-}
-
-.colore {
-    background-color: #FF6A71;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-}
-
-.colorf {
-    background-color: #82B2BB;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-}
-
-.colorg {
-    background-color: #47BA7E;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-}
-
-.colorh {
-    background-color: #276899;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-}
-
 .name {
     font-size: 32px;
     color: white;
