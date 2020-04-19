@@ -24,7 +24,7 @@ const App = (props) => {
                 <Nav/>
                 <Route path="/profile" render={() => <Profile/>}/>
                 <Route path="/rating" render={() => <Rating/>} />
-                <Route path="/activity" render={() => <Activity users={props.users} messages={props.messages} />} />
+                <Route path="/activity" render={() => <Activity activity={props.state.activity} users={props.state.users}  />} />
                 <Footer/>
             </div>
         </BrowserRouter>

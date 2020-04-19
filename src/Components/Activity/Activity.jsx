@@ -3,7 +3,7 @@ import stylesActivity from './Activity.module.css';
 import Post from './Posts/Post';
 
 const Activity = (props) => {
-    let posts = props.messages.map(post => <Post userName={props.users[post.userId].name}
+    let posts = props.activity.messages.map(post => <Post userName={props.users[post.userId].name}
                                                  userImage={props.users[post.userId].image}
                                                  message={post.text} />);
 
