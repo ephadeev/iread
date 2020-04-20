@@ -26,6 +26,7 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 
 .header__title {
@@ -41,67 +42,69 @@
 
 .header__settingsContentVisible {
     display: block;
-    height: 100px;
+    height: 225px;
+    padding: 5px;
 
     background-color: white;
 
     position: absolute;
     top: 30px;
     right: 30px;
+    border-radius: 5px;
 }
 
 .colora {
     background-color: #F9CB00;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
 }
 
 .colorb {
     background-color: #0D0A0E;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
 }
 
 .colorc {
     background-color: #E9B100;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
 }
 
 .colord {
     background-color: #FF6A22;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
 }
 
 .colore {
     background-color: #FF6A71;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
 }
 
 .colorf {
     background-color: #82B2BB;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
 }
 
 .colorg {
     background-color: #47BA7E;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
 }
 
 .colorh {
     background-color: #276899;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
 }
