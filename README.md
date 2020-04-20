@@ -1,3 +1,5 @@
+[Project structure (click to view)](https://jamboard.google.com/d/1MJVH1LLlIuduLO7OPEhAozOhxqBoDmjpLLMAds7iMaU/viewer "click to view")
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
