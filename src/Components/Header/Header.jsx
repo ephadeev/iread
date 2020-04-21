@@ -30,14 +30,14 @@ const Header = () => {
 
                 <div className={stylesHeader.header__settingsContentUnvisible} ref={settings}>
                     Select color scheme:
-                    <div className={stylesHeader.colora}></div>
-                    <div className={stylesHeader.colorb}></div>
-                    <div className={stylesHeader.colorc}></div>
-                    <div className={stylesHeader.colord}></div>
-                    <div className={stylesHeader.colore}></div>
-                    <div className={stylesHeader.colorf}></div>
-                    <div className={stylesHeader.colorg}></div>
-                    <div className={stylesHeader.colorh}></div>
+                    <div className={`${stylesHeader.header__bgColorYellow} ${stylesHeader.header__colorSchemes}`}></div>
+                    <div className={`${stylesHeader.header__bgColorBlack} ${stylesHeader.header__colorSchemes}`}></div>
+                    <div className={`${stylesHeader.header__bgColorGold} ${stylesHeader.header__colorSchemes}`}></div>
+                    <div className={`${stylesHeader.header__bgColorOrange} ${stylesHeader.header__colorSchemes}`}></div>
+                    <div className={`${stylesHeader.header__bgColorPink} ${stylesHeader.header__colorSchemes}`}></div>
+                    <div className={`${stylesHeader.header__bgColorBlue} ${stylesHeader.header__colorSchemes}`}></div>
+                    <div className={`${stylesHeader.header__bgColorGreen} ${stylesHeader.header__colorSchemes}`}></div>
+                    <div className={`${stylesHeader.header__bgColorIndigo} ${stylesHeader.header__colorSchemes}`}></div>
                 </div>
 
             </div>

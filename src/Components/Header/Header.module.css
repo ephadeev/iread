@@ -53,58 +53,40 @@
     border-radius: 5px;
 }
 
-.colora {
+.header__colorSchemes {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+}
+
+.header__bgColorYellow {
     background-color: #F9CB00;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
 }
 
-.colorb {
+.header__bgColorBlack {
     background-color: #0D0A0E;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
 }
 
-.colorc {
+.header__bgColorGold {
     background-color: #E9B100;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
 }
 
-.colord {
+.header__bgColorOrange {
     background-color: #FF6A22;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
 }
 
-.colore {
+.header__bgColorPink {
     background-color: #FF6A71;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
 }
 
-.colorf {
+.header__bgColorBlue {
     background-color: #82B2BB;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
 }
 
-.colorg {
+.header__bgColorGreen {
     background-color: #47BA7E;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
 }
 
-.colorh {
+.header__bgColorIndigo {
     background-color: #276899;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
 }

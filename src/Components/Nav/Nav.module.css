@@ -1,11 +1,13 @@
 .links {
-    border: 2px solid #47BA7E;
-    background-color: #FF6A71;
+    background-color: #F9CB00;
 }
 
 .containerNav {
     max-width: 1200px;
     margin: 0 auto;
+    background-color: #FF6A71;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .link {
