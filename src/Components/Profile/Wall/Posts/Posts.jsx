@@ -5,7 +5,7 @@ import stylesPosts from './Posts.module.css';
 const Posts = (props) => {
     return (
         <div className={stylesPosts.posts}>
-            {props.message}
+            {props.posts}
         </div>
     );
 };

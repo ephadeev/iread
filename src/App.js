@@ -15,17 +15,16 @@ import Post from "./Components/Activity/Posts/Post";
 import Footer from "./Components/Footer/Footer";
 import {BrowserRouter, Route} from "react-router-dom";
 
-/*как сделать чтобы урл http://localhost:3000/ перенаправлялся на http://localhost:3000/profile */
+
 const App = (props) => {
     return (
         <BrowserRouter>
             <div className="App">
                 <Header/>
                 <Nav/>
-                <Route exact path="/" render={() => <Profile users={props.state.users[0]} />}/>
-                <Route exact path="/profile" render={() => <Profile users={props.state.users[0]} />}/>
+                <Route exact path={['/', '/profile']} render={() => <Profile users={props.state.users[0]} posts={props.state.posts} />}/>
                 <Route exact path="/rating" render={() => <Rating/>} />
-                <Route exact path="/activity" render={() => <Activity activity={props.state.activity} users={props.state.users}  />} />
+                <Route exact path="/activity" render={() => <Activity posts={props.state.posts} users={props.state.users}  />} />
                 <Footer/>
             </div>
         </BrowserRouter>
@@ -33,7 +32,6 @@ const App = (props) => {
 };
 
 export default App;
-
 
 /*
 import logo from './logo.svg';

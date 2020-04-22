@@ -7,6 +7,20 @@
     margin: 0 auto;
 }
 
+.profile__flexContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile__avatar {
+    width: 115px;
+}
+
+.profile__information {
+    width: 500px;
+    color: white;
+}
+
 .name {
     font-size: 32px;
     color: white;

@@ -8,11 +8,19 @@ const Profile = (props) => {
     return (
         <div className={stylesProfile.profile}>
                 <div className={stylesProfile.containerProfile}>
-                    <img src={props.users.image} alt="Profile avatar"/>
-                    <h4 className={stylesProfile.name}>{props.users.name}</h4>
-                    Информация о человеке
-                    Что-то вроде витрины с последними прочитанными книгами или загруженными фотками
-                    <Wall />
+                    <div className={stylesProfile.profile__flexContainer}>
+                        <img src={props.users.image} alt="Profile avatar" className={stylesProfile.profile__avatar}/>
+                        <div className={stylesProfile.profile__information}>
+                            <h4 className={stylesProfile.name}>{props.users.name}</h4>
+                            <div>
+                                from
+                            </div>
+                            <div>
+                                Minsk
+                            </div>
+                        </div>
+                    </div>
+                    <Wall posts={props.posts} />
                 </div>
         </div>
     );
