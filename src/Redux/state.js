@@ -1,3 +1,5 @@
+import {renderEntireTree} from "../render";
+
 let state = {
     users: [
         {name: 'Richard Hendricks', image: 'https://www.kinopoisk.ru/images/sm_actor/1615667.jpg'},
@@ -19,6 +21,15 @@ let state = {
     ]
 };
 
-
+export let addPost = (text) => {
+    let post = {
+        id: 8,
+        userId: 0,
+        text: text,
+        isPrivate: false
+    };
+    state.posts.push(post);
+    renderEntireTree(state);
+};
 
 export default state;

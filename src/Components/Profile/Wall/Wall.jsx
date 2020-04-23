@@ -11,7 +11,8 @@ const Wall = (props) => {
     let addPost = () => {
 
         let text = newPost.current.value;
-        alert(text);
+        props.addPost(text);
+        newPost.current.value = '';
     };
 
     let posts = props.posts.map(post =>{

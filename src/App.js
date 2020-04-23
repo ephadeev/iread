@@ -22,7 +22,7 @@ const App = (props) => {
             <div className="App">
                 <Header/>
                 <Nav/>
-                <Route exact path={['/', '/profile']} render={() => <Profile users={props.state.users[0]} posts={props.state.posts} />}/>
+                <Route exact path={['/', '/profile']} render={() => <Profile users={props.state.users[0]} posts={props.state.posts} addPost={props['addPost']} />}/>
                 <Route exact path="/rating" render={() => <Rating/>} />
                 <Route exact path="/activity" render={() => <Activity posts={props.state.posts} users={props.state.users}  />} />
                 <Footer/>
