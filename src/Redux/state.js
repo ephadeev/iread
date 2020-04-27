@@ -18,7 +18,29 @@ let state = {
         {id: 5, userId: 5, text: 'Here we home again', isPrivate: false},
         {id: 6, userId: 0, text: 'love this book.', isPrivate: false},
         {id: 7, userId: 0, text: 'nice one', isPrivate: false}
-    ]
+    ],
+    careers: {
+        shortcomings: [
+            {id: 0, text: 'watched only the first part of the godfather'},
+            {id: 1, text: 'don\'t eat olives'},
+            {id: 2, text: 'don\'t like Russian films'},
+            {id: 3, text: 'don\'t have telekinesis'},
+            {id: 4, text: 'don\'t speak elven'},
+            {id: 5, text: 'bad sense of humor'},
+            {id: 6, text: 'too good sense of humor'}
+        ],
+        checkedElements: 0
+    }
+};
+
+export let checkAmountOfCheckedElements = (status) => {
+    if (status) {
+        state.careers.checkedElements++;
+    } else {
+        state.careers.checkedElements--;
+    }
+    console.log(state.careers.checkedElements);
+    renderEntireTree(state);
 };
 
 export let addPost = (text) => {

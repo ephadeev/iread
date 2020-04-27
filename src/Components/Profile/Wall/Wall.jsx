@@ -15,7 +15,7 @@ const Wall = (props) => {
         newPost.current.value = '';
     };
 
-    let posts = props.posts.map(post =>{
+    let posts = props.posts.map(post => {
         if (post.userId === 0) {
             return <Posts posts={post.text} />
         }
