@@ -1,0 +1,18 @@
+.careers {
+    background-color: #F9CB00;
+    color: white;
+    padding: 10px;
+}
+
+.careers__container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.careers__shortcomings {
+
+}
+
+.careers__inputs {
+    display: block;
+}

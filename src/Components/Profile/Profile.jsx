@@ -9,9 +9,13 @@ const Profile = (props) => {
         <div className={stylesProfile.profile}>
                 <div className={stylesProfile.containerProfile}>
                     <div className={stylesProfile.profile__flexContainer}>
-                        <img src={props.users.image} alt="Profile avatar" className={stylesProfile.profile__avatar}/>
+                        <img src={props.users.image}
+                             alt="Profile avatar"
+                             className={stylesProfile.profile__avatar}/>
                         <div className={stylesProfile.profile__information}>
-                            <h4 className={stylesProfile.name}>{props.users.name}</h4>
+                            <h4 className={stylesProfile.name}>
+                                {props.users.name}
+                            </h4>
                             <div>
                                 from
                             </div>
@@ -20,7 +24,8 @@ const Profile = (props) => {
                             </div>
                         </div>
                     </div>
-                    <Wall posts={props.posts} addPost={props['addPost']} />
+                    <Wall posts={props.posts}
+                          addPost={props['addPost']} />
                 </div>
         </div>
     );
