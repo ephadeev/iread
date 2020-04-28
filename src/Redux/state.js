@@ -21,23 +21,25 @@ let state = {
     ],
     careers: {
         shortcomings: [
-            {id: 0, text: 'watched only the first part of the godfather'},
-            {id: 1, text: 'don\'t eat olives'},
-            {id: 2, text: 'don\'t like Russian films'},
-            {id: 3, text: 'don\'t have telekinesis'},
-            {id: 4, text: 'don\'t speak elven'},
-            {id: 5, text: 'bad sense of humor'},
-            {id: 6, text: 'too good sense of humor'}
+            {id: 0, text: 'watched only the first part of the godfather', isChecked: false},
+            {id: 1, text: 'don\'t eat olives', isChecked: false},
+            {id: 2, text: 'don\'t like Russian films', isChecked: false},
+            {id: 3, text: 'don\'t have telekinesis', isChecked: false},
+            {id: 4, text: 'don\'t speak elven', isChecked: false},
+            {id: 5, text: 'bad sense of humor', isChecked: false},
+            {id: 6, text: 'too good sense of humor', isChecked: false}
         ],
         checkedElements: 0
     }
 };
 
-export let checkAmountOfCheckedElements = (status) => {
+export let checkAmountOfCheckedElements = (status, id) => {
     if (status) {
         state.careers.checkedElements++;
+        state.careers.shortcomings[id].isChecked = true;
     } else {
         state.careers.checkedElements--;
+        state.careers.shortcomings[id].isChecked = false;
     }
     console.log(state.careers.checkedElements);
     renderEntireTree(state);

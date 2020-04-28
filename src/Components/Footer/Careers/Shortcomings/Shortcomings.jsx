@@ -13,7 +13,7 @@ const Shortcomings = (props) => {
         console.log(inpCheckbox.current);
         let status = inpCheckbox.current.checked;
         console.log(status);
-        props.checkAmountOfCheckedElements(status);
+        props.checkAmountOfCheckedElements(status, props.shortcomings.id);
     };
 
     return(
@@ -21,7 +21,8 @@ const Shortcomings = (props) => {
             <input type="checkbox"
                    onClick={checkAmountOfCheckedElements}
                    ref={inpCheckbox}
-                   disabled={(props.checkedElements >= 5)} />
+                   disabled={(props.checkedElements >= 5) && (props.shortcomings.isChecked === false)}
+                   checked={props.shortcomings.isChecked} />
             <div>{props.shortcomings.text}</div>
         </label>
     );
