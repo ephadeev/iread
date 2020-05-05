@@ -13,6 +13,14 @@
     cursor: pointer;
 }
 
+.header__login {
+    font-size: 30px;
+    color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
 .header__settings {
     font-size: 30px;
     color: white;
@@ -36,11 +44,11 @@
     cursor: pointer;
 }
 
-.header__settingsContentUnvisible {
+.header__contentUnvisible {
     display: none;
 }
 
-.header__settingsContentVisible {
+.header__contentVisible {
     display: block;
     height: 225px;
     padding: 5px;
@@ -51,6 +59,10 @@
     top: 30px;
     right: 30px;
     border-radius: 5px;
+}
+
+.header__label {
+    display: block;
 }
 
 .header__colorSchemes {
