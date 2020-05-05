@@ -3,7 +3,6 @@ import stylesCareers from './Careers.module.css';
 import Shortcomings from "./Shortcomings/Shortcomings";
 
 const Careers = (props) => {
-    console.log(props);
 
     let shortcomings = props.shortcomings.map(shortcoming => {
         return <Shortcomings shortcomings={shortcoming}
