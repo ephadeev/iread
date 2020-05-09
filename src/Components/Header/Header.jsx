@@ -1,7 +1,34 @@
-import React from "react";
+import React, {useEffect} from "react";
 import stylesHeader from './Header.module.css';
+import firebase from "firebase";
+import SignIn from "./Sign-in/SignIn";
 
 const Header = () => {
+
+    useEffect(() => {
+
+        let firebaseConfig = {
+            apiKey: "AIzaSyB_1Y2KFoOMHSSmrkbgX2_VQB5ZDI_BuZY",
+            authDomain: "iread-529b4.firebaseapp.com",
+            databaseURL: "https://iread-529b4.firebaseio.com",
+            projectId: "iread-529b4",
+            storageBucket: "iread-529b4.appspot.com",
+            messagingSenderId: "598382842689",
+            appId: "1:598382842689:web:8e579c1da14f9e5cc547c0",
+            measurementId: "G-S5GF7FYN7K"
+        };
+        firebase.initializeApp(firebaseConfig);
+    }, []);
+
+    /*useEffect(() => {
+
+    });*/
+
+
+    firebase.auth().signInWithEmailAndPassword('example@example.com', '123456')
+        .then((response) => {
+        console.log(response.user.uid);
+    });
 
     let login = React.createRef();
     let settings = React.createRef();
@@ -34,44 +61,8 @@ const Header = () => {
 
                 <div className={stylesHeader.header__contentUnvisible}
                      ref={login}>
-                    <form action="">
-                        <fieldset>
-                            <legend>
-                                Sign in
-                            </legend>
-                            <label className={stylesHeader.header__label}>
-                                <span>E-mail: </span>
-                                <input type="email"/>
-                            </label>
-                            <label className={stylesHeader.header__label}>
-                                <span>Password: </span>
-                                <input type="password"
-                                       minLength='6'
-                                       maxLength='6' />
-                            </label>
-                        </fieldset>
-                        <input type="submit"
-                               value="Sign in" />
-                    </form>
-                    <form action="">
-                        <fieldset>
-                            <legend>
-                                Sign up
-                            </legend>
-                            <label className={stylesHeader.header__label}>
-                                <span>E-mail: </span>
-                                <input type="email"/>
-                            </label>
-                            <label className={stylesHeader.header__label}>
-                                <span>Password: </span>
-                                <input type="password"
-                                       minLength='6'
-                                       maxLength='6' />
-                            </label>
-                        </fieldset>
-                        <input type="submit"
-                               value="Sign up" />
-                    </form>
+                    <SignIn />
+
                 </div>
 
                 <div className={stylesHeader.header__settings}>
