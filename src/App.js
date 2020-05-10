@@ -16,7 +16,7 @@ const App = (props) => {
                 <Header/>
                 <Nav/>
                 <Route exact path={['/', '/profile']}
-                       render={() => <Profile users={props.state.users[0]}
+                       render={() => <Profile users={props.users[0]}
                                               posts={props.state.activity.posts}
                                               dispatch={props.dispatch} />
                        }
@@ -26,7 +26,7 @@ const App = (props) => {
                 />
                 <Route exact path="/activity"
                        render={() => <Activity posts={props.state.activity.posts}
-                                               users={props.state.users} />
+                                               users={props.users} />
                        }
                 />
                 <Route exact path="/careers"

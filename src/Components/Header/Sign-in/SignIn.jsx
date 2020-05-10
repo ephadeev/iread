@@ -8,18 +8,23 @@ const SignIn = () => {
     let email = React.createRef();
     let pass = React.createRef();
 
-    let signIn = () => {
+    let signIn = (event) => {
+        event.preventDefault();
         firebase.auth().signInWithEmailAndPassword(email.current.value, pass.current.value)
             .then((response) => {
                 console.log(response.user.uid);
+                email.current.value = '';
+                pass.current.value = '';
             })
             .catch((err) => {
                 console.log(err);
+                email.current.value = '';
+                pass.current.value = '';
             });
     };
 
     return (
-        <form action="">
+        <form onSubmit={signIn} >
             <fieldset>
                 <legend>
                     Sign in
@@ -38,7 +43,7 @@ const SignIn = () => {
                 </label>
             </fieldset>
             <input type="submit"
-                   value="Sign in" onClick={signIn} />
+                   value="Sign in" />
         </form>
     )
 };
