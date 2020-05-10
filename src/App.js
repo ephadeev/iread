@@ -17,23 +17,23 @@ const App = (props) => {
                 <Nav/>
                 <Route exact path={['/', '/profile']}
                        render={() => <Profile users={props.state.users[0]}
-                                              posts={props.state.posts}
-                                              dispatch={props.dispatch}
-                       />}
+                                              posts={props.state.activity.posts}
+                                              dispatch={props.dispatch} />
+                       }
                 />
                 <Route exact path="/rating"
                        render={() => <Rating/>}
                 />
                 <Route exact path="/activity"
-                       render={() => <Activity posts={props.state.posts}
-                                               users={props.state.users}
-                       />}
+                       render={() => <Activity posts={props.state.activity.posts}
+                                               users={props.state.users} />
+                       }
                 />
                 <Route exact path="/careers"
                        render={() => <Careers shortcomings={props.state.careers.shortcomings}
                                               checkedElements={props.state.careers.checkedElements}
-                                              dispatch={props.dispatch}
-                       />}
+                                              dispatch={props.dispatch} />
+                       }
                 />
                 <Footer />
             </div>

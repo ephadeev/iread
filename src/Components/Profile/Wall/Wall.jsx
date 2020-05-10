@@ -1,7 +1,7 @@
 import React from "react";
 import stylesWall from './Wall.module.css';
 import Posts from "./Posts/Posts";
-import {addPostActionCreator} from "../../../Redux/state";
+import {addPostActionCreator} from "../../../Redux/activity-reducer";
 
 const Wall = (props) => {
 

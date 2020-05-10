@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './Shortcomings.module.css'
-import {checkAmountOfCheckedElementsActionCreator} from "../../../../Redux/state";
+import {checkAmountOfCheckedElementsActionCreator} from "../../../../Redux/careers-reducer";
 
 
 

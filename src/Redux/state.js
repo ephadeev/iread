@@ -1,5 +1,5 @@
-let ADD_POST = 'ADD-POST';
-let CHECK_AMOUNT_OF_CHECKED_ELEMENT = 'CHECK-AMOUNT-OF-CHECKED-ELEMENT';
+import activityReducer from "./activity-reducer";
+import careersReducer from "./careers-reducer";
 
 const store = {
     _state: {
@@ -11,16 +11,18 @@ const store = {
             {name: 'Monica Hall', image: 'https://www.kinopoisk.ru/images/sm_actor/731114.jpg'},
             {name: 'Jared', image: 'https://www.kinopoisk.ru/images/sm_actor/1085386.jpg'}
         ],
-        posts: [
-            {id: 0, userId: 0, text: 'Hello! How are you?', isPrivate: false},
-            {id: 1, userId: 1, text: 'Im fine thank you!', isPrivate: false},
-            {id: 2, userId: 2, text: 'Where are you?', isPrivate: false},
-            {id: 3, userId: 3, text: 'Whats uuuuuuup', isPrivate: false},
-            {id: 4, userId: 4, text: 'I am going home.', isPrivate: false},
-            {id: 5, userId: 5, text: 'Here we home again', isPrivate: false},
-            {id: 6, userId: 0, text: 'love this book.', isPrivate: false},
-            {id: 7, userId: 0, text: 'nice one', isPrivate: false}
-        ],
+        activity: {
+            posts: [
+                {id: 0, userId: 0, text: 'Hello! How are you?', isPrivate: false},
+                {id: 1, userId: 1, text: 'Im fine thank you!', isPrivate: false},
+                {id: 2, userId: 2, text: 'Where are you?', isPrivate: false},
+                {id: 3, userId: 3, text: 'Whats uuuuuuup', isPrivate: false},
+                {id: 4, userId: 4, text: 'I am going home.', isPrivate: false},
+                {id: 5, userId: 5, text: 'Here we home again', isPrivate: false},
+                {id: 6, userId: 0, text: 'love this book.', isPrivate: false},
+                {id: 7, userId: 0, text: 'nice one', isPrivate: false}
+            ],
+        },
         careers: {
             shortcomings: [
                 {id: 0, text: 'watched only the first part of the godfather', isChecked: false},
@@ -47,41 +49,9 @@ const store = {
         this._renderEntireTree = observer;
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let post = {
-                id: 8,
-                userId: 0,
-                text: action.text,
-                isPrivate: false
-            };
-            this._state.posts.push(post);
-            this._renderEntireTree(this.getState());
-        } else if (action.type === CHECK_AMOUNT_OF_CHECKED_ELEMENT) {
-            if (action.status) {
-                this._state.careers.checkedElements++;
-                this._state.careers.shortcomings[action.id].isChecked = true;
-            } else {
-                this._state.careers.checkedElements--;
-                this._state.careers.shortcomings[action.id].isChecked = false;
-            }
-            this._renderEntireTree(this.getState());
-        }
-    }
-
-};
-
-export const addPostActionCreator = (text) => {
-    return {
-        type: ADD_POST,
-        text: text
-    }
-};
-
-export const checkAmountOfCheckedElementsActionCreator = (status, id) => {
-    return {
-        type: CHECK_AMOUNT_OF_CHECKED_ELEMENT,
-        status: status,
-        id: id
+        this._state.activity = activityReducer(this._state.activity, action);
+        this._state.careers = careersReducer(this._state.careers, action);
+        this._renderEntireTree(this.getState());
     }
 };
 
