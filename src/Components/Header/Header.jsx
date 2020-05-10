@@ -2,11 +2,11 @@ import React, {useEffect} from "react";
 import stylesHeader from './Header.module.css';
 import firebase from "firebase";
 import SignIn from "./Sign-in/SignIn";
+import SignUp from "./Sign-up/SignUp";
 
 const Header = () => {
 
-    useEffect(() => {
-
+    let initFirebase = () => {
         let firebaseConfig = {
             apiKey: "AIzaSyB_1Y2KFoOMHSSmrkbgX2_VQB5ZDI_BuZY",
             authDomain: "iread-529b4.firebaseapp.com",
@@ -18,17 +18,9 @@ const Header = () => {
             measurementId: "G-S5GF7FYN7K"
         };
         firebase.initializeApp(firebaseConfig);
-    }, []);
+    };
 
-    /*useEffect(() => {
-
-    });*/
-
-
-    firebase.auth().signInWithEmailAndPassword('example@example.com', '123456')
-        .then((response) => {
-        console.log(response.user.uid);
-    });
+    useEffect(initFirebase, []);
 
     let login = React.createRef();
     let settings = React.createRef();
@@ -62,7 +54,7 @@ const Header = () => {
                 <div className={stylesHeader.header__contentUnvisible}
                      ref={login}>
                     <SignIn />
-
+                    <SignUp />
                 </div>
 
                 <div className={stylesHeader.header__settings}>

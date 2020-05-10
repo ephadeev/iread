@@ -1,19 +1,17 @@
 import React from "react";
 import styles from './Shortcomings.module.css'
+import {checkAmountOfCheckedElementsActionCreator} from "../../../../Redux/state";
+
+
 
 const Shortcomings = (props) => {
     let inpCheckbox = React.createRef();
-
-    /*if (props.checkedElements >= 5) {
-        // inpCheckbox.current - null :(
-        inpCheckbox.current.disabled = true;
-    }*/
-
     let checkAmountOfCheckedElements = (event) => {
         console.log(inpCheckbox.current);
         let status = inpCheckbox.current.checked;
         console.log(status);
-        props.checkAmountOfCheckedElements(status, props.shortcomings.id);
+        let id = props.shortcomings.id;
+        props.dispatch(checkAmountOfCheckedElementsActionCreator(status, id));
     };
 
     return(

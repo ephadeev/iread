@@ -10,8 +10,7 @@ import App from "./App";
 const renderEntireTree = (state) => {
     ReactDOM.render(
         <App state={state}
-             checkAmountOfCheckedElements={store.checkAmountOfCheckedElements.bind(store)}
-             addPost={store.addPost.bind(store)} />,
+             dispatch={store.dispatch.bind(store)} />,
         document.getElementById('root')
     );
 };

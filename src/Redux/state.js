@@ -1,3 +1,6 @@
+let ADD_POST = 'ADD-POST';
+let CHECK_AMOUNT_OF_CHECKED_ELEMENT = 'CHECK-AMOUNT-OF-CHECKED-ELEMENT';
+
 const store = {
     _state: {
         users: [
@@ -40,28 +43,45 @@ const store = {
     _renderEntireTree() {
         console.log('state changed');
     },
-    checkAmountOfCheckedElements(status, id) {
-        if (status) {
-            this._state.careers.checkedElements++;
-            this._state.careers.shortcomings[id].isChecked = true;
-        } else {
-            this._state.careers.checkedElements--;
-            this._state.careers.shortcomings[id].isChecked = false;
-        }
-        this._renderEntireTree(this.getState());
-    },
-    addPost(text) {
-        let post = {
-            id: 8,
-            userId: 0,
-            text: text,
-            isPrivate: false
-        };
-        this._state.posts.push(post);
-        this._renderEntireTree(this.getState());
-    },
     subscribe(observer) {
         this._renderEntireTree = observer;
+    },
+    dispatch(action) {
+        if (action.type === ADD_POST) {
+            let post = {
+                id: 8,
+                userId: 0,
+                text: action.text,
+                isPrivate: false
+            };
+            this._state.posts.push(post);
+            this._renderEntireTree(this.getState());
+        } else if (action.type === CHECK_AMOUNT_OF_CHECKED_ELEMENT) {
+            if (action.status) {
+                this._state.careers.checkedElements++;
+                this._state.careers.shortcomings[action.id].isChecked = true;
+            } else {
+                this._state.careers.checkedElements--;
+                this._state.careers.shortcomings[action.id].isChecked = false;
+            }
+            this._renderEntireTree(this.getState());
+        }
+    }
+
+};
+
+export const addPostActionCreator = (text) => {
+    return {
+        type: ADD_POST,
+        text: text
+    }
+};
+
+export const checkAmountOfCheckedElementsActionCreator = (status, id) => {
+    return {
+        type: CHECK_AMOUNT_OF_CHECKED_ELEMENT,
+        status: status,
+        id: id
     }
 };
 

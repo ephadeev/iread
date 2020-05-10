@@ -1,8 +1,7 @@
 import React from "react";
-
 import stylesWall from './Wall.module.css';
-
 import Posts from "./Posts/Posts";
+import {addPostActionCreator} from "../../../Redux/state";
 
 const Wall = (props) => {
 
@@ -11,7 +10,7 @@ const Wall = (props) => {
     let addPost = () => {
 
         let text = newPost.current.value;
-        props.addPost(text);
+        props.dispatch(addPostActionCreator(text));
         newPost.current.value = '';
     };
 
