@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import Header from "./Components/Header/Header";
 import Nav from "./Components/Nav/Nav";
@@ -8,8 +8,41 @@ import Activity from "./Components/Activity/Activity";
 import Footer from "./Components/Footer/Footer";
 import Careers from './Components/Footer/Careers/Careers'
 import {BrowserRouter, Route} from "react-router-dom";
+import firebase from "firebase";
 
 const App = (props) => {
+    const initFirebase = () => {
+        let firebaseConfig = {
+            apiKey: "AIzaSyB_1Y2KFoOMHSSmrkbgX2_VQB5ZDI_BuZY",
+            authDomain: "iread-529b4.firebaseapp.com",
+            databaseURL: "https://iread-529b4.firebaseio.com",
+            projectId: "iread-529b4",
+            storageBucket: "iread-529b4.appspot.com",
+            messagingSenderId: "598382842689",
+            appId: "1:598382842689:web:8e579c1da14f9e5cc547c0",
+            measurementId: "G-S5GF7FYN7K"
+        };
+        return firebase.initializeApp(firebaseConfig);
+
+
+    };
+    let defaultProject = initFirebase();
+    let defaultFirestore = defaultProject.firestore();
+
+
+    let posts = [];
+    const getPosts = () => {
+        defaultFirestore.collection('posts').get()
+            .then(response => {
+                response.docs.forEach(post => {
+                    console.log(post.data());
+                    posts.push(post.data());
+                })
+            });
+    };
+    getPosts();
+    console.log(posts);
+
     return (
         <BrowserRouter>
             <div className="App">
@@ -17,7 +50,7 @@ const App = (props) => {
                 <Nav/>
                 <Route exact path={['/', '/profile']}
                        render={() => <Profile users={props.users[0]}
-                                              posts={props.state.activity.posts}
+                                              posts={posts}
                                               dispatch={props.dispatch} />
                        }
                 />

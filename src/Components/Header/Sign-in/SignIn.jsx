@@ -8,16 +8,17 @@ const SignIn = () => {
     let email = React.createRef();
     let pass = React.createRef();
 
-    let signIn = (event) => {
+    const signIn = event => {
         event.preventDefault();
         firebase.auth().signInWithEmailAndPassword(email.current.value, pass.current.value)
             .then((response) => {
                 console.log(response.user.uid);
+                console.log(response);
                 email.current.value = '';
                 pass.current.value = '';
             })
-            .catch((err) => {
-                console.log(err);
+            .catch(err => {
+                console.log(err.message);
                 email.current.value = '';
                 pass.current.value = '';
             });

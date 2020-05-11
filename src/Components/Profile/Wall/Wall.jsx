@@ -2,9 +2,10 @@ import React from "react";
 import stylesWall from './Wall.module.css';
 import Posts from "./Posts/Posts";
 import {addPostActionCreator} from "../../../Redux/activity-reducer";
+import * as firebase from "firebase";
 
 const Wall = (props) => {
-
+    console.log(props);
     let newPost = React.createRef();
 
     let addPost = () => {
@@ -15,7 +16,8 @@ const Wall = (props) => {
     };
 
     let posts = props.posts.map(post => {
-        if (post.userId === 0) {
+
+        if (post.userId === 'pczX7HckW1e8bydZ91wAFPN0V443') {
             return <Posts posts={post.text} />
         }
     });
