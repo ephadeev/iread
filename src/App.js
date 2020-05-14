@@ -11,23 +11,9 @@ import {BrowserRouter, Route} from "react-router-dom";
 import firebase from "firebase";
 
 const App = (props) => {
-    const initFirebase = () => {
-        let firebaseConfig = {
-            apiKey: "AIzaSyB_1Y2KFoOMHSSmrkbgX2_VQB5ZDI_BuZY",
-            authDomain: "iread-529b4.firebaseapp.com",
-            databaseURL: "https://iread-529b4.firebaseio.com",
-            projectId: "iread-529b4",
-            storageBucket: "iread-529b4.appspot.com",
-            messagingSenderId: "598382842689",
-            appId: "1:598382842689:web:8e579c1da14f9e5cc547c0",
-            measurementId: "G-S5GF7FYN7K"
-        };
-        return firebase.initializeApp(firebaseConfig);
+    // const [userData, setUserData] = useState(null);
 
-
-    };
-    let defaultProject = initFirebase();
-    let defaultFirestore = defaultProject.firestore();
+    let defaultFirestore = props.defaultProject.firestore();
 
 
     let posts = [];
@@ -46,7 +32,7 @@ const App = (props) => {
     return (
         <BrowserRouter>
             <div className="App">
-                <Header/>
+                <Header dispatch={props.dispatch} />
                 <Nav/>
                 <Route exact path={['/', '/profile']}
                        render={() => <Profile users={props.users[0]}

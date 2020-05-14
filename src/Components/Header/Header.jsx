@@ -3,8 +3,9 @@ import stylesHeader from './Header.module.css';
 import firebase from "firebase";
 import SignIn from "./Sign-in/SignIn";
 import SignUp from "./Sign-up/SignUp";
+import signInActionCreator from '../../';
 
-const Header = () => {
+const Header = (props) => {
 
 
 
@@ -20,6 +21,22 @@ const Header = () => {
             container.current.classList.add(stylesHeader.header__contentUnvisible);
         }
     };
+
+    let LogOut = (event) => {
+        event.preventDefault();
+        firebase.auth().signOut()
+            .then(() => console.log('user signed out'));
+    };
+
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            console.log('user logged: ', user.uid);
+            props.dispatch(signInActionCreator());
+        } else {
+            console.log('user logged out');
+        }
+    });
+
     return (
         <div className={stylesHeader.header}>
             <div className={stylesHeader.header__container}>
@@ -41,6 +58,7 @@ const Header = () => {
                      ref={login}>
                     <SignIn />
                     <SignUp />
+                    <button onClick={LogOut}>Logout</button>
                 </div>
 
                 <div className={stylesHeader.header__settings}>
