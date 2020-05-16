@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import Header from "./Components/Header/Header";
 import Nav from "./Components/Nav/Nav";
@@ -8,13 +8,10 @@ import Activity from "./Components/Activity/Activity";
 import Footer from "./Components/Footer/Footer";
 import Careers from './Components/Footer/Careers/Careers'
 import {BrowserRouter, Route} from "react-router-dom";
-import firebase from "firebase";
 
 const App = (props) => {
     // const [userData, setUserData] = useState(null);
-
     let defaultFirestore = props.defaultProject.firestore();
-
 
     let posts = [];
     const getPosts = () => {

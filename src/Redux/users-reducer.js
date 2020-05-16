@@ -22,3 +22,7 @@ export const signInActionCreator = (id) => {
 };
 
 export default usersReducer;
+
+//app 30
+//wall 8
+//header 33

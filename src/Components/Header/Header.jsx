@@ -3,12 +3,9 @@ import stylesHeader from './Header.module.css';
 import firebase from "firebase";
 import SignIn from "./Sign-in/SignIn";
 import SignUp from "./Sign-up/SignUp";
-import signInActionCreator from '../../';
+import {signInActionCreator} from '../../Redux/users-reducer';
 
 const Header = (props) => {
-
-
-
     let login = React.createRef();
     let settings = React.createRef();
 
@@ -22,7 +19,7 @@ const Header = (props) => {
         }
     };
 
-    let LogOut = (event) => {
+    let LogOut = event => {
         event.preventDefault();
         firebase.auth().signOut()
             .then(() => console.log('user signed out'));
@@ -31,7 +28,8 @@ const Header = (props) => {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             console.log('user logged: ', user.uid);
-            props.dispatch(signInActionCreator());
+            let id = user.uid;
+            props.dispatch(signInActionCreator(id));
         } else {
             console.log('user logged out');
         }
