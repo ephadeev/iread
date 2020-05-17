@@ -4,8 +4,9 @@ import Post from './Posts/Post';
 
 const Activity = (props) => {
     let posts = props.posts.map(post => <Post userName={props.users[post.userId].name}
-                                                 userImage={props.users[post.userId].image}
-                                                 message={post.text} />);
+                                              userImage={props.users[post.userId].image}
+                                              message={post.text}
+                                              key={post.userId} />);
 
     return (
         <div className={stylesActivity.activity}>
