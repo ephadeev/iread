@@ -9,20 +9,28 @@ let initialState = {
         {id: 4, userId: 4, text: 'I am going home.', isPrivate: false},
         {id: 5, userId: 5, text: 'Here we home again', isPrivate: false},
         {id: 6, userId: 0, text: 'love this book.', isPrivate: false},
-        {id: 7, userId: 0, text: 'nice one', isPrivate: false}
-    ],
+        {id: 7, userId: 0, text: 'nice one', isPrivate: false}],
+    users: [
+        {name: 'Richard Hendricks', image: 'https://www.kinopoisk.ru/images/sm_actor/1852968.jpg'},
+        {name: 'Nelson Bighetti', image: 'https://www.kinopoisk.ru/images/sm_actor/1852968.jpg'},
+        {name: 'Bertram Gilfoyle', image: 'https://www.kinopoisk.ru/images/sm_actor/11897.jpg'},
+        {name: 'Dinesh Chugtai', image: 'https://www.kinopoisk.ru/images/sm_actor/1833413.jpg'},
+        {name: 'Monica Hall', image: 'https://www.kinopoisk.ru/images/sm_actor/731114.jpg'},
+        {name: 'Jared', image: 'https://www.kinopoisk.ru/images/sm_actor/1085386.jpg'}]
 };
 
 const activityReducer = (state = initialState, action) => {
     if (action.type === ADD_POST) {
+        let stateCopy = {...state};
+        stateCopy.posts = [...state.posts];
         let post = {
             id: 8,
             userId: 0,
             text: action.text,
             isPrivate: false
         };
-        state.posts.push(post);
-        return state;
+        stateCopy.posts.push(post);
+        return stateCopy;
     }
     return state;
 };

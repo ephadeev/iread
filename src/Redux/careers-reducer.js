@@ -16,13 +16,15 @@ let initialState = {
 const careersReducer = (state = initialState, action) => {
     if (action.type === CHECK_AMOUNT_OF_CHECKED_ELEMENT) {
         if (action.status) {
-            state.checkedElements++;
-            state.shortcomings[action.id].isChecked = true;
-            return state;
+            let stateCopy = {...state};
+            stateCopy.checkedElements++;
+            stateCopy.shortcomings[action.id].isChecked = true;
+            return stateCopy;
         } else {
-            state.checkedElements--;
-            state.shortcomings[action.id].isChecked = false;
-            return state;
+            let stateCopy = {...state};
+            stateCopy.checkedElements--;
+            stateCopy.shortcomings[action.id].isChecked = false;
+            return stateCopy;
         }
     }
     return state;

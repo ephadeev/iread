@@ -8,8 +8,13 @@ let initialState = {
 
 const usersReducer = (state = initialState, action) => {
     if (action.type === SIGN_IN) {
-        state.user.id = action.id;
-        return state
+        return {
+            ...state,
+            user: {
+                ...state.user,
+                id: action.id
+            }
+        }
     }
     return state;
 };
@@ -22,7 +27,3 @@ export const signInActionCreator = (id) => {
 };
 
 export default usersReducer;
-
-//app 30
-//wall 8
-//header 33
