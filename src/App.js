@@ -4,10 +4,10 @@ import Header from "./Components/Header/Header";
 import Nav from "./Components/Nav/Nav";
 import Profile from "./Components/Profile/Profile";
 import Rating from "./Components/Rating/Rating";
-import Activity from "./Components/Activity/Activity";
 import Footer from "./Components/Footer/Footer";
 import Careers from './Components/Footer/Careers/Careers'
 import {BrowserRouter, Route} from "react-router-dom";
+import ActivityContainer from "./Components/Activity/ActivityContainer";
 
 const App = (props) => {
     // const [userData, setUserData] = useState(null);
@@ -38,11 +38,10 @@ const App = (props) => {
                        }
                 />
                 <Route exact path="/rating"
-                       render={() => <Rating/>}
+                       render={() => <Rating />}
                 />
                 <Route exact path="/activity"
-                       render={() => <Activity posts={props.state.activity.posts}
-                                               users={props.users} />
+                       render={() => <ActivityContainer />
                        }
                 />
                 <Route exact path="/careers"

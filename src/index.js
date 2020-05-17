@@ -5,6 +5,7 @@ import './index.css';
 import store from "./Redux/redux-store";
 import App from "./App";
 import firebase from "firebase";
+import {Provider} from 'react-redux';
 
 const initFirebase = () => {
     let firebaseConfig = {
@@ -30,18 +31,12 @@ let users = [
     {name: 'Jared', image: 'https://www.kinopoisk.ru/images/sm_actor/1085386.jpg'}
 ];
 
-const renderEntireTree = (state) => {
-    ReactDOM.render(
-        <App state={state}
-             dispatch={store.dispatch.bind(store)}
-             users={users}
-             defaultProject={defaultProject} />,
-        document.getElementById('root')
-    );
-};
-
-renderEntireTree(store.getState());
-store.subscribe(() => {
-    let state = store.getState();
-    renderEntireTree(state);
-});
+// dispatch={store.dispatch.bind(store)}
+// state={state}
+ReactDOM.render(
+    <Provider store={store}>
+        <App users={users}
+             defaultProject={defaultProject} />
+    </Provider>,
+    document.getElementById('root')
+);

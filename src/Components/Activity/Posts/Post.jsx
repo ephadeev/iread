@@ -6,7 +6,9 @@ const Post = (props) => {
         <div className={stylesPost.posts}>
             <div className={stylesPost.container}>
                 <span>
-                <img className={stylesPost.posts__image} src={props.userImage} alt="Profile avatar"/>
+                <img className={stylesPost.posts__image}
+                     src={props.userImage}
+                     alt="Profile avatar"/>
                 <span className={stylesPost.posts__author}>{props.userName}: </span>
             </span>
                 {props.message}
