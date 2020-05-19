@@ -9,21 +9,23 @@ const Nav = () => {
             <div className={stylesNav.containerNav}>
                 <NavLink to="/profile"
                          className={stylesNav.link}
-                         activeClassName={stylesNav.activeLink}
-                >
+                         activeClassName={stylesNav.activeLink} >
                     Profile
                 </NavLink>
                 <NavLink to="/rating"
                          className={stylesNav.link}
-                         activeClassName={stylesNav.activeLink}
-                >
+                         activeClassName={stylesNav.activeLink} >
                     Rating
                 </NavLink>
                 <NavLink to="/activity"
                          className={stylesNav.link}
-                         activeClassName={stylesNav.activeLink}
-                >
+                         activeClassName={stylesNav.activeLink} >
                     Activity
+                </NavLink>
+                <NavLink to="/users"
+                         className={stylesNav.link}
+                         activeClassName={stylesNav.activeLink} >
+                    Users
                 </NavLink>
             </div>
         </div>
