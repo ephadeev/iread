@@ -8,6 +8,7 @@ import Footer from "./Components/Footer/Footer";
 import Careers from './Components/Footer/Careers/Careers'
 import {BrowserRouter, Route} from "react-router-dom";
 import ActivityContainer from "./Components/Activity/ActivityContainer";
+import UsersContainer from "./Components/Users/UsersContainer";
 
 const App = (props) => {
     // const [userData, setUserData] = useState(null);
@@ -49,6 +50,7 @@ const App = (props) => {
                                               dispatch={props.dispatch} />
                        }
                 />
+                <Route exact path="/users" render={() => <UsersContainer />} />
                 <Footer />
             </div>
         </BrowserRouter>
