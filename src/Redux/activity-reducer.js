@@ -11,7 +11,7 @@ let initialState = {
         {id: 6, userId: 0, text: 'love this book.', isPrivate: false},
         {id: 7, userId: 0, text: 'nice one', isPrivate: false}],
     users: [
-        {name: 'Richard Hendricks', image: 'https://www.kinopoisk.ru/images/sm_actor/1852968.jpg'},
+        {name: 'Richard Hendricks', image: 'https://www.kinopoisk.ru/images/sm_actor/1615667.jpg'},
         {name: 'Nelson Bighetti', image: 'https://www.kinopoisk.ru/images/sm_actor/1852968.jpg'},
         {name: 'Bertram Gilfoyle', image: 'https://www.kinopoisk.ru/images/sm_actor/11897.jpg'},
         {name: 'Dinesh Chugtai', image: 'https://www.kinopoisk.ru/images/sm_actor/1833413.jpg'},
