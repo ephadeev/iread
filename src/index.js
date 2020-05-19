@@ -21,9 +21,9 @@ const initFirebase = () => {
     return firebase.initializeApp(firebaseConfig);
 };
 let defaultProject = initFirebase();
-// https://drive.google.com/file/d/1ENwuLJ0Ygcybz3yCZVJVxTRzosiRuV05/view?usp=sharing
+
 let users = [
-    {name: 'Richard Hendricks', image: 'https://www.kinopoisk.ru/images/sm_actor/1852968.jpg'},
+    {name: 'Richard Hendricks', image: 'https://www.kinopoisk.ru/images/sm_actor/1615667.jpg'},
     {name: 'Nelson Bighetti', image: 'https://www.kinopoisk.ru/images/sm_actor/1852968.jpg'},
     {name: 'Bertram Gilfoyle', image: 'https://www.kinopoisk.ru/images/sm_actor/11897.jpg'},
     {name: 'Dinesh Chugtai', image: 'https://www.kinopoisk.ru/images/sm_actor/1833413.jpg'},

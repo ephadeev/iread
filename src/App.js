@@ -24,7 +24,7 @@ const App = (props) => {
             });
     };
     getPosts();
-    console.log(posts);
+    console.log(posts); // need to dispatch in state
 
     return (
         <BrowserRouter>
@@ -33,8 +33,7 @@ const App = (props) => {
                 <Nav/>
                 <Route exact path={['/', '/profile']}
                        render={() => <Profile users={props.users[0]}
-                                              posts={posts}
-                                              dispatch={props.dispatch} />
+                                              posts={posts} />
                        }
                 />
                 <Route exact path="/rating"

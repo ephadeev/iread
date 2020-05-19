@@ -1,8 +1,6 @@
 import React from "react";
-
-import Wall from "./Wall/Wall";
-
 import stylesProfile from './Profile.module.css';
+import WallContainer from "./Wall/WallContainer";
 
 const Profile = (props) => {
     return (
@@ -24,9 +22,7 @@ const Profile = (props) => {
                             </div>
                         </div>
                     </div>
-                    <Wall posts={props.posts}
-                          dispatch={props.dispatch}
-                    />
+                    <WallContainer />
                 </div>
         </div>
     );
