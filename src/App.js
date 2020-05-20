@@ -9,6 +9,7 @@ import Careers from './Components/Footer/Careers/Careers'
 import {BrowserRouter, Route} from "react-router-dom";
 import ActivityContainer from "./Components/Activity/ActivityContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
+import UserPage from "./Components/Users/UserPage";
 
 const App = (props) => {
     // const [userData, setUserData] = useState(null);
@@ -51,6 +52,7 @@ const App = (props) => {
                        }
                 />
                 <Route exact path="/users" render={() => <UsersContainer />} />
+                <Route path={'/users/:index'} render={() => <UserPage />} />
                 <Footer />
             </div>
         </BrowserRouter>
