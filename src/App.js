@@ -52,7 +52,7 @@ const App = (props) => {
                        }
                 />
                 <Route exact path="/users" render={() => <UsersContainer />} />
-                <Route path={'/users/:index'} render={() => <UserPage />} />
+                <Route path={'/users/:index'} component={UserPage} />
                 <Footer />
             </div>
         </BrowserRouter>
