@@ -3,7 +3,6 @@ import stylesHeader from './Header.module.css';
 import firebase from "firebase";
 import SignIn from "./Sign-in/SignIn";
 import SignUp from "./Sign-up/SignUp";
-import {signInActionCreator} from '../../Redux/users-reducer';
 
 const Header = (props) => {
     let login = React.createRef();
@@ -29,7 +28,7 @@ const Header = (props) => {
         if (user) {
             console.log('user logged: ', user.uid);
             let id = user.uid;
-            props.dispatch(signInActionCreator(id));
+            props.signIn(id);
         } else {
             console.log('user logged out');
         }

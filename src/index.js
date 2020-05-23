@@ -22,21 +22,9 @@ const initFirebase = () => {
 };
 let defaultProject = initFirebase();
 
-let users = [
-    {name: 'Richard Hendricks', image: 'https://www.kinopoisk.ru/images/sm_actor/1615667.jpg'},
-    {name: 'Nelson Bighetti', image: 'https://www.kinopoisk.ru/images/sm_actor/1852968.jpg'},
-    {name: 'Bertram Gilfoyle', image: 'https://www.kinopoisk.ru/images/sm_actor/11897.jpg'},
-    {name: 'Dinesh Chugtai', image: 'https://www.kinopoisk.ru/images/sm_actor/1833413.jpg'},
-    {name: 'Monica Hall', image: 'https://www.kinopoisk.ru/images/sm_actor/731114.jpg'},
-    {name: 'Jared', image: 'https://www.kinopoisk.ru/images/sm_actor/1085386.jpg'}
-];
-
-// dispatch={store.dispatch.bind(store)}
-// state={state}
 ReactDOM.render(
     <Provider store={store}>
-        <App users={users}
-             defaultProject={defaultProject} />
+        <App defaultProject={defaultProject} />
     </Provider>,
     document.getElementById('root')
 );

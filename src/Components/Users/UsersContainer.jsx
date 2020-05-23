@@ -1,20 +1,19 @@
 import React, {useEffect} from "react";
 import Users from './Users';
 import {connect} from 'react-redux';
-// import action creator
+import {getUsersActionCreator} from "../../Redux/users-reducer";
 
-
-
-
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return {
-        users: ['user0', 'user1', 'user2', 'user3' , 'user4']
+        users: state.users.users
     }
 };
 
-let mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-
+        getUsers: () => {
+            dispatch(getUsersActionCreator());
+        }
     }
 };
 

@@ -1,29 +1,26 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
+import React, {useEffect} from "react";
 import User from "./User";
 
 const Users = (props) => {
-
-    const [users, setUsers] = useState([]);
+    console.log(props);
 
     useEffect(() => {
-        axios.get('https://serverless-backend-ky9b8rmuq.now.sh/api/users')
-            .then(response => {
-                console.log(response.data);
-                setUsers(response.data);
-            })
-    }, []);
+        props.getUsers()}, []);
+
+    let usersFromProps = props.users.map(user => {
+        return (
+            <User userIndex={user.index}
+                  firstName={user.name.first}
+                  lastName={user.name.last}
+                  userAvatar={user.picture}
+                  key={user._id} />
+        )
+    });
 
     return (
         <div>
             Users:
-            {props.users}
-            {users.map(user => {
-                return (
-                    <User user={user}
-                          key={user.index} />
-                )
-            })}
+            {usersFromProps}
         </div>
     );
 };
