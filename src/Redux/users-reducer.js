@@ -1,13 +1,14 @@
 import axios from 'axios';
 
 let SIGN_IN = 'SIGN-IN';
-let GET_USERS = 'GET-USERS';
+let SET_USERS = 'SET-USERS';
 
 let initialState = {
     user: {
         id: null
     },
-    users: []
+    users: [],
+    isLoading: true
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -19,11 +20,10 @@ const usersReducer = (state = initialState, action) => {
                 id: action.id
             }
         }
-    } else if (action.type === GET_USERS) {
+    } else if (action.type === SET_USERS) {
         return {
             ...state,
-            users: axios.get('https://serverless-backend-ky9b8rmuq.now.sh/api/users')
-                .then(response => response.data)
+            users: action.users
         }
     }
     return state;
@@ -36,10 +36,17 @@ export const signInActionCreator = (id) => {
     }
 };
 
-export const getUsersActionCreator = () => {
-    return {
-        type: GET_USERS
-    }
+const setUsers = (users) => ({type: SET_USERS, users});
+
+export const getUsers = (dispatch) => {
+    // dispatch(isLoading(true));
+    axios.get('https://serverless-backend-ky9b8rmuq.now.sh/api/users')
+        .then(response => {
+            // dispatch(isLoading(false));
+            // response.data - array of users
+            dispatch(setUsers(response.data)); // Uncaught (in promise) TypeError: dispatch is not a function
+
+        })
 };
 
 export default usersReducer;

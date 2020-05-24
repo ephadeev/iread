@@ -4,8 +4,7 @@ import User from "./User";
 const Users = (props) => {
     console.log(props);
 
-    useEffect(() => {
-        props.getUsers()}, []);
+    useEffect(() => props.onGetUsers(), []);
 
     let usersFromProps = props.users.map(user => {
         return (

@@ -1,7 +1,8 @@
 import React, {useEffect} from "react";
 import Users from './Users';
 import {connect} from 'react-redux';
-import {getUsersActionCreator} from "../../Redux/users-reducer";
+import {getUsers} from "../../Redux/users-reducer";
+
 
 const mapStateToProps = (state) => {
     return {
@@ -9,11 +10,9 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
     return {
-        getUsers: () => {
-            dispatch(getUsersActionCreator());
-        }
+        onGetUsers: () => dispatch(getUsers())
     }
 };
 
