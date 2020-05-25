@@ -1,8 +1,7 @@
-import React, {useEffect} from "react";
+import React from "react";
 import Users from './Users';
 import {connect} from 'react-redux';
-import {getUsers} from "../../Redux/users-reducer";
-
+import {getUsers} from "../../Redux/reducers/users-reducer";
 
 const mapStateToProps = (state) => {
     return {

@@ -1,4 +1,4 @@
-let CHECK_AMOUNT_OF_CHECKED_ELEMENT = 'CHECK-AMOUNT-OF-CHECKED-ELEMENT';
+import {CHECK_AMOUNT_OF_CHECKED_ELEMENT} from '../actions/types';
 
 let initialState = {
     shortcomings: [

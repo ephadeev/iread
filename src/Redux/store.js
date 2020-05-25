@@ -1,5 +1,5 @@
-import activityReducer from "./activity-reducer";
-import careersReducer from "./careers-reducer";
+import activityReducer from "./reducers/activity-reducer";
+import careersReducer from "./reducers/careers-reducer";
 
 const store = {
     _state: {

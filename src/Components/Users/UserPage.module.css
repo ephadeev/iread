@@ -1,26 +1,11 @@
 .user {
-    background-color: #F9CB00;
-    padding: 10px;
-}
 
-.user__container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.user__flexContainer {
-    display: flex;
-    justify-content: space-between;
-}
-
-.user__image {
-    width: 100px;
 }
 
 .friend {
     text-decoration: none;
+    color: black;
 }
-
 
 .friend__item {
     border-bottom: 1px solid #FF6A71;

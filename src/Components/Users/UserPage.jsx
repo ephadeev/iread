@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import '../../App.css';
 import stylesUserPage from './UserPage.module.css';
 
 const UserPage = (props) => {
@@ -33,22 +34,22 @@ const UserPage = (props) => {
             <Link to={`/users/${friend.index}`} className={stylesUserPage.friend}>
                 <div className={stylesUserPage.friend__item}>
                     <img src={friend.picture} alt="" className={stylesUserPage.user__friendImage} />
-                    <span> {friend.name.first} </span><span>{friend.name.last}</span>
+                    <span>{`${friend.name.first} ${friend.name.last}`}</span>
                 </div>
             </Link>
         )
     });
 
     return (
-        <div className={stylesUserPage.user}>
-            <div className={stylesUserPage.user__container}>
-                <div className={stylesUserPage.user__flexContainer}>
+        <div className='wrapper'>
+            <div className='container'>
+                <div className='flex-container'>
                     {loading && <div>Loading...</div>}
                     <div>
-                        <img src={userData?.picture} alt="" className={stylesUserPage.user__image} />
+                        <img src={userData?.picture} alt="" className='middle-avatar' />
                     </div>
                     <div>
-                        <div><span>{userData?.name.first} </span><span>{userData?.name.last}</span></div>
+                        <div> {`${userData?.name.first} ${userData?.name.last}`}</div>
 
                         <div>About me: {userData?.about}</div>
                         <div>

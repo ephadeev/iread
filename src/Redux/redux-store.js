@@ -1,7 +1,7 @@
 import {combineReducers, createStore, applyMiddleware} from "redux";
-import activityReducer from "./activity-reducer";
-import careersReducer from "./careers-reducer";
-import usersReducer from "./users-reducer";
+import activityReducer from "./reducers/activity-reducer";
+import careersReducer from "./reducers/careers-reducer";
+import usersReducer from "./reducers/users-reducer";
 import thunk from 'redux-thunk';
 
 let reducers = combineReducers({

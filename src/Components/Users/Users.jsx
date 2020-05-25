@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import User from "./User";
+import '../../App.css'
 
 const Users = (props) => {
     console.log(props);
@@ -17,8 +18,7 @@ const Users = (props) => {
     });
 
     return (
-        <div>
-            Users:
+        <div className='wrapper'>
             {usersFromProps}
         </div>
     );

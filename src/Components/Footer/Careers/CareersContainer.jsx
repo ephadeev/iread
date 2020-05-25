@@ -1,7 +1,7 @@
 import React from "react";
 import Careers from "./Careers";
 import {connect} from 'react-redux';
-import {checkAmountOfCheckedElementsActionCreator} from "../../../Redux/careers-reducer";
+import {checkAmountOfCheckedElementsActionCreator} from "../../../Redux/reducers/careers-reducer";
 
 const mapStateToProps = (state) => {
     return {

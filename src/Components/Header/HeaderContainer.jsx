@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux';
-import {signInActionCreator} from "../../Redux/users-reducer";
+import {signInActionCreator} from "../../Redux/reducers/users-reducer";
 import Header from "./Header";
 
 const mapStateToProps = (state) => {
