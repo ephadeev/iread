@@ -1,4 +1,4 @@
-let ADD_POST = 'ADD-POST';
+import {ADD_POST} from '../actions/types';
 
 let initialState = {
     posts: [

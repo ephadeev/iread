@@ -1,7 +1,7 @@
 import React from "react";
 import Activity from "./Activity";
 import {connect} from "react-redux";
-import {addPostActionCreator} from "../../Redux/activity-reducer";
+import {addPostActionCreator} from "../../Redux/reducers/activity-reducer";
 
 let mapStateToProps = (state) => {
     return {

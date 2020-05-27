@@ -6,7 +6,7 @@ const Careers = (props) => {
     let shortcomings = props.shortcomings.map(shortcoming => {
         return <Shortcomings shortcomings={shortcoming}
                              checkedElements={props.checkedElements}
-                             dispatch={props.dispatch} />;
+                             checkAmountOfCheckedElements={props.checkAmountOfCheckedElements} />;
     });
 
     return (

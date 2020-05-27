@@ -7,12 +7,12 @@ const Profile = (props) => {
         <div className={stylesProfile.profile}>
                 <div className={stylesProfile.containerProfile}>
                     <div className={stylesProfile.profile__flexContainer}>
-                        <img src={props.users.image}
+                        <img src={props.users[0].image}
                              alt="Profile avatar"
                              className={stylesProfile.profile__avatar}/>
                         <div className={stylesProfile.profile__information}>
                             <h4 className={stylesProfile.name}>
-                                {props.users.name}
+                                {props.users[0].name}
                             </h4>
                             <div>
                                 from
