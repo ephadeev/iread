@@ -5,7 +5,6 @@ import Profile from "./Profile";
 const mapStateToProps = (state) => {
     return {
         users: state.activity.users,
-        posts: state.activity.posts
     }
 };
 

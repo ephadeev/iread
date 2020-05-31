@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import Nav from "./Components/Nav/Nav";
 import Rating from "./Components/Rating/Rating";
@@ -11,22 +11,11 @@ import PropTypes from 'prop-types';
 import CareersContainer from "./Components/Footer/Careers/CareersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
+import {connect} from 'react-redux';
+import {getPostsFromFirestore} from './Redux/reducers/firebase-reducer'
 
-const App = ({defaultProject}) => {
-    // const [userData, setUserData] = useState(null);
-    let defaultFirestore = defaultProject.firestore();
-    let posts = [];
-    const getPosts = arr => {
-        defaultFirestore.collection('posts').get()
-            .then(response => {
-                response.docs.forEach(post => {
-                    console.log(post.data());
-                    arr.push(post.data());
-                })
-            });
-    };
-    getPosts(posts);
-    // posts need to dispatch in state
+const App = ({getPostsFromFirestore}) => {
+    useEffect(() => getPostsFromFirestore(), []);
 
     return (
         <BrowserRouter>
@@ -53,7 +42,9 @@ const App = ({defaultProject}) => {
 };
 
 App.propTypes = {
-    defaultProject: PropTypes.object
+    getPostsFromFirestore: PropTypes.func
 };
 
-export default App;
+const mapDispatchToProps = {getPostsFromFirestore};
+
+export default connect(null, mapDispatchToProps)(App);

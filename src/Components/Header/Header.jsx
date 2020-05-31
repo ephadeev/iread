@@ -27,6 +27,12 @@ const Header = (props) => {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             console.log('user logged: ', user.uid);
+            console.log('user\'s name: ', user.displayName);
+            console.log('user\'s email: ', user.email);
+            console.log('user\'s emailVerified: ', user.emailVerified);
+            console.log('user\'s photoURL: ', user.photoURL);
+            console.log('user isAnonymous: ', user.isAnonymous);
+            console.log('user providerData: ', user.providerData);
             let id = user.uid;
             props.signIn(id);
         } else {

@@ -18,6 +18,7 @@ const SignIn = () => {
                 pass.current.value = '';
             })
             .catch(err => {
+                console.log(err.code);
                 console.log(err.message);
                 email.current.value = '';
                 pass.current.value = '';

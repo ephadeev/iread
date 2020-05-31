@@ -2,7 +2,7 @@ import {SIGN_IN, GET_USERS_STARTED, SET_USERS, GET_USERS_FAILURE} from '../actio
 import axios from 'axios';
 
 let initialState = {
-    user: {
+    authorizedUser: {
         id: null
     },
     users: [],
@@ -15,7 +15,7 @@ const usersReducer = (state = initialState, action) => {
         case SIGN_IN: {
             return {
                 ...state,
-                user: {
+                authorizedUser: {
                     ...state.user,
                     id: action.id
                 }
@@ -46,12 +46,7 @@ const usersReducer = (state = initialState, action) => {
     }
 };
 
-export const signInActionCreator = (id) => {
-    return {
-        type: SIGN_IN,
-        id: id
-    }
-};
+export const signInActionCreator = (id) => ({type: SIGN_IN, id: id});
 
 const getUsersStarted = () => ({type: GET_USERS_STARTED});
 const setUsers = (users) => ({type: SET_USERS, users});

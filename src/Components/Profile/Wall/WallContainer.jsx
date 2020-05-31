@@ -5,7 +5,7 @@ import {addPostActionCreator} from "../../../Redux/reducers/activity-reducer";
 
 let mapStateToProps = state => {
     return {
-        posts: state.activity.posts
+        posts: state.firebase.posts
     }
 };
 

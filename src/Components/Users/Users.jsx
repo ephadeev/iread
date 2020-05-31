@@ -3,6 +3,7 @@ import User from "./User";
 import '../../App.css'
 
 const Users = (props) => {
+    // TODO: PropTypes!
     console.log(props);
 
     useEffect(() => props.onGetUsers(), []);
