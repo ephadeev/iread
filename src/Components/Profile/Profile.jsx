@@ -7,19 +7,19 @@ const Profile = ({users}) => {
     return (
         <div className={stylesProfile.profile}>
                 <div className={stylesProfile.containerProfile}>
-                    <div className={stylesProfile.profile__flexContainer}> {/* TODO: need to pick up image url from firebase */}
-                        <img src={users[0].image}
+                    <div className={stylesProfile.profile__flexContainer}>
+                        <img src={users[0]?.image}
                              alt="Profile avatar"
                              className={stylesProfile.profile__avatar}/>
                         <div className={stylesProfile.profile__information}>
                             <h4 className={stylesProfile.name}>
-                                {users[0].name} {/* TODO: need to pick up name from firebase */}
+                                {users[0]?.firstName} {users[0]?.lastName}
                             </h4>
                             <div>
                                 from
                             </div>
                             <div>
-                                Minsk {/* TODO: need to pick up data from firebase */}
+                                {users[0]?.Hometown}
                             </div>
                         </div>
                     </div>

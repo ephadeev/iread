@@ -1,11 +1,11 @@
-import React from "react";
-import Activity from "./Activity";
-import {connect} from "react-redux";
-import {addPostActionCreator} from "../../Redux/reducers/activity-reducer";
+import React from 'react';
+import Activity from './Activity';
+import {connect} from 'react-redux';
+import {addPostActionCreator} from '../../Redux/reducers/activity-reducer';
 
 let mapStateToProps = (state) => {
     return {
-        posts: state.activity.posts,
+        postsFromProps: state.activity.posts,
         users: state.activity.users
     }
 };

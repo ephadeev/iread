@@ -4,7 +4,7 @@ import Profile from "./Profile";
 
 const mapStateToProps = (state) => {
     return {
-        users: state.activity.users,
+        users: state.firebase.users,
     }
 };
 

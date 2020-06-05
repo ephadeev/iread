@@ -12,10 +12,12 @@ import CareersContainer from "./Components/Footer/Careers/CareersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import {connect} from 'react-redux';
-import {getPostsFromFirestore} from './Redux/reducers/firebase-reducer'
+import {getPostsFromFirestore, getUsersFromFirestore} from './Redux/actions/firebase-actions';
 
-const App = ({getPostsFromFirestore}) => {
+
+const App = ({getPostsFromFirestore, getUsersFromFirestore}) => {
     useEffect(() => getPostsFromFirestore(), []);
+    useEffect(() => getUsersFromFirestore(), []);
 
     return (
         <BrowserRouter>
@@ -42,9 +44,10 @@ const App = ({getPostsFromFirestore}) => {
 };
 
 App.propTypes = {
-    getPostsFromFirestore: PropTypes.func
+    getPostsFromFirestore: PropTypes.func,
+    getUsersFromFirestore: PropTypes.func
 };
 
-const mapDispatchToProps = {getPostsFromFirestore};
+const mapDispatchToProps = {getPostsFromFirestore, getUsersFromFirestore};
 
 export default connect(null, mapDispatchToProps)(App);
