@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 import stylesWall from './Wall.module.css';
-import Posts from "./Posts/Posts";
+import Posts from './Posts/Posts';
+import PropTypes from 'prop-types';
 
-const Wall = (props) => {
-    // TODO: PropTypes!
+const Wall = ({postsFromProps, addPostFromProps}) => {
     let newPost = React.createRef();
 
-    let posts = props.posts.map(post => {
-        if (post.userId === 'pczX7HckW1e8bydZ91wAFPN0V443') {   // TODO: usedId need to be current user's id
+    let posts = postsFromProps.map(post => {
+        if (post.userId === 'pczX7HckW1e8bydZ91wAFPN0V443') {   // TODO: userId need to be current user's id
             return <Posts posts={post.text} />
         }
     });
 
     let addPost = () => {
         let text = newPost.current.value;
-        props.addPost(text);
+        addPostFromProps(text);
         newPost.current.value = '';
     };
 
@@ -27,6 +27,11 @@ const Wall = (props) => {
             {posts}
         </div>
     );
+};
+
+Wall.propTypes = {
+    postsFromProps: PropTypes.array,
+    addPostFromProps: PropTypes.func
 };
 
 export default Wall;
