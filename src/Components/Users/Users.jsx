@@ -1,14 +1,14 @@
-import React, {useEffect} from "react";
-import User from "./User";
-import '../../App.css'
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import '../../App.css';
+import User from './User';
+import PropTypes from 'prop-types';
+import {getUsers} from "../../Redux/reducers/users-reducer";
 
-const Users = (props) => {
-    // TODO: PropTypes!
-    console.log(props);
+const Users = ({users, onGetUsers}) => {
+    useEffect(() => onGetUsers(), []);
 
-    useEffect(() => props.onGetUsers(), []);
-
-    let usersFromProps = props.users.map(user => {
+    let usersFromProps = users.map(user => {
         return (
             <User userIndex={user.index}
                   firstName={user.name.first}
@@ -25,4 +25,21 @@ const Users = (props) => {
     );
 };
 
-export default Users;
+Users.propTypes = {
+    user: PropTypes.array,
+    onGetUsers: PropTypes.func
+};
+
+const mapStateToProps = (state) => {
+    return {
+        users: state.users.users
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onGetUsers: () => dispatch(getUsers())
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users);
