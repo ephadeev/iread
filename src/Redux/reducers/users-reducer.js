@@ -1,10 +1,10 @@
-import {SIGN_IN, GET_USERS_STARTED, SET_USERS, GET_USERS_FAILURE} from '../actions/types';
+import {
+    GET_USERS_STARTED,
+    SET_USERS,
+    GET_USERS_FAILURE} from '../actions/types';
 import axios from 'axios';
 
 let initialState = {
-    authorizedUser: {
-        id: null
-    },
     users: [],
     isLoading: false,
     error: null
@@ -12,15 +12,6 @@ let initialState = {
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SIGN_IN: {
-            return {
-                ...state,
-                authorizedUser: {
-                    ...state.user,
-                    id: action.id
-                }
-            }
-        }
         case GET_USERS_STARTED: {
             return {
                 ...state,
@@ -45,8 +36,6 @@ const usersReducer = (state = initialState, action) => {
         }
     }
 };
-
-export const signInActionCreator = (id) => ({type: SIGN_IN, id: id});
 
 const getUsersStarted = () => ({type: GET_USERS_STARTED});
 const setUsers = (users) => ({type: SET_USERS, users});
