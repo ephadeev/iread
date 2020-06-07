@@ -1,4 +1,3 @@
-import React from 'react';
 import Activity from './Activity';
 import {connect} from 'react-redux';
 import {addPostActionCreator} from '../../Redux/reducers/activity-reducer';
