@@ -1,7 +1,7 @@
 .header {
     height: 60px;
     width: 100%;
-    background-color: #F9CB00;
+    background-color: #276899;
 }
 
 .header__logo {
@@ -59,10 +59,6 @@
     top: 30px;
     right: 30px;
     border-radius: 5px;
-}
-
-.header__label {
-    display: block;
 }
 
 .header__colorSchemes {
