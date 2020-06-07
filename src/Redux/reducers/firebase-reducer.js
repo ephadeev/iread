@@ -102,7 +102,9 @@ const firebaseReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                authorizedUser: action.payload
+                authorizedUser: action.payload,
+                email: '',
+                password: ''
             }
         }
         case SIGN_IN_FAILURE: {
