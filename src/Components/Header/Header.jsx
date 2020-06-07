@@ -1,11 +1,8 @@
 import React from "react";
 import stylesHeader from './Header.module.css';
 import firebase from "firebase";
-import SignIn from "./Sign-in/SignIn";
-import SignUp from "./Sign-up/SignUp";
 
-const Header = (props) => {
-    let login = React.createRef();
+const Header = () => {
     let settings = React.createRef();
 
     let showHiddenContent = (container) => {
@@ -18,12 +15,6 @@ const Header = (props) => {
         }
     };
 
-    let LogOut = event => {
-        event.preventDefault();
-        firebase.auth().signOut()
-            .then(() => console.log('user signed out'));
-    };
-
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             console.log('user logged: ', user.uid);
@@ -33,8 +24,6 @@ const Header = (props) => {
             console.log('user\'s photoURL: ', user.photoURL);
             console.log('user isAnonymous: ', user.isAnonymous);
             console.log('user providerData: ', user.providerData);
-            let id = user.uid;
-            props.signIn(id);
         } else {
             console.log('user logged out');
         }
@@ -49,20 +38,6 @@ const Header = (props) => {
                 </div>
 
                 <div className={stylesHeader.header__title}>iRead</div>
-
-                <div className={stylesHeader.header__login}>
-                    <i
-                        className="fas fa-user"
-                        onClick={() => showHiddenContent(login)}>
-                    </i>
-                </div>
-
-                <div className={stylesHeader.header__contentUnvisible}
-                     ref={login}>
-                    <SignIn />
-                    <SignUp />
-                    <button onClick={LogOut}>Logout</button>
-                </div>
 
                 <div className={stylesHeader.header__settings}>
                     <i

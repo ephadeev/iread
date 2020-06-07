@@ -2,6 +2,7 @@ import React from "react";
 import stylesActivity from './Activity.module.css';
 import Post from './Posts/Post';
 import PropTypes from 'prop-types';
+import AddPost from '../AddPost/AddPost';
 
 const Activity = ({postsFromProps, users, addPost}) => {
     let posts = postsFromProps.map(post => <Post userName={users[post.userId].name}
@@ -11,6 +12,7 @@ const Activity = ({postsFromProps, users, addPost}) => {
 
     return (
         <div className={stylesActivity.activity}>
+            <AddPost />
             {posts}
         </div>
     );

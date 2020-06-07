@@ -1,25 +1,26 @@
 import React from "react";
 import stylesProfile from './Profile.module.css';
+import '../../App.css';
 import WallContainer from "./Wall/WallContainer";
 import PropTypes from 'prop-types';
 
-const Profile = ({users}) => {
+const Profile = ({users, authorizedUserData}) => {
     return (
-        <div className={stylesProfile.profile}>
+        <div className='wrapper'>
                 <div className={stylesProfile.containerProfile}>
                     <div className={stylesProfile.profile__flexContainer}>
-                        <img src={users[0]?.image}
+                        <img src={authorizedUserData?.image}
                              alt="Profile avatar"
                              className={stylesProfile.profile__avatar}/>
                         <div className={stylesProfile.profile__information}>
                             <h4 className={stylesProfile.name}>
-                                {users[0]?.firstName} {users[0]?.lastName}
+                                {authorizedUserData?.firstName} {authorizedUserData?.lastName}
                             </h4>
                             <div>
-                                from
+                                Hometown:
                             </div>
                             <div>
-                                {users[0]?.Hometown}
+                                {authorizedUserData?.Hometown}
                             </div>
                         </div>
                     </div>
@@ -30,7 +31,8 @@ const Profile = ({users}) => {
 };
 
 Profile.propTypes = {
-    users: PropTypes.array
+    users: PropTypes.array,
+    authorizedUser: PropTypes.object
 };
 
 
