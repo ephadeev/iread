@@ -4,12 +4,13 @@ import Post from './Posts/Post';
 import PropTypes from 'prop-types';
 import AddPost from '../AddPost/AddPost';
 
-const Activity = ({postsFromProps, users, addPost}) => {
-    let posts = postsFromProps.map(post => <Post userName={users[post.userId].name}
-                                              userImage={users[post.userId].image}
-                                              message={post.text}
-                                              key={post.userId} />);
-
+const Activity = ({postsFromProps}) => {
+    let posts = postsFromProps.map((post, index) => <Post userId={post.userId}
+                                                          message={post.text}
+                                                          key={index} />);
+    // TODO: need to show only posts with isPrivate=false
+    // TODO: on Avatar click open http://localhost:3000/user/id
+    // TODO: on Avatar mouseover show a little bit more info about user
     return (
         <div className={stylesActivity.activity}>
             <AddPost />
@@ -17,13 +18,9 @@ const Activity = ({postsFromProps, users, addPost}) => {
         </div>
     );
 };
-/*Стена с общедоступными постами друзей. Что-то наподобии активности в steam.
-            При клике на аватар или имя автора поста должен открываться http://localhost:3000/profile/id.
-            А при наведении мыши всплывашка с немного большей информацией о человеке.*/
+
 Activity.propTypes = {
-    postsFromProps: PropTypes.array,
-    users: PropTypes.array,
-    addPost: PropTypes.func
+    postsFromProps: PropTypes.array
 };
 
 export default Activity;
