@@ -7,16 +7,15 @@ import Footer from "./Components/Footer/Footer";
 import UserPage from "./Components/Users/UserPage";
 import Users from "./Components/Users/Users";
 import Authentication from './Components/Authentication/Authentication';
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Redirect, Route} from "react-router-dom";
 import ActivityContainer from "./Components/Activity/ActivityContainer";
 import PropTypes from 'prop-types';
-import CareersContainer from "./Components/Footer/Careers/CareersContainer";
 import Header from "./Components/Header/Header";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import {connect} from 'react-redux';
 import {getPostsFromFirestore, getUsersFromFirestore, setAuthorizedUser} from './Redux/actions/firebase-actions';
 
-const App = ({getPostsFromFirestore, getUsersFromFirestore, setAuthorizedUser}) => {
+const App = ({authorizedUser, getPostsFromFirestore, getUsersFromFirestore, setAuthorizedUser}) => {
     useEffect(() => getPostsFromFirestore(), []);
     useEffect(() => getUsersFromFirestore(), []);
     let user = firebase.auth().currentUser;
@@ -29,21 +28,24 @@ const App = ({getPostsFromFirestore, getUsersFromFirestore, setAuthorizedUser}) 
 
     return (
         <BrowserRouter>
-            <div className="App">
+            <div className='App'>
                 <Header />
                 <Nav />
-                <Route exact path={['/', '/profile']}
-                       render={() => <ProfileContainer />} />
-                <Route exact path="/rating"
-                       render={() => <Rating />} />
-                <Route exact path="/activity"
-                       render={() => <ActivityContainer />} />
-                <Route exact path="/careers"
-                       render={() => <CareersContainer />} />
-                <Route exact path="/users"
-                       render={() => <Users />} />
-                <Route path={'/users/:index'}
-                       component={UserPage} />
+                <Route exact path={['/', '/profile']}>
+                    {!authorizedUser ? <Redirect to='/authentication' /> : <ProfileContainer />}
+                </Route>
+                <Route exact path='/rating'>
+                    {!authorizedUser ? <Redirect to='/authentication' /> : <Rating />}
+                </Route>
+                <Route exact path='/activity'>
+                    {!authorizedUser ? <Redirect to='/authentication' /> : <ActivityContainer />}
+                </Route>
+                <Route exact path="/users">
+                    {!authorizedUser ? <Redirect to='/authentication' /> : <Users />}
+                </Route>
+                <Route path={'/users/:index'}>
+                    {!authorizedUser ? <Redirect to='/authentication' /> : <UserPage />}
+                </Route>
                 <Route exact path='/authentication'
                        render={() => <Authentication />} />
                 <Footer />
@@ -53,10 +55,17 @@ const App = ({getPostsFromFirestore, getUsersFromFirestore, setAuthorizedUser}) 
 };
 
 App.propTypes = {
+    authorizedUser: PropTypes.object,
     getPostsFromFirestore: PropTypes.func,
     getUsersFromFirestore: PropTypes.func
 };
 
+const mapStateToProps = state => {
+    return {
+        authorizedUser: state.firebase.authorizedUser
+    }
+};
+
 const mapDispatchToProps = {getPostsFromFirestore, getUsersFromFirestore, setAuthorizedUser};
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
