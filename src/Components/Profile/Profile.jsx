@@ -4,7 +4,7 @@ import '../../App.css';
 import WallContainer from "./Wall/WallContainer";
 import PropTypes from 'prop-types';
 
-const Profile = ({users, authorizedUserData}) => {
+const Profile = ({authorizedUserData}) => {
     return (
         <div className='wrapper'>
                 <div className={stylesProfile.containerProfile}>
@@ -31,7 +31,6 @@ const Profile = ({users, authorizedUserData}) => {
 };
 
 Profile.propTypes = {
-    users: PropTypes.array,
     authorizedUser: PropTypes.object
 };
 

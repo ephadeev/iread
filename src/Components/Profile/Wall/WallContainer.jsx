@@ -1,18 +1,16 @@
 import Wall from './Wall';
 import {connect} from 'react-redux';
-import {addPostActionCreator} from '../../../Redux/reducers/activity-reducer';
 
 let mapStateToProps = state => {
     return {
-        postsFromProps: state.firebase.posts
+        postsFromProps: state.firebase.posts,
+        authorizedUser: state.firebase.authorizedUser
     }
 };
 
 let mapDispatchToProps = dispatch => {
     return {
-        addPostFromProps: (text) => {
-            dispatch(addPostActionCreator(text))
-        }
+
     }
 };
 

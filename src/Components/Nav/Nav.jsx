@@ -32,12 +32,13 @@ const Nav = ({authorizedUser}) => {
                          activeClassName={stylesNav.activeLink} >
                     Users
                 </NavLink>}
+                {!authorizedUser &&
                 <NavLink to='authentication'
                          className={stylesNav.link}
                          activeClassName={stylesNav.activeLink} >
                     <i className="fas fa-user">
                     </i>Login
-                </NavLink>
+                </NavLink>}
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import stylesHeader from './Header.module.css';
-import firebase from "firebase";
+import firebase from 'firebase/app';
 
 const Header = () => {
     let settings = React.createRef();
@@ -15,19 +15,11 @@ const Header = () => {
         }
     };
 
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            console.log('user logged: ', user.uid);
-            console.log('user\'s name: ', user.displayName);
-            console.log('user\'s email: ', user.email);
-            console.log('user\'s emailVerified: ', user.emailVerified);
-            console.log('user\'s photoURL: ', user.photoURL);
-            console.log('user isAnonymous: ', user.isAnonymous);
-            console.log('user providerData: ', user.providerData);
-        } else {
-            console.log('user logged out');
-        }
-    });
+    const LogOut = event => {
+        event.preventDefault();
+        firebase.auth().signOut()
+            .then(() => console.log('user signed out'));
+    };
 
     return (
         <div className={stylesHeader.header}>
@@ -48,6 +40,7 @@ const Header = () => {
 
                 <div className={stylesHeader.header__contentUnvisible}
                      ref={settings}>
+                    <button onClick={LogOut}>Logout</button>
                     Select color scheme:
                     <div className={`
                     ${stylesHeader.header__bgColorYellow} 
