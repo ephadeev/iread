@@ -28,6 +28,10 @@
     color: black;
 }
 
+.textarea {
+    resize: none;
+}
+
 /*
 .App-logo {
   height: 40vmin;

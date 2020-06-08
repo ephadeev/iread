@@ -1,20 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import stylesWall from '../Profile/Wall/Wall.module.css'; // need to refactor
+import '../../App.css';
 import {onChangePost} from '../../Redux/actions/firebase-actions';
 import {addPostFromProps} from '../../Redux/actions/firebase-actions';
 
-
-const AddPost = ({postText, addPostFromProps, onChangePost}) => {
-    const addPost = () => addPostFromProps(postText);
+const AddPost = ({postText, authorizedUser, addPostFromProps, onChangePost}) => {
+    const addPost = () => addPostFromProps(postText, authorizedUser.uid);
     const onChange = event => onChangePost(event.target.value);
 
     return (
         <div>
-            <div className={stylesWall.newPost}>
-                <textarea placeholder="anything new?"
-                          className={stylesWall.textarea}
+            <div className='container'>
+                <textarea placeholder='anything new?'
+                          className='textarea'
                           onChange={onChange}
                           value={postText} >
                 </textarea>
@@ -26,6 +25,7 @@ const AddPost = ({postText, addPostFromProps, onChangePost}) => {
 
 AddPost.propTypes = {
     postText: PropTypes.string,
+    authorizedUser: PropTypes.object,
     addPostFromProps: PropTypes.func,
     onChangePost: PropTypes.func
 };
@@ -33,6 +33,7 @@ AddPost.propTypes = {
 const mapStateToProps = state => {
     return {
         postText: state.firebase.newPostText,
+        authorizedUser: state.firebase.authorizedUser
     }
 };
 
