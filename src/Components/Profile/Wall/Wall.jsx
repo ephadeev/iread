@@ -4,9 +4,9 @@ import Posts from './Posts/Posts';
 import PropTypes from 'prop-types';
 import AddPost from '../../AddPost/AddPost';
 
-const Wall = ({postsFromProps}) => {
+const Wall = ({postsFromProps, authorizedUser}) => {
     let posts = postsFromProps.map((post) => {
-        if (post.userId === 'pczX7HckW1e8bydZ91wAFPN0V443') {   // TODO: userId need to be current user's id
+        if (post.userId === authorizedUser.uid) {
             return <Posts posts={post.text}/>
         }
     });
@@ -21,6 +21,7 @@ const Wall = ({postsFromProps}) => {
 
 Wall.propTypes = {
     postsFromProps: PropTypes.array,
+    authorizedUser: PropTypes.object
 };
 
 export default Wall;

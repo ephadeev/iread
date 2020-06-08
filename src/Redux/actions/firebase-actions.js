@@ -45,13 +45,16 @@ export const getUsersFromFirestore = () => {
 // auth
 export const onChangeEmailFromProps = (email) => ({type: ON_CHANGE_EMAIL, payload: email});
 export const onChangePasswordFromProps = (pass) => ({type: ON_CHANGE_PASSWORD, payload: pass});
+
 // sign in
 const signInStarted = () => ({type: SIGN_IN_STARTED});
 export const setAuthorizedUser = (user) => ({type: SET_AUTHORIZED_USER, payload: user});
 const signInFailure = error => ({type: SIGN_IN_FAILURE, payload: {error}});
+
 // get authorized user's data
 const setAuthorizedUserData = (userData) => ({type: SET_AUTHORIZED_USER_DATA, payload: userData});
 const getAuthorizedUserDataFailure = error => ({type: GET_AUTHORIZED_USER_DATA_FAILURE, payload: {error}});
+
 // auth redux thunk
 export const signInFromProps = () => {
     return (dispatch, getState) => {
@@ -69,11 +72,11 @@ export const signInFromProps = () => {
 
 // create post
 export const onChangePost = post => ({type: ON_CHANGE_POST, payload: post});
-export const addPostFromProps = (text) => {
+export const addPostFromProps = (text, userId) => {
     firebase.firestore().collection('posts').add({
         text: text,
         isPrivate: false,
-        userId: 'pczX7HckW1e8bydZ91wAFPN0V443'
+        userId: userId
     })
         .then((docRef) => console.log('Document written with ID: ', docRef.id))
         .catch((error) => console.log('Error adding document: ', error))
