@@ -13,7 +13,8 @@ import {
     SET_AUTHORIZED_USER,
     SIGN_IN_STARTED,
     GET_AUTHORIZED_USER_DATA_FAILURE,
-    SET_AUTHORIZED_USER_DATA
+    SET_AUTHORIZED_USER_DATA,
+    ON_ADD_POST
 } from './types';
 
 // get posts
@@ -72,12 +73,4 @@ export const signInFromProps = () => {
 
 // create post
 export const onChangePost = post => ({type: ON_CHANGE_POST, payload: post});
-export const addPostFromProps = (text, userId) => {
-    firebase.firestore().collection('posts').add({
-        text: text,
-        isPrivate: false,
-        userId: userId
-    })
-        .then((docRef) => console.log('Document written with ID: ', docRef.id))
-        .catch((error) => console.log('Error adding document: ', error))
-};
+export const onAddPost = () => ({type: ON_ADD_POST});

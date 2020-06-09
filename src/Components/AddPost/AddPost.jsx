@@ -2,12 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import '../../App.css';
-import {onChangePost} from '../../Redux/actions/firebase-actions';
-import {addPostFromProps} from '../../Redux/actions/firebase-actions';
+import {onAddPost, onChangePost} from '../../Redux/actions/firebase-actions';
+import firebase from "firebase";
 
-const AddPost = ({postText, authorizedUser, addPostFromProps, onChangePost}) => {
+const AddPost = ({postText, authorizedUser, onChangePost, onAddPost}) => {
     // Error: Actions must be plain objects. Use custom middleware for async actions.
     // TypeError: Cannot read property 'type' of undefined
+
+    const addPostFromProps = (text, userId) => {
+        firebase.firestore().collection('posts')
+            .add({
+                text: text,
+                isPrivate: false,
+                userId: userId
+            })
+            .then((docRef) => console.log('Document written with ID: ', docRef.id))
+            .catch((error) => console.log('Error adding document: ', error))
+    };
+
     const addPost = () => addPostFromProps(postText, authorizedUser.uid);
     const onChange = event => onChangePost(event.target.value);
 
@@ -28,8 +40,8 @@ const AddPost = ({postText, authorizedUser, addPostFromProps, onChangePost}) => 
 AddPost.propTypes = {
     postText: PropTypes.string,
     authorizedUser: PropTypes.object,
-    addPostFromProps: PropTypes.func,
-    onChangePost: PropTypes.func
+    onChangePost: PropTypes.func,
+    onAddPost: PropTypes.func
 };
 
 const mapStateToProps = state => {
@@ -41,7 +53,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     onChangePost,
-    addPostFromProps
+    onAddPost
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddPost);

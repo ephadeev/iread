@@ -24,6 +24,7 @@ export const CHECK_AMOUNT_OF_CHECKED_ELEMENT = 'CHECK_AMOUNT_OF_CHECKED_ELEMENT'
 
 export const ADD_POST = 'ADD_POST';
 export const ON_CHANGE_POST = 'ON_CHANGE_POST';
+export const ON_ADD_POST = 'ON_ADD_POST';
 
 // auth
 export const ON_CHANGE_EMAIL = 'ON_CHANGE_EMAIL';

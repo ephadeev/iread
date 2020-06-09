@@ -14,7 +14,7 @@ const Header = () => {
             container.current.classList.add(stylesHeader.header__contentUnvisible);
         }
     };
-
+    // TODO: delete from state authorizedUser, authorizedUserData
     const LogOut = event => {
         event.preventDefault();
         firebase.auth().signOut()
