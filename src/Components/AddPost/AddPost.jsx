@@ -6,6 +6,8 @@ import {onChangePost} from '../../Redux/actions/firebase-actions';
 import {addPostFromProps} from '../../Redux/actions/firebase-actions';
 
 const AddPost = ({postText, authorizedUser, addPostFromProps, onChangePost}) => {
+    // Error: Actions must be plain objects. Use custom middleware for async actions.
+    // TypeError: Cannot read property 'type' of undefined
     const addPost = () => addPostFromProps(postText, authorizedUser.uid);
     const onChange = event => onChangePost(event.target.value);
 
