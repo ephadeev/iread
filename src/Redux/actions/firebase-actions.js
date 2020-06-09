@@ -19,8 +19,8 @@ import {
 
 // get posts
 const getPostsFromFirestoreStarted = () => ({type: GET_POSTS_FROM_FIRESTORE_STARTED});
-const setPostsFromFirestore = (posts) => ({type: SET_POSTS_FROM_FIRESTORE, posts});
-const getPostsFromFirestoreFailure = (error) => ({type: GET_POSTS_FROM_FIRESTORE_FAILURE, payload: {error}});
+const setPostsFromFirestore = posts => ({type: SET_POSTS_FROM_FIRESTORE, posts});
+const getPostsFromFirestoreFailure = error => ({type: GET_POSTS_FROM_FIRESTORE_FAILURE, payload: {error}});
 export const getPostsFromFirestore = () => {
     return dispatch => {
         dispatch(getPostsFromFirestoreStarted);
@@ -44,16 +44,16 @@ export const getUsersFromFirestore = () => {
 };
 
 // auth
-export const onChangeEmailFromProps = (email) => ({type: ON_CHANGE_EMAIL, payload: email});
-export const onChangePasswordFromProps = (pass) => ({type: ON_CHANGE_PASSWORD, payload: pass});
+export const onChangeEmailFromProps = email => ({type: ON_CHANGE_EMAIL, payload: email});
+export const onChangePasswordFromProps = pass => ({type: ON_CHANGE_PASSWORD, payload: pass});
 
 // sign in
 const signInStarted = () => ({type: SIGN_IN_STARTED});
-export const setAuthorizedUser = (user) => ({type: SET_AUTHORIZED_USER, payload: user});
+export const setAuthorizedUser = user => ({type: SET_AUTHORIZED_USER, payload: user});
 const signInFailure = error => ({type: SIGN_IN_FAILURE, payload: {error}});
 
 // get authorized user's data
-const setAuthorizedUserData = (userData) => ({type: SET_AUTHORIZED_USER_DATA, payload: userData});
+const setAuthorizedUserData = userData => ({type: SET_AUTHORIZED_USER_DATA, payload: userData});
 const getAuthorizedUserDataFailure = error => ({type: GET_AUTHORIZED_USER_DATA_FAILURE, payload: {error}});
 
 // auth redux thunk

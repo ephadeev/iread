@@ -5,9 +5,11 @@ import PropTypes from 'prop-types';
 import AddPost from '../../AddPost/AddPost';
 
 const Wall = ({postsFromProps, authorizedUser}) => {
-    let posts = postsFromProps.map((post) => {
+    console.log(postsFromProps);
+    // TODO: передать в props <Posts /> id документа
+    let posts = postsFromProps.map(post => {
         if (post.userId === authorizedUser.uid) {
-            return <Posts posts={post.text}/>
+            return <Posts postText={post.text}/>
         }
     });
 
