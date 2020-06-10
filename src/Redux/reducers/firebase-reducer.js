@@ -13,7 +13,9 @@ import {
     SIGN_IN_FAILURE,
     SET_AUTHORIZED_USER_DATA,
     GET_AUTHORIZED_USER_DATA_FAILURE,
-    ON_ADD_POST
+    GET_NEW_POST_STARTED,
+    SET_NEW_POST,
+    GET_NEW_POST_FAILURE,
 } from '../actions/types';
 
 let initialState = {
@@ -58,10 +60,25 @@ const firebaseReducer = (state = initialState, action) => {
                 newPostText: action.payload
             }
         }
-        case ON_ADD_POST: {
+        case GET_NEW_POST_STARTED: {
             return {
                 ...state,
+                isLoading: true
+            }
+        }
+        case SET_NEW_POST: {
+            return {
+                ...state,
+                isLoading: false,
+                posts: [...state.posts, action.post],
                 newPostText: ''
+            }
+        }
+        case GET_NEW_POST_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload.error
             }
         }
         // get users

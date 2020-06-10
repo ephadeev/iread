@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 import stylesPosts from './Posts.module.css';
 import firebase from 'firebase/app';
 
-const Posts = ({postText}) => {
-    // TODO: write function
-    const deletePost = () => console.log('delete post');
-
-
-    // TODO: нужно получить через props id документа
-    // firebase.firestore().collection('posts').doc('сюда предеать айди документа').delete().then('post deleted').catch(err => console.log(err.message))
+const Posts = ({postText, postId}) => {
+    const deletePost = () => firebase.firestore().collection('posts').doc(postId).delete()
+        .then(console.log('post deleted'))
+        .catch(err => console.log(err.message));
 
     return (
         <div className={stylesPosts.posts}>
@@ -22,7 +19,8 @@ const Posts = ({postText}) => {
 };
 
 Posts.propTypes = {
-    postText: PropTypes.string
+    postText: PropTypes.string,
+    postId: PropTypes.string
 };
 
 export default Posts;

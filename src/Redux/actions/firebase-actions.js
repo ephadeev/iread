@@ -14,7 +14,9 @@ import {
     SIGN_IN_STARTED,
     GET_AUTHORIZED_USER_DATA_FAILURE,
     SET_AUTHORIZED_USER_DATA,
-    ON_ADD_POST
+    GET_NEW_POST_STARTED,
+    SET_NEW_POST,
+    GET_NEW_POST_FAILURE
 } from './types';
 
 // get posts
@@ -25,10 +27,27 @@ export const getPostsFromFirestore = () => {
     return dispatch => {
         dispatch(getPostsFromFirestoreStarted);
         firebase.firestore().collection('posts').get()
-            .then(response => dispatch(setPostsFromFirestore(response.docs.map(post => post.data()))))
+            .then(response => dispatch(setPostsFromFirestore(response.docs.map(post => {
+                return {postId: post.id, ...post.data()}
+            }))))
             .catch(err => dispatch(getPostsFromFirestoreFailure(err.message)))
     }
 };
+
+// create new post
+export const onChangePost = post => ({type: ON_CHANGE_POST, payload: post});
+const getNewPostStarted = () => ({type: GET_NEW_POST_STARTED});
+const setNewPost = post => ({type: SET_NEW_POST, post});
+const getNewPostFailure = error => ({type: GET_NEW_POST_FAILURE, payload: {error}});
+export const getNewPost = (docId) => {
+    return dispatch => {
+        dispatch(getNewPostStarted);
+        firebase.firestore().collection('posts').doc(docId).get()
+            .then(doc => dispatch(setNewPost(doc.data())))
+            .catch(err => dispatch(getNewPostFailure(err.message)))
+    }
+};
+
 
 // get users
 const getUsersFromFirestoreStarted = () => ({type: GET_USERS_FROM_FIRESTORE_STARTED});
@@ -70,7 +89,3 @@ export const signInFromProps = () => {
             .catch(err => dispatch(signInFailure(err.message)))
     }
 };
-
-// create post
-export const onChangePost = post => ({type: ON_CHANGE_POST, payload: post});
-export const onAddPost = () => ({type: ON_ADD_POST});
