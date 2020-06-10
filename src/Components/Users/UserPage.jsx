@@ -1,34 +1,33 @@
 import React, {useEffect, useState} from "react";
+import {connect} from 'react-redux';
 import axios from 'axios';
 import {Link} from "react-router-dom";
 import '../../App.css';
 import stylesUserPage from './UserPage.module.css';
 
 const UserPage = (props) => {
-    const [userData, setUserData] = useState(null);
-    const [loading, setLoading] = useState(false);
+    console.log(props);
+    // TODO: need to get in props match.params
+    // const [userData, setUserData] = useState(null);
 
-    useEffect(() => {
-        setLoading(true);
+    /*useEffect(() => {
         axios.get(`https://serverless-backend-ky9b8rmuq.now.sh/api/users/${props.match.params.index}`)
             .then(response => {
                     setUserData(response.data);
-                    setLoading(false);
             })
             .catch((err) => {
                 console.log(err.message);
-                setLoading(false);
             })
-    }, [props.match.params.index]);
-
-    if (!userData && !loading) {
+    }, [props.match.params.index]);*/
+    // Uncaught TypeError: Cannot read property 'params' of undefined
+    const userData = {};
+    if (!userData && !props.isLoading) {
         return (
             <div>Опаньки, нет такого человека...</div>
         )
     }
 
-
-    let friends = userData?.friends.map(friend => {
+    /*const friends = userData?.friends.map(friend => {
         return (
 
             <Link to={`/users/${friend.index}`} className={stylesUserPage.friend}>
@@ -38,23 +37,23 @@ const UserPage = (props) => {
                 </div>
             </Link>
         )
-    });
+    });*/
 
     return (
         <div className='wrapper'>
             <div className='container'>
                 <div className='flex-container'>
-                    {loading && <div>Loading...</div>}
+                    {props.isLoading && <div>Loading...</div>}
                     <div>
-                        <img src={userData?.picture} alt="" className='middle-avatar' />
+                        <img src={userData?.image} alt="" className='middle-avatar' />
                     </div>
                     <div>
-                        <div> {`${userData?.name.first} ${userData?.name.last}`}</div>
+                        <div> {`${userData?.firstName} ${userData?.lastName}`}</div>
 
                         <div>About me: {userData?.about}</div>
                         <div>
                             Friends:
-                            {friends}
+                            {/*{friends}*/}
                         </div>
 
                     </div>
@@ -64,4 +63,11 @@ const UserPage = (props) => {
     )
 };
 
-export default UserPage;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        isLoading: state.firebase.isLoading,
+        ownProps: ownProps
+    }
+};
+
+export default connect(mapStateToProps)(UserPage);

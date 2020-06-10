@@ -15,12 +15,6 @@ const Nav = ({authorizedUser}) => {
                     Profile
                 </NavLink>}
                 {authorizedUser &&
-                <NavLink to='/rating'
-                         className={stylesNav.link}
-                         activeClassName={stylesNav.activeLink} >
-                    Rating
-                </NavLink>}
-                {authorizedUser &&
                 <NavLink to='/activity'
                          className={stylesNav.link}
                          activeClassName={stylesNav.activeLink} >

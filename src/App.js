@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import firebase from 'firebase/app';
 import './App.css';
 import Nav from "./Components/Nav/Nav";
-import Rating from "./Components/Rating/Rating";
 import Footer from "./Components/Footer/Footer";
 import UserPage from "./Components/Users/UserPage";
 import Users from "./Components/Users/Users";
@@ -34,16 +33,13 @@ const App = ({authorizedUser, getPostsFromFirestore, getUsersFromFirestore, setA
                 <Route exact path={['/', '/profile']}>
                     {!authorizedUser ? <Redirect to='/authentication' /> : <ProfileContainer />}
                 </Route>
-                <Route exact path='/rating'>
-                    {!authorizedUser ? <Redirect to='/authentication' /> : <Rating />}
-                </Route>
                 <Route exact path='/activity'>
                     {!authorizedUser ? <Redirect to='/authentication' /> : <ActivityContainer />}
                 </Route>
                 <Route exact path="/users">
                     {!authorizedUser ? <Redirect to='/authentication' /> : <Users />}
                 </Route>
-                <Route path={'/users/:index'}>
+                <Route path='/users/:index'>
                     {!authorizedUser ? <Redirect to='/authentication' /> : <UserPage />}
                 </Route>
                 <Route exact path='/authentication'

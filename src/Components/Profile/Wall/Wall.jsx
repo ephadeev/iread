@@ -1,14 +1,15 @@
 import React from 'react';
 import stylesWall from './Wall.module.css';
-import Posts from './Posts/Posts';
+import Post from './Post/Post';
 import PropTypes from 'prop-types';
 import AddPost from '../../AddPost/AddPost';
 
 const Wall = ({postsFromProps, authorizedUser}) => {
-    const posts = postsFromProps.map(post => {
+    const posts = postsFromProps.map((post, index) => {
         if (post.userId === authorizedUser.uid) {
-            return <Posts postText={post.text}
-                          postId={post.postId} />
+            return <Post postText={post.text}
+                         postId={post.postId}
+                         key={index} />
         }
     });
 

@@ -6,14 +6,12 @@ import '../../App.css'
 const User = ({userIndex, firstName, lastName, userAvatar}) => {
     return (
         <Link to={`/users/${userIndex}`} className='user'>
-            <div className="container">
-                <div className='flex-container'>
-                    <div>
-                        <img src={userAvatar} alt="" className='middle-avatar' />
-                    </div>
-                    <div>
-                        {`${firstName} ${lastName}`}
-                    </div>
+            <div className={`container flex-container`}>
+                <div>
+                    <img src={userAvatar} alt="" className='middle-avatar' />
+                </div>
+                <div>
+                    {`${firstName} ${lastName}`}
                 </div>
             </div>
         </Link>
@@ -21,7 +19,7 @@ const User = ({userIndex, firstName, lastName, userAvatar}) => {
 };
 
 User.propTypes = {
-    userIndex: PropTypes.number,
+    userIndex: PropTypes.string,
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     userAvatar: PropTypes.string

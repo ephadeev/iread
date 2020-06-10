@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types';
-import stylesPost from "./Post.module.css";
 import firebase from 'firebase/app';
+import stylesPost from "./Post.module.css";
 
-const Post = ({userId, message}) => {
+const Post = ({userId, postText}) => {
     const getAuthorOfPostData = (userId) => {
         firebase.firestore().collection('users').doc(userId).get()
             .then(response => setAuthorOfPost(response.data()))
@@ -25,7 +25,7 @@ const Post = ({userId, message}) => {
                         {`${authorOfPost?.firstName} ${authorOfPost?.lastName}: `}
                     </span>
                 </span>
-                {message}
+                {postText}
             </div>
         </div>
     );
@@ -33,7 +33,7 @@ const Post = ({userId, message}) => {
 
 Post.propTypes = {
     userId: PropTypes.string,
-    message: PropTypes.string
+    postText: PropTypes.string
 };
 
 export default Post;

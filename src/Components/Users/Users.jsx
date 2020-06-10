@@ -1,45 +1,39 @@
-import React, {useEffect} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import '../../App.css';
 import User from './User';
-import PropTypes from 'prop-types';
-import {getUsers} from "../../Redux/reducers/users-reducer";
 
-const Users = ({users, onGetUsers}) => {
-    useEffect(() => onGetUsers(), []);
-
-    let usersFromProps = users.map(user => {
+const Users = ({usersFromProps}) => {
+    const users = usersFromProps.map((user, index) => {
         return (
-            <User userIndex={user.index}
-                  firstName={user.name.first}
-                  lastName={user.name.last}
-                  userAvatar={user.picture}
-                  key={user._id} />
+            <User firstName={user.firstName}
+                  lastName={user.lastName}
+                  userIndex={user.userId}
+                  userAvatar={user.image}
+                  key={index} />
         )
     });
 
     return (
         <div className='wrapper'>
-            {usersFromProps}
+            {users}
         </div>
     );
 };
 
 Users.propTypes = {
-    user: PropTypes.array,
-    onGetUsers: PropTypes.func
+    usersFromProps: PropTypes.array,
 };
 
 const mapStateToProps = (state) => {
     return {
-        users: state.users.users
+        usersFromProps: state.firebase.users
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onGetUsers: () => dispatch(getUsers())
-    }
+const mapDispatchToProps = {
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users);

@@ -1,22 +1,11 @@
 import firebase from 'firebase/app';
 import {
-    GET_POSTS_FROM_FIRESTORE_FAILURE,
-    GET_POSTS_FROM_FIRESTORE_STARTED,
-    SET_POSTS_FROM_FIRESTORE,
-    GET_USERS_FROM_FIRESTORE_FAILURE,
-    GET_USERS_FROM_FIRESTORE_STARTED,
-    SET_USERS_FROM_FIRESTORE,
-    ON_CHANGE_EMAIL,
-    ON_CHANGE_PASSWORD,
-    ON_CHANGE_POST,
-    SIGN_IN_FAILURE,
-    SET_AUTHORIZED_USER,
-    SIGN_IN_STARTED,
-    GET_AUTHORIZED_USER_DATA_FAILURE,
-    SET_AUTHORIZED_USER_DATA,
-    GET_NEW_POST_STARTED,
-    SET_NEW_POST,
-    GET_NEW_POST_FAILURE
+    GET_POSTS_FROM_FIRESTORE_FAILURE, GET_POSTS_FROM_FIRESTORE_STARTED, SET_POSTS_FROM_FIRESTORE,
+    GET_USERS_FROM_FIRESTORE_FAILURE, GET_USERS_FROM_FIRESTORE_STARTED, SET_USERS_FROM_FIRESTORE,
+    ON_CHANGE_EMAIL, ON_CHANGE_PASSWORD, ON_CHANGE_POST,
+    SIGN_IN_FAILURE, SET_AUTHORIZED_USER, SIGN_IN_STARTED,
+    GET_AUTHORIZED_USER_DATA_FAILURE, SET_AUTHORIZED_USER_DATA, GET_NEW_POST_STARTED,
+    SET_NEW_POST, GET_NEW_POST_FAILURE, DELETE_POST
 } from './types';
 
 // get posts
@@ -48,6 +37,8 @@ export const getNewPost = (docId) => {
     }
 };
 
+// delete post
+export const deletePost = postId => ({type: DELETE_POST, payload: postId});
 
 // get users
 const getUsersFromFirestoreStarted = () => ({type: GET_USERS_FROM_FIRESTORE_STARTED});
@@ -57,7 +48,9 @@ export const getUsersFromFirestore = () => {
     return dispatch => {
         dispatch(getUsersFromFirestoreStarted);
         firebase.firestore().collection('users').get()
-            .then(response => dispatch(setUsersFromFirestore(response.docs.map(user => user.data()))))
+            .then(response => dispatch(setUsersFromFirestore(response.docs.map(user => {
+                return {userId: user.id, ...user.data()}
+            }))))
             .catch(err => dispatch(getUsersFromFirestoreFailure(err.message)))
     }
 };
@@ -70,12 +63,6 @@ export const onChangePasswordFromProps = pass => ({type: ON_CHANGE_PASSWORD, pay
 const signInStarted = () => ({type: SIGN_IN_STARTED});
 export const setAuthorizedUser = user => ({type: SET_AUTHORIZED_USER, payload: user});
 const signInFailure = error => ({type: SIGN_IN_FAILURE, payload: {error}});
-
-// get authorized user's data
-const setAuthorizedUserData = userData => ({type: SET_AUTHORIZED_USER_DATA, payload: userData});
-const getAuthorizedUserDataFailure = error => ({type: GET_AUTHORIZED_USER_DATA_FAILURE, payload: {error}});
-
-// auth redux thunk
 export const signInFromProps = () => {
     return (dispatch, getState) => {
         dispatch(signInStarted);
@@ -89,3 +76,7 @@ export const signInFromProps = () => {
             .catch(err => dispatch(signInFailure(err.message)))
     }
 };
+
+// get authorized user's data
+const setAuthorizedUserData = userData => ({type: SET_AUTHORIZED_USER_DATA, payload: userData});
+const getAuthorizedUserDataFailure = error => ({type: GET_AUTHORIZED_USER_DATA_FAILURE, payload: {error}});
