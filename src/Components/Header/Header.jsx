@@ -1,8 +1,10 @@
 import React from 'react';
-import stylesHeader from './Header.module.css';
+import {connect} from 'react-redux';
 import firebase from 'firebase/app';
+import stylesHeader from './Header.module.css';
+import {signOut} from '../../Redux/actions/firebase-actions';
 
-const Header = () => {
+const Header = ({signOut}) => {
     let settings = React.createRef();
 
     let showHiddenContent = (container) => {
@@ -14,11 +16,12 @@ const Header = () => {
             container.current.classList.add(stylesHeader.header__contentUnvisible);
         }
     };
-    // TODO: delete from state authorizedUser, authorizedUserData
+
     const LogOut = event => {
         event.preventDefault();
         firebase.auth().signOut()
-            .then(() => console.log('user signed out'));
+            .then(() => signOut())
+            .catch(err => console.log(err.message))
     };
 
     return (
@@ -88,4 +91,8 @@ const Header = () => {
     );
 };
 
-export default Header;
+const mapDispatchToProps = {
+    signOut
+};
+
+export default connect(null, mapDispatchToProps)(Header);

@@ -4,7 +4,7 @@ import {
     ON_CHANGE_POST, ON_CHANGE_EMAIL, ON_CHANGE_PASSWORD,
     SIGN_IN_STARTED, SET_AUTHORIZED_USER, SIGN_IN_FAILURE,
     SET_AUTHORIZED_USER_DATA, GET_AUTHORIZED_USER_DATA_FAILURE, GET_NEW_POST_STARTED,
-    SET_NEW_POST, GET_NEW_POST_FAILURE, DELETE_POST,
+    SET_NEW_POST, GET_NEW_POST_FAILURE, DELETE_POST, SIGN_OUT,
 } from '../actions/types';
 
 let initialState = {
@@ -132,6 +132,14 @@ const firebaseReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 error: action.payload.error
+            }
+        }
+        // sign out
+        case SIGN_OUT: {
+            return {
+                ...state,
+                authorizedUser: null,
+                authorizedUserData: null
             }
         }
         // get authorized user's data

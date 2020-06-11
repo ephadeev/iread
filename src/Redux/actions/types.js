@@ -26,6 +26,9 @@ export const SIGN_IN_STARTED = 'SIGN_IN_STARTED';
 export const SET_AUTHORIZED_USER = 'SET_AUTHORIZED_USER';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
 
+// sign out
+export const SIGN_OUT = 'SIGN_OUT';
+
 // get authorized user's data
 export const SET_AUTHORIZED_USER_DATA = 'SET_AUTHORIZED_USER_DATA';
 export const GET_AUTHORIZED_USER_DATA_FAILURE = 'GET_AUTHORIZED_USER_DATA_FAILURE';

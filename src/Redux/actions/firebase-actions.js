@@ -5,7 +5,7 @@ import {
     ON_CHANGE_EMAIL, ON_CHANGE_PASSWORD, ON_CHANGE_POST,
     SIGN_IN_FAILURE, SET_AUTHORIZED_USER, SIGN_IN_STARTED,
     GET_AUTHORIZED_USER_DATA_FAILURE, SET_AUTHORIZED_USER_DATA, GET_NEW_POST_STARTED,
-    SET_NEW_POST, GET_NEW_POST_FAILURE, DELETE_POST
+    SET_NEW_POST, GET_NEW_POST_FAILURE, DELETE_POST, SIGN_OUT
 } from './types';
 
 // get posts
@@ -76,6 +76,9 @@ export const signInFromProps = () => {
             .catch(err => dispatch(signInFailure(err.message)))
     }
 };
+
+// sign out
+export const signOut = () => ({type: SIGN_OUT});
 
 // get authorized user's data
 const setAuthorizedUserData = userData => ({type: SET_AUTHORIZED_USER_DATA, payload: userData});
