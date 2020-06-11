@@ -1,28 +1,17 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import stylesSignUp from './signUp.module.css'
 import styles from '../Authentication.module.css';
-import * as firebase from 'firebase';
+import {onChangeEmailSignUp, onChangePasswordSignUp, signUpFromProps} from '../../../Redux/actions/firebase-actions';
 
-const SignUp = () => {
-
-    let email = React.createRef();
-    let pass = React.createRef();
-
+const SignUp = ({emailSignUp, passwordSignUp, onChangeEmailSignUp, onChangePasswordSignUp, signUpFromProps}) => {
     const signUp = event => {
         event.preventDefault();
-        firebase.auth().createUserWithEmailAndPassword(email.current.value, pass.current.value)
-            .then(response => {
-                console.log(response);
-                email.current.value = '';
-                pass.current.value = '';
-            })
-            .catch(err => {
-                console.log(err.code);
-                console.log(err.message);
-                email.current.value = '';
-                pass.current.value = '';
-        })
+        signUpFromProps();
     };
+
+    const onChangeEmail = event => onChangeEmailSignUp(event.target.value);
+    const onChangePassword = event => onChangePasswordSignUp(event.target.value);
 
     return (
         <form onSubmit={signUp}>
@@ -32,15 +21,17 @@ const SignUp = () => {
                 </legend>
                 <label className={styles.label}>
                     <span>E-mail: </span>
-                    <input type="email"
-                           ref={email} />
+                    <input type='email'
+                           onChange={onChangeEmail}
+                           value={emailSignUp} />
                 </label>
                 <label className={styles.label}>
                     <span>Password: </span>
-                    <input type="password"
+                    <input type='password'
                            minLength='6'
                            maxLength='6'
-                           ref={pass} />
+                           onChange={onChangePassword}
+                           value={passwordSignUp} />
                 </label>
             </fieldset>
             <input type="submit"
@@ -49,4 +40,10 @@ const SignUp = () => {
     )
 };
 
-export default SignUp;
+const mapDispatchToProps = {
+    onChangeEmailSignUp,
+    onChangePasswordSignUp,
+    signUpFromProps
+};
+
+export default connect(null, mapDispatchToProps)(SignUp);

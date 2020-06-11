@@ -1,10 +1,26 @@
 import {
-    GET_POSTS_FROM_FIRESTORE_FAILURE, GET_POSTS_FROM_FIRESTORE_STARTED, SET_POSTS_FROM_FIRESTORE,
-    GET_USERS_FROM_FIRESTORE_FAILURE, GET_USERS_FROM_FIRESTORE_STARTED, SET_USERS_FROM_FIRESTORE,
-    ON_CHANGE_POST, ON_CHANGE_EMAIL, ON_CHANGE_PASSWORD,
-    SIGN_IN_STARTED, SET_AUTHORIZED_USER, SIGN_IN_FAILURE,
-    SET_AUTHORIZED_USER_DATA, GET_AUTHORIZED_USER_DATA_FAILURE, GET_NEW_POST_STARTED,
-    SET_NEW_POST, GET_NEW_POST_FAILURE, DELETE_POST, SIGN_OUT,
+    GET_POSTS_FROM_FIRESTORE_FAILURE,
+    GET_POSTS_FROM_FIRESTORE_STARTED,
+    SET_POSTS_FROM_FIRESTORE,
+    GET_USERS_FROM_FIRESTORE_FAILURE,
+    GET_USERS_FROM_FIRESTORE_STARTED,
+    SET_USERS_FROM_FIRESTORE,
+    ON_CHANGE_POST,
+    ON_CHANGE_EMAIL_SIGN_IN,
+    ON_CHANGE_PASSWORD_SIGN_IN,
+    SIGN_IN_STARTED,
+    SET_AUTHORIZED_USER,
+    SIGN_IN_FAILURE,
+    SET_AUTHORIZED_USER_DATA,
+    GET_AUTHORIZED_USER_DATA_FAILURE,
+    GET_NEW_POST_STARTED,
+    SET_NEW_POST,
+    GET_NEW_POST_FAILURE,
+    DELETE_POST,
+    SIGN_OUT,
+    ON_CHANGE_EMAIL_SIGN_UP,
+    ON_CHANGE_PASSWORD_SIGN_UP,
+    SIGN_UP_STARTED, SIGN_UP_FAILURE,
 } from '../actions/types';
 
 let initialState = {
@@ -15,8 +31,10 @@ let initialState = {
     error: null,
     newPostText: '',
     isLoading: false,
-    email: '',
-    password: ''
+    emailSignIn: '',
+    passwordSignIn: '',
+    emailSignUp: '',
+    passwordSignUp: ''
 };
 
 const firebaseReducer = (state = initialState, action) => {
@@ -99,16 +117,42 @@ const firebaseReducer = (state = initialState, action) => {
             }
         }
         // auth
-        case ON_CHANGE_EMAIL: {
+        case ON_CHANGE_EMAIL_SIGN_IN: {
             return {
                 ...state,
-                email: action.payload
+                emailSignIn: action.payload
             }
         }
-        case ON_CHANGE_PASSWORD: {
+        case ON_CHANGE_PASSWORD_SIGN_IN: {
             return {
                 ...state,
-                password: action.payload
+                passwordSignIn: action.payload
+            }
+        }
+        case ON_CHANGE_EMAIL_SIGN_UP: {
+            return {
+                ...state,
+                emailSignUp: action.payload
+            }
+        }
+        case ON_CHANGE_PASSWORD_SIGN_UP: {
+            return {
+                ...state,
+                passwordSignUp: action.payload
+            }
+        }
+        // sign up
+        case SIGN_UP_STARTED: {
+            return {
+                ...state,
+                isLoading: true
+            }
+        }
+        case SIGN_UP_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload.error
             }
         }
         // sign in
@@ -123,8 +167,10 @@ const firebaseReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 authorizedUser: action.payload,
-                email: '',
-                password: ''
+                emailSignIn: '',
+                passwordSignIn: '',
+                emailSignUp: '',
+                passwordSignUp: ''
             }
         }
         case SIGN_IN_FAILURE: {

@@ -2,10 +2,12 @@ import firebase from 'firebase/app';
 import {
     GET_POSTS_FROM_FIRESTORE_FAILURE, GET_POSTS_FROM_FIRESTORE_STARTED, SET_POSTS_FROM_FIRESTORE,
     GET_USERS_FROM_FIRESTORE_FAILURE, GET_USERS_FROM_FIRESTORE_STARTED, SET_USERS_FROM_FIRESTORE,
-    ON_CHANGE_EMAIL, ON_CHANGE_PASSWORD, ON_CHANGE_POST,
+    ON_CHANGE_EMAIL_SIGN_IN, ON_CHANGE_PASSWORD_SIGN_IN, ON_CHANGE_POST,
     SIGN_IN_FAILURE, SET_AUTHORIZED_USER, SIGN_IN_STARTED,
     GET_AUTHORIZED_USER_DATA_FAILURE, SET_AUTHORIZED_USER_DATA, GET_NEW_POST_STARTED,
-    SET_NEW_POST, GET_NEW_POST_FAILURE, DELETE_POST, SIGN_OUT
+    SET_NEW_POST, GET_NEW_POST_FAILURE, DELETE_POST,
+    SIGN_OUT, ON_CHANGE_EMAIL_SIGN_UP, ON_CHANGE_PASSWORD_SIGN_UP,
+    SIGN_UP_STARTED, SIGN_UP_FAILURE
 } from './types';
 
 // get posts
@@ -56,8 +58,27 @@ export const getUsersFromFirestore = () => {
 };
 
 // auth
-export const onChangeEmailFromProps = email => ({type: ON_CHANGE_EMAIL, payload: email});
-export const onChangePasswordFromProps = pass => ({type: ON_CHANGE_PASSWORD, payload: pass});
+export const onChangeEmailFromProps = email => ({type: ON_CHANGE_EMAIL_SIGN_IN, payload: email});
+export const onChangePasswordFromProps = pass => ({type: ON_CHANGE_PASSWORD_SIGN_IN, payload: pass});
+export const onChangeEmailSignUp = email => ({type: ON_CHANGE_EMAIL_SIGN_UP, payload: email});
+export const onChangePasswordSignUp = pass => ({type: ON_CHANGE_PASSWORD_SIGN_UP, payload: pass});
+
+// sign up
+const signUpStarted = () => ({type: SIGN_UP_STARTED});
+const signUpFailure = error => ({type: SIGN_UP_FAILURE, payload: {error}});
+export const signUpFromProps = () => {
+    return (dispatch, getState) => {
+        dispatch(signUpStarted);
+        firebase.auth().createUserWithEmailAndPassword(getState().firebase.emailSignUp, getState().firebase.passwordSignUp)
+            .then(response => {
+                firebase.firestore().collection('users').doc(`${response.user.uid}`).add()
+                /*firebase.firestore().collection('users').doc(`${response.user.uid}`).get()
+                    .then(doc => dispatch(setAuthorizedUserData(doc.data())))
+                    .catch(err => dispatch(getAuthorizedUserDataFailure(err.message)))*/
+            })
+            .catch(err => dispatch(signUpFailure(err.message)))
+    }
+};
 
 // sign in
 const signInStarted = () => ({type: SIGN_IN_STARTED});
@@ -66,7 +87,7 @@ const signInFailure = error => ({type: SIGN_IN_FAILURE, payload: {error}});
 export const signInFromProps = () => {
     return (dispatch, getState) => {
         dispatch(signInStarted);
-        firebase.auth().signInWithEmailAndPassword(getState().firebase.email, getState().firebase.password)
+        firebase.auth().signInWithEmailAndPassword(getState().firebase.emailSignIn, getState().firebase.passwordSignIn)
             .then(response => {
                 dispatch(setAuthorizedUser(response.user));
                 firebase.firestore().collection('users').doc(`${response.user.uid}`).get()
