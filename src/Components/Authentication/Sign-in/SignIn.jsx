@@ -1,6 +1,6 @@
 import React from 'react';
-import firebase from 'firebase';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import stylesSignIn from './signIn.module.css'
 import styles from '../Authentication.module.css';
 import {
@@ -43,6 +43,14 @@ const SignIn = ({email, password, onChangeEmailFromProps, onChangePasswordFromPr
                    value='Sign in' />
         </form>
     )
+};
+
+SignIn.propTypes = {
+    email: PropTypes.string,
+    password: PropTypes.string,
+    onChangeEmailFromProps: PropTypes.func,
+    onChangePasswordFromProps: PropTypes.func,
+    signInFromProps: PropTypes.func
 };
 
 const mapStateToProps = state => {
