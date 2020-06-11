@@ -9,18 +9,15 @@ const Profile = ({authorizedUserData}) => {
         <div className='wrapper'>
                 <div className={stylesProfile.containerProfile}>
                     <div className={stylesProfile.profile__flexContainer}>
-                        <img src={authorizedUserData?.image}
+                        <img src={authorizedUserData?.image ? authorizedUserData?.image : 'https://lookp.ru/images/user_unknown_icon.jpg'}
                              alt="Profile avatar"
                              className={stylesProfile.profile__avatar}/>
                         <div className={stylesProfile.profile__information}>
                             <h4 className={stylesProfile.name}>
-                                {authorizedUserData?.firstName} {authorizedUserData?.lastName}
+                                {authorizedUserData?.firstName ? authorizedUserData?.firstName : 'Mr.'} {authorizedUserData?.lastName ? authorizedUserData?.lastName : 'Smith'}
                             </h4>
                             <div>
-                                Hometown:
-                            </div>
-                            <div>
-                                {authorizedUserData?.Hometown}
+                                Hometown: {authorizedUserData?.Hometown ? authorizedUserData?.Hometown : 'La La Land'}
                             </div>
                         </div>
                     </div>
@@ -31,7 +28,7 @@ const Profile = ({authorizedUserData}) => {
 };
 
 Profile.propTypes = {
-    authorizedUser: PropTypes.object
+    authorizedUserData: PropTypes.object
 };
 
 
