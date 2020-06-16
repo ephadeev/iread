@@ -45,7 +45,7 @@ const UserPage = ({isLoading, ...ownProps}) => {
                         <div>
                             Friends:
                             {(userData?.friends)
-                                ? friends
+                                ? userData?.friends
                                 : ' It seems like there are no friends here...'}
                         </div>
                     </div>
