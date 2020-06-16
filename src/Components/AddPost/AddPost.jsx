@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import firebase from 'firebase/app';
 import '../../App.css';
 import {getNewPost, onChangePost} from '../../Redux/actions/firebase-actions';
 
 const AddPost = ({postText, authorizedUser, onChangePost, getNewPost}) => {
-    // need to create container component
+    // TODO: create container component
     const addPostFromProps = (text, userId) => {
         firebase.firestore().collection('posts')
             .add({
@@ -15,7 +15,7 @@ const AddPost = ({postText, authorizedUser, onChangePost, getNewPost}) => {
                 userId: userId
             })
             .then(docRef => getNewPost(docRef.id))
-            .catch((error) => console.log('Error adding document: ', error))
+            .catch(err => console.log('Error adding document: ', err))
     };
 
     const addPost = () => addPostFromProps(postText, authorizedUser.uid);

@@ -27,7 +27,7 @@ const Nav = ({authorizedUser}) => {
                     Users
                 </NavLink>}
                 {!authorizedUser &&
-                <NavLink to='authentication'
+                <NavLink to='/authentication'
                          className={stylesNav.link}
                          activeClassName={stylesNav.activeLink} >
                     <i className="fas fa-user">

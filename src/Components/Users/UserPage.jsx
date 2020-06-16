@@ -1,61 +1,53 @@
 import React, {useEffect, useState} from "react";
 import {connect} from 'react-redux';
-import axios from 'axios';
+import firebase from 'firebase/app';
 import {Link} from "react-router-dom";
 import '../../App.css';
 import stylesUserPage from './UserPage.module.css';
 
-const UserPage = (props) => {
-    console.log(props);
-    // TODO: need to get in props match.params
-    // const [userData, setUserData] = useState(null);
+const UserPage = ({isLoading, ...ownProps}) => {
+    const [userData, setUserData] = useState(null);
 
-    /*useEffect(() => {
-        axios.get(`https://serverless-backend-ky9b8rmuq.now.sh/api/users/${props.match.params.index}`)
-            .then(response => {
-                    setUserData(response.data);
-            })
-            .catch((err) => {
-                console.log(err.message);
-            })
-    }, [props.match.params.index]);*/
-    // Uncaught TypeError: Cannot read property 'params' of undefined
-    const userData = {};
-    if (!userData && !props.isLoading) {
+    useEffect(() => {
+        firebase.firestore().collection('users').doc(ownProps.match.params.index).get()
+            .then(response => setUserData(response.data()))
+            .catch(err => console.log(err.message));
+    }, [ownProps.match.params.index]);
+
+    if (!userData && !isLoading) {
         return (
-            <div>Опаньки, нет такого человека...</div>
+            <div>No such person...</div>
         )
     }
 
-    /*const friends = userData?.friends.map(friend => {
+    const friends = userData?.friends?.map(friend => {
         return (
-
             <Link to={`/users/${friend.index}`} className={stylesUserPage.friend}>
                 <div className={stylesUserPage.friend__item}>
-                    <img src={friend.picture} alt="" className={stylesUserPage.user__friendImage} />
-                    <span>{`${friend.name.first} ${friend.name.last}`}</span>
+                    <img src={friend.image} alt="" className={stylesUserPage.user__friendImage} />
+                    <span>{`${friend.firstName} ${friend.lastName}`}</span>
                 </div>
             </Link>
         )
-    });*/
+    });
 
     return (
         <div className='wrapper'>
             <div className='container'>
                 <div className='flex-container'>
-                    {props.isLoading && <div>Loading...</div>}
+                    {isLoading && <div>Loading...</div>}
                     <div>
                         <img src={userData?.image} alt="" className='middle-avatar' />
                     </div>
                     <div>
                         <div> {`${userData?.firstName} ${userData?.lastName}`}</div>
-
-                        <div>About me: {userData?.about}</div>
+                        <div>Hometown: {userData?.Hometown}</div>
                         <div>
                             Friends:
-                            {/*{friends}*/}
+                            {(userData?.friends)
+                                ? friends
+                                : ' It seems like there are no friends here...'}
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -63,10 +55,9 @@ const UserPage = (props) => {
     )
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
     return {
         isLoading: state.firebase.isLoading,
-        ownProps: ownProps
     }
 };
 
