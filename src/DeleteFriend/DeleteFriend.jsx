@@ -3,10 +3,10 @@ import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import firebase from 'firebase/app';
 
-const AddFriend = ({authorizedUserUid, friendsId}) => {
-    const addFriend = () => {
+const DeleteFriend = ({authorizedUserUid, friendsId}) => {
+    const deleteFriend = () => {
         return firebase.firestore().collection('users').doc(authorizedUserUid).update({
-            friends: firebase.firestore.FieldValue.arrayUnion(friendsId)
+            friends: firebase.firestore.FieldValue.arrayRemove(friendsId)
         })
             .then(() => console.log('Document successfully updated!'))
             .catch(err => console.log(err.message))
@@ -15,14 +15,14 @@ const AddFriend = ({authorizedUserUid, friendsId}) => {
 
     return (
         <div>
-            <i className='fas fa-user-plus'
-               onClick={addFriend}>
+            <i className='fas fa-user-times'
+               onClick={deleteFriend}>
             </i>
         </div>
     )
 };
 
-AddFriend.propTypes = {
+DeleteFriend.propTypes = {
     authorizedUserUid: PropTypes.string,
     friendsId: PropTypes.string
 };
@@ -33,4 +33,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(AddFriend);
+export default connect(mapStateToProps)(DeleteFriend);
