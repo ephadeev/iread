@@ -10,11 +10,6 @@
     border-radius: 5px;
 }
 
-.posts__image {
-    width: 50px;
-    margin: 10px;
-}
-
 .posts__author {
     font-weight: bold;
 }

@@ -20,15 +20,17 @@
     width: 100px;
 }
 
+.small-avatar {
+    width: 50px;
+    margin: 5px;
+}
+
 .flex-container {
     display: flex;
-    justify-content: space-between;
 }
 
 .user__container {
-    border-radius: 5px;
-    background-color: white;
-    margin: 5px auto;
+    position: relative;
 }
 
 .user {
@@ -38,6 +40,14 @@
 
 .textarea {
     resize: none;
+}
+
+.buttons {
+    color: #777;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: calc(50% - 8px);
 }
 
 /*

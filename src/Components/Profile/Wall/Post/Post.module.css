@@ -1,13 +1,6 @@
 .posts {
-    margin: 5px;
     padding: 10px;
     background-color: white;
     border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.trash {
-    color: #777;
-    cursor: pointer;
+    position: relative;
 }
