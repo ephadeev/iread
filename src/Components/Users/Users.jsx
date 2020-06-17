@@ -4,8 +4,10 @@ import {connect} from 'react-redux';
 import '../../App.css';
 import User from './User';
 
-const Users = ({usersFromProps}) => {
-    const users = usersFromProps.map((user, index) => {
+const Users = ({usersFromProps, authorizedUserId}) => {
+    const users = usersFromProps
+        .filter(user => user.userId !== authorizedUserId)
+        .map((user, index) => {
         return (
             <User firstName={user.firstName}
                   lastName={user.lastName}
@@ -24,11 +26,13 @@ const Users = ({usersFromProps}) => {
 
 Users.propTypes = {
     usersFromProps: PropTypes.array,
+    authorizedUserId: PropTypes.string
 };
 
 const mapStateToProps = (state) => {
     return {
-        usersFromProps: state.firebase.users
+        usersFromProps: state.users.users,
+        authorizedUserId: state.authorization.authorizedUser.uid
     }
 };
 
