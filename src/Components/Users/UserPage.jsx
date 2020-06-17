@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import firebase from 'firebase/app';
-import {Link} from "react-router-dom";
 import '../../App.css';
 import stylesUserPage from './UserPage.module.css';
+import FriendsList from '../FriendsList/FriendsList';
 
 const UserPage = ({isLoading, ...ownProps}) => {
     const [userData, setUserData] = useState(null);
@@ -20,16 +20,7 @@ const UserPage = ({isLoading, ...ownProps}) => {
         )
     }
 
-    const friends = userData?.friends?.map(friend => {
-        return (
-            <Link to={`/users/${friend.index}`} className={stylesUserPage.friend}>
-                <div className={stylesUserPage.friend__item}>
-                    <img src={friend.image} alt="" className={stylesUserPage.user__friendImage} />
-                    <span>{`${friend.firstName} ${friend.lastName}`}</span>
-                </div>
-            </Link>
-        )
-    });
+    const friends = userData?.friends?.map((friend, index) => <FriendsList friend={friend} key={index} />);
 
     return (
         <div className='wrapper'>
@@ -45,7 +36,7 @@ const UserPage = ({isLoading, ...ownProps}) => {
                         <div>
                             Friends:
                             {(userData?.friends)
-                                ? userData?.friends
+                                ? friends
                                 : ' It seems like there are no friends here...'}
                         </div>
                     </div>
@@ -57,7 +48,7 @@ const UserPage = ({isLoading, ...ownProps}) => {
 
 const mapStateToProps = state => {
     return {
-        isLoading: state.firebase.isLoading,
+        isLoading: state.users.isLoading,
     }
 };
 
