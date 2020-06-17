@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import firebase from 'firebase/app';
 import '../../App.css';
-import {getNewPost, onChangePost} from '../../Redux/actions/firebase-actions';
+import {getNewPost, onChangePost} from '../../Redux/actions/posts-actions';
 
 const AddPost = ({postText, authorizedUser, onChangePost, getNewPost}) => {
     // TODO: create container component
@@ -44,8 +44,8 @@ AddPost.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        postText: state.firebase.newPostText,
-        authorizedUser: state.firebase.authorizedUser
+        postText: state.posts.newPostText,
+        authorizedUser: state.authorization.authorizedUser
     }
 };
 

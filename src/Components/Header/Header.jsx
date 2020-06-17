@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import firebase from 'firebase/app';
 import stylesHeader from './Header.module.css';
-import {signOut} from '../../Redux/actions/firebase-actions';
+import {signOut} from '../../Redux/actions/authorization-actions';
 
 const Header = ({signOut}) => {
     let settings = React.createRef();

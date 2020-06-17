@@ -12,6 +12,12 @@ export const GET_NEW_POST_FAILURE = 'GET_NEW_POST_FAILURE';
 // delete post
 export const DELETE_POST = 'DELETE_POST';
 
+// delete friend
+export const DELETE_FRIEND = 'DELETE_FRIEND';
+
+// add friend
+export const ADD_FRIEND = 'ADD_FRIEND';
+
 // get users
 export const GET_USERS_FROM_FIRESTORE_STARTED = 'GET_USERS_FROM_FIRESTORE_STARTED';
 export const SET_USERS_FROM_FIRESTORE = 'SET_USERS_FROM_FIRESTORE';

@@ -3,7 +3,7 @@ import Profile from "./Profile";
 
 const mapStateToProps = (state) => {
     return {
-        authorizedUserData: state.firebase.authorizedUserData
+        authorizedUserData: state.authorization.authorizedUserData
     }
 };
 

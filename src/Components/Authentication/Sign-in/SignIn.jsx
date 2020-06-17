@@ -7,7 +7,7 @@ import {
     onChangeEmailFromProps,
     onChangePasswordFromProps,
     signInFromProps
-} from '../../../Redux/actions/firebase-actions';
+} from '../../../Redux/actions/authorization-actions';
 
 const SignIn = ({email, password, onChangeEmailFromProps, onChangePasswordFromProps, signInFromProps}) => {
     const signIn = event => {
@@ -55,8 +55,8 @@ SignIn.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        email: state.firebase.email,
-        password: state.firebase.password
+        email: state.authorization.emailSignIn,
+        password: state.authorization.passwordSignIn
     }
 
 };

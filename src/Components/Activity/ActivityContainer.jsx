@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 let mapStateToProps = (state) => {
     return {
-        postsFromProps: state.firebase.posts
+        postsFromProps: state.posts.posts
     }
 };
 

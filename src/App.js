@@ -1,18 +1,20 @@
 import React, {useEffect} from 'react';
 import firebase from 'firebase/app';
 import './App.css';
-import Nav from "./Components/Nav/Nav";
-import Footer from "./Components/Footer/Footer";
-import UserPage from "./Components/Users/UserPage";
-import Users from "./Components/Users/Users";
+import Nav from './Components/Nav/Nav';
+import Footer from './Components/Footer/Footer';
+import UserPage from './Components/Users/UserPage';
+import Users from './Components/Users/Users';
 import Authentication from './Components/Authentication/Authentication';
-import {Redirect, Route} from "react-router-dom";
-import ActivityContainer from "./Components/Activity/ActivityContainer";
+import {Redirect, Route} from 'react-router-dom';
+import ActivityContainer from './Components/Activity/ActivityContainer';
 import * as PropTypes from 'prop-types';
-import Header from "./Components/Header/Header";
-import ProfileContainer from "./Components/Profile/ProfileContainer";
+import Header from './Components/Header/Header';
+import ProfileContainer from './Components/Profile/ProfileContainer';
 import {connect} from 'react-redux';
-import {getPostsFromFirestore, getUsersFromFirestore, setAuthorizedUser} from './Redux/actions/firebase-actions';
+import {getUsersFromFirestore} from './Redux/actions/users-actions';
+import {setAuthorizedUser} from './Redux/actions/authorization-actions';
+import {getPostsFromFirestore} from './Redux/actions/posts-actions';
 
 const App = ({authorizedUser, getPostsFromFirestore, getUsersFromFirestore, setAuthorizedUser}) => {
     useEffect(() => getPostsFromFirestore(), []);
@@ -57,7 +59,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        authorizedUser: state.firebase.authorizedUser,
+        authorizedUser: state.authorization.authorizedUser,
     }
 };
 

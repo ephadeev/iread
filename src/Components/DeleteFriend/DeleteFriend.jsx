@@ -2,35 +2,35 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import firebase from 'firebase/app';
+import '../../App.css';
+import {deleteFriendFromProps} from '../../Redux/actions/authorization-actions';
 
-const DeleteFriend = ({authorizedUserUid, friendsId}) => {
+const DeleteFriend = ({authorizedUserUid, friendsId, deleteFriendFromProps}) => {
     const deleteFriend = () => {
         return firebase.firestore().collection('users').doc(authorizedUserUid).update({
             friends: firebase.firestore.FieldValue.arrayRemove(friendsId)
         })
-            .then(() => console.log('Document successfully updated!'))
+            .then(() => deleteFriendFromProps(friendsId))
             .catch(err => console.log(err.message))
     };
-    // TODO: update state after adding friend
 
     return (
-        <div>
-            <i className='fas fa-user-times'
-               onClick={deleteFriend}>
-            </i>
-        </div>
+        <i className='fas fa-user-times buttons'
+           onClick={deleteFriend}>
+        </i>
     )
 };
 
 DeleteFriend.propTypes = {
     authorizedUserUid: PropTypes.string,
-    friendsId: PropTypes.string
+    friendsId: PropTypes.string,
+    deleteFriendFromProps: PropTypes.func
 };
 
 const mapStateToProps = state => {
     return {
-        authorizedUserUid: state.firebase.authorizedUser.uid
+        authorizedUserUid: state.authorization.authorizedUser.uid
     }
 };
 
-export default connect(mapStateToProps)(DeleteFriend);
+export default connect(mapStateToProps, {deleteFriendFromProps})(DeleteFriend);

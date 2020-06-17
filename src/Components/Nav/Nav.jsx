@@ -44,7 +44,7 @@ Nav.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        authorizedUser: state.firebase.authorizedUser
+        authorizedUser: state.authorization.authorizedUser
     }
 };
 

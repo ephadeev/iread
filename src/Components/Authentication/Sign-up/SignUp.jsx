@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import stylesSignUp from './signUp.module.css'
 import styles from '../Authentication.module.css';
-import {onChangeEmailSignUp, onChangePasswordSignUp, signUpFromProps} from '../../../Redux/actions/firebase-actions';
+import {onChangeEmailSignUp, onChangePasswordSignUp, signUpFromProps} from '../../../Redux/actions/authorization-actions';
 
 const SignUp = ({emailSignUp, passwordSignUp, onChangeEmailSignUp, onChangePasswordSignUp, signUpFromProps}) => {
     const signUp = event => {
@@ -40,10 +40,17 @@ const SignUp = ({emailSignUp, passwordSignUp, onChangeEmailSignUp, onChangePassw
     )
 };
 
+const mapStateToProps = state => {
+    return {
+        emailSignUp: state.authorization.emailSignUp,
+        passwordSignUp: state.authorization.passwordSignUp
+    }
+};
+
 const mapDispatchToProps = {
     onChangeEmailSignUp,
     onChangePasswordSignUp,
     signUpFromProps
 };
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
