@@ -4,7 +4,7 @@ import {
     SET_AUTHORIZED_USER, SIGN_IN_STARTED, GET_AUTHORIZED_USER_DATA_FAILURE,
     SET_AUTHORIZED_USER_DATA, SIGN_OUT, ON_CHANGE_EMAIL_SIGN_UP,
     ON_CHANGE_PASSWORD_SIGN_UP, SIGN_UP_STARTED, SIGN_UP_FAILURE,
-    DELETE_FRIEND, ADD_FRIEND,
+    DELETE_FRIEND, ADD_FRIEND, SET_FIELDS_IN_AUTHORIZED_USER_DATA,
 } from '../types';
 
 // auth
@@ -19,9 +19,15 @@ const signUpFailure = error => ({type: SIGN_UP_FAILURE, payload: {error}});
 export const signUpFromProps = () => {
     return (dispatch, getState) => {
         dispatch(signUpStarted);
-        firebase.auth().createUserWithEmailAndPassword(getState().firebase.emailSignUp, getState().firebase.passwordSignUp)
+        firebase.auth().createUserWithEmailAndPassword(getState().authorization.emailSignUp, getState().authorization.passwordSignUp)
             .then(response => {
-                firebase.firestore().collection('users').doc(`${response.user.uid}`).add()
+                firebase.firestore().collection('users').doc(`${response.user.uid}`).set({
+                    firstName: '',
+                    lastName: '',
+                    friends: [],
+                    image: '',
+                    Hometown: ''
+                })
                 /*firebase.firestore().collection('users').doc(`${response.user.uid}`).get()
                     .then(doc => dispatch(setAuthorizedUserData(doc.data())))
                     .catch(err => dispatch(getAuthorizedUserDataFailure(err.message)))*/
@@ -60,3 +66,6 @@ export const deleteFriendFromProps = friendsId => ({type: DELETE_FRIEND, payload
 
 // add friend
 export const addFriendFromProps = friendsId => ({type: ADD_FRIEND, payload: friendsId});
+
+// set new fields in authorized user's data
+export const setNewFieldsInAuthorizedUserData = (field, data) => ({type: SET_FIELDS_IN_AUTHORIZED_USER_DATA, payload: {field, data}});

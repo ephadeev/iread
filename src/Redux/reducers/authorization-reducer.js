@@ -3,8 +3,9 @@ import {
     SET_AUTHORIZED_USER, SIGN_IN_FAILURE, SET_AUTHORIZED_USER_DATA,
     GET_AUTHORIZED_USER_DATA_FAILURE, SIGN_OUT, ON_CHANGE_EMAIL_SIGN_UP,
     ON_CHANGE_PASSWORD_SIGN_UP, SIGN_UP_STARTED, SIGN_UP_FAILURE,
-    DELETE_FRIEND, ADD_FRIEND,
+    DELETE_FRIEND, ADD_FRIEND, SET_FIELDS_IN_AUTHORIZED_USER_DATA,
 } from '../types';
+import {setAuthorizedUser} from "../actions/authorization-actions";
 
 let initialState = {
     authorizedUser: null,
@@ -105,7 +106,7 @@ const authorizationReducer = (state = initialState, action) => {
             }
         }
         // delete friend
-        case DELETE_FRIEND : {
+        case DELETE_FRIEND: {
             return {
                 ...state,
                 authorizedUserData: {
@@ -115,12 +116,22 @@ const authorizationReducer = (state = initialState, action) => {
             }
         }
         // add friend
-        case ADD_FRIEND : {
+        case ADD_FRIEND: {
             return {
                 ...state,
                 authorizedUserData: {
                     ...state.authorizedUserData,
                     friends: [...state.authorizedUserData.friends, action.payload]
+                }
+            }
+        }
+        // set new fields in authorized user's data
+        case SET_FIELDS_IN_AUTHORIZED_USER_DATA: {
+            return {
+                ...state,
+                authorizedUserData: {
+                    ...state.authorizedUserData,
+                    [action.payload.field]: action.payload.data
                 }
             }
         }

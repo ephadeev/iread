@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 import '../../App.css';
 import {getNewPost, onChangePost} from '../../Redux/actions/posts-actions';
 
-const AddPost = ({postText, authorizedUser, onChangePost, getNewPost}) => {
+const AddPost = ({postText, authorizedUserUid, onChangePost, getNewPost}) => {
     // TODO: create container component
     const addPostFromProps = (text, userId) => {
         firebase.firestore().collection('posts')
@@ -18,7 +18,7 @@ const AddPost = ({postText, authorizedUser, onChangePost, getNewPost}) => {
             .catch(err => console.log('Error adding document: ', err))
     };
 
-    const addPost = () => addPostFromProps(postText, authorizedUser.uid);
+    const addPost = () => addPostFromProps(postText, authorizedUserUid);
     const onChange = event => onChangePost(event.target.value);
 
     return (
@@ -37,7 +37,7 @@ const AddPost = ({postText, authorizedUser, onChangePost, getNewPost}) => {
 
 AddPost.propTypes = {
     postText: PropTypes.string,
-    authorizedUser: PropTypes.object,
+    authorizedUserUid: PropTypes.string,
     onChangePost: PropTypes.func,
     getNewPost: PropTypes.func
 };
@@ -45,7 +45,7 @@ AddPost.propTypes = {
 const mapStateToProps = state => {
     return {
         postText: state.posts.newPostText,
-        authorizedUser: state.authorization.authorizedUser
+        authorizedUserUid: state.authorization.authorizedUser.uid
     }
 };
 
