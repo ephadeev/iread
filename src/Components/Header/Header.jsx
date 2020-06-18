@@ -44,7 +44,7 @@ const Header = ({signOut}) => {
                 <div className={stylesHeader.header__contentUnvisible}
                      ref={settings}>
                     <button onClick={LogOut}>Logout</button>
-                    Select color scheme:
+                    {/*Select color scheme:
                     <div className={`
                     ${stylesHeader.header__bgColorYellow} 
                     ${stylesHeader.header__colorSchemes}
@@ -84,7 +84,7 @@ const Header = ({signOut}) => {
                     ${stylesHeader.header__bgColorIndigo} 
                     ${stylesHeader.header__colorSchemes}
                     `}>
-                    </div>
+                    </div>*/}
                 </div>
             </div>
         </div>

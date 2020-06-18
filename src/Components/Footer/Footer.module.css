@@ -5,12 +5,15 @@
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    background-color: #FF6A71;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
 }
 
 .footer__link {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .footer__link--active {
