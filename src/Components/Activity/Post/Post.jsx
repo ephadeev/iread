@@ -20,7 +20,9 @@ const Post = ({userId, postText}) => {
             <div className={stylesPost.container}>
                 <span>
                     <img className='small-avatar'
-                         src={authorOfPost?.image}
+                         src={authorOfPost?.image
+                             ? authorOfPost?.image
+                             : 'https://lookp.ru/images/user_unknown_icon.jpg'}
                          alt="Profile avatar"/>
                     <span className={stylesPost.posts__author}>
                         {`${authorOfPost?.firstName} ${authorOfPost?.lastName}: `}
