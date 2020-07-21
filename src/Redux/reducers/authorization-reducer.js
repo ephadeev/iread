@@ -5,7 +5,6 @@ import {
     ON_CHANGE_PASSWORD_SIGN_UP, SIGN_UP_STARTED, SIGN_UP_FAILURE,
     DELETE_FRIEND, ADD_FRIEND, SET_FIELDS_IN_AUTHORIZED_USER_DATA,
 } from '../types';
-import {setAuthorizedUser} from "../actions/authorization-actions";
 
 let initialState = {
     authorizedUser: null,

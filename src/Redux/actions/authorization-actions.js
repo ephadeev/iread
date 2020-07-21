@@ -58,8 +58,8 @@ export const signInFromProps = () => {
 export const signOut = () => ({type: SIGN_OUT});
 
 // get authorized user's data
-const setAuthorizedUserData = userData => ({type: SET_AUTHORIZED_USER_DATA, payload: userData});
-const getAuthorizedUserDataFailure = error => ({type: GET_AUTHORIZED_USER_DATA_FAILURE, payload: {error}});
+export const setAuthorizedUserData = userData => ({type: SET_AUTHORIZED_USER_DATA, payload: userData});
+export const getAuthorizedUserDataFailure = error => ({type: GET_AUTHORIZED_USER_DATA_FAILURE, payload: {error}});
 
 // delete friend
 export const deleteFriendFromProps = friendsId => ({type: DELETE_FRIEND, payload: friendsId});
