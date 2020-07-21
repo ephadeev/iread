@@ -1,16 +1,11 @@
 import Activity from './Activity';
 import {connect} from 'react-redux';
 
-let mapStateToProps = (state) => {
+let mapStateToProps = state => {
     return {
-        postsFromProps: state.posts.posts
+        postsFromProps: state.posts.posts,
+        checkedTheme: state.themes.checkedTheme
     }
 };
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Activity);
+export default connect(mapStateToProps)(Activity);

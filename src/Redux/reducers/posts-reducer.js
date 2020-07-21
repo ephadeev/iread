@@ -1,7 +1,6 @@
 import {
     GET_POSTS_FROM_FIRESTORE_FAILURE, GET_POSTS_FROM_FIRESTORE_STARTED, SET_POSTS_FROM_FIRESTORE,
-    ON_CHANGE_POST, GET_NEW_POST_STARTED, SET_NEW_POST,
-    GET_NEW_POST_FAILURE, DELETE_POST,
+    ON_CHANGE_POST, DELETE_POST,
 } from '../types';
 
 let initialState = {
@@ -17,14 +16,16 @@ const postsReducer = (state = initialState, action) => {
         case GET_POSTS_FROM_FIRESTORE_STARTED: {
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
+                newPostText: ''
             }
         }
         case SET_POSTS_FROM_FIRESTORE: {
             return {
                 ...state,
                 isLoading: false,
-                posts: [...action.posts]
+                posts: [...action.posts],
+                newPostText: ''
             }
         }
         case GET_POSTS_FROM_FIRESTORE_FAILURE: {
@@ -39,27 +40,6 @@ const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 newPostText: action.payload
-            }
-        }
-        case GET_NEW_POST_STARTED: {
-            return {
-                ...state,
-                isLoading: true
-            }
-        }
-        case SET_NEW_POST: {
-            return {
-                ...state,
-                isLoading: false,
-                posts: [...state.posts, action.post],
-                newPostText: ''
-            }
-        }
-        case GET_NEW_POST_FAILURE: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error
             }
         }
         // delete post

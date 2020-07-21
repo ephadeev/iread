@@ -2,14 +2,6 @@
     color: black;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 5px auto;
-    background-color: white;
-    padding: 5px;
-    border-radius: 5px;
-}
-
 .posts__author {
     font-weight: bold;
 }

@@ -4,7 +4,7 @@ import firebase from 'firebase/app';
 import stylesPost from "./Post.module.css";
 import '../../../App.css';
 
-const Post = ({userId, postText}) => {
+const Post = ({userId, postText, hours, minutes, checkedTheme}) => {
     const getAuthorOfPostData = (userId) => {
         firebase.firestore().collection('users').doc(userId).get()
             .then(response => setAuthorOfPost(response.data()))
@@ -17,7 +17,7 @@ const Post = ({userId, postText}) => {
 
     return (
         <div className={stylesPost.posts}>
-            <div className={stylesPost.container}>
+            <div className='container bgColorGray pos--relative'>
                 <span>
                     <img className='small-avatar'
                          src={authorOfPost?.image
@@ -29,6 +29,7 @@ const Post = ({userId, postText}) => {
                     </span>
                 </span>
                 {postText}
+                <span className={`post__time colorDefault color${checkedTheme}`}>{`${hours}:${minutes}`}</span>
             </div>
         </div>
     );
@@ -36,7 +37,10 @@ const Post = ({userId, postText}) => {
 
 Post.propTypes = {
     userId: PropTypes.string,
-    postText: PropTypes.string
+    postText: PropTypes.string,
+    hours: PropTypes.number,
+    minutes: PropTypes.number,
+    checkedTheme: PropTypes.string
 };
 
 export default Post;

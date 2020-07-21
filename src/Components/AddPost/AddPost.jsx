@@ -3,33 +3,32 @@ import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import firebase from 'firebase/app';
 import '../../App.css';
-import {getNewPost, onChangePost} from '../../Redux/actions/posts-actions';
+import {onChangePost} from '../../Redux/actions/posts-actions';
 
-const AddPost = ({postText, authorizedUserUid, onChangePost, getNewPost}) => {
-    // TODO: create container component
-    const addPostFromProps = (text, userId) => {
+const AddPost = ({postText, authorizedUserUid, checkedTheme, onChangePost}) => {
+    const addPostHandler = (text, userId) => {
         firebase.firestore().collection('posts')
             .add({
                 text: text,
                 isPrivate: false,
-                userId: userId
+                userId: userId,
+                time: new Date()
             })
-            .then(docRef => getNewPost(docRef.id))
             .catch(err => console.log('Error adding document: ', err))
     };
 
-    const addPost = () => addPostFromProps(postText, authorizedUserUid);
+    const addPost = () => addPostHandler(postText, authorizedUserUid);
     const onChange = event => onChangePost(event.target.value);
 
     return (
         <div>
-            <div className='container'>
+            <div className='container bgColorGray'>
                 <textarea placeholder='anything new?'
-                          className='textarea'
+                          className={`textarea br5 btDefault bt${checkedTheme} button`}
                           onChange={onChange}
                           value={postText} >
                 </textarea>
-                <button onClick={addPost}>add post</button>
+                <button onClick={addPost} className={`btn m15`}>add post</button>
             </div>
         </div>
     )
@@ -38,20 +37,20 @@ const AddPost = ({postText, authorizedUserUid, onChangePost, getNewPost}) => {
 AddPost.propTypes = {
     postText: PropTypes.string,
     authorizedUserUid: PropTypes.string,
+    checkedTheme: PropTypes.string,
     onChangePost: PropTypes.func,
-    getNewPost: PropTypes.func
 };
 
 const mapStateToProps = state => {
     return {
         postText: state.posts.newPostText,
-        authorizedUserUid: state.authorization.authorizedUser.uid
+        authorizedUserUid: state.authorization.authorizedUser.uid,
+        checkedTheme: state.themes.checkedTheme
     }
 };
 
 const mapDispatchToProps = {
-    onChangePost,
-    getNewPost
+    onChangePost
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddPost);
