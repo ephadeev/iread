@@ -15,7 +15,7 @@ const FriendsList = ({friend}) => {
 
     return (
         <Link to={`/users/${friend}`} className={stylesFriends.friend}>
-            <div className={stylesFriends.friend__item}>
+            <div>
                 <img src={friendObject?.image} alt="" className={stylesFriends.user__friendImage} />
                 <span>{`${friendObject?.firstName} ${friendObject?.lastName}`}</span>
             </div>
