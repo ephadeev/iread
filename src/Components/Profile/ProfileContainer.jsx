@@ -3,14 +3,10 @@ import Profile from "./Profile";
 
 const mapStateToProps = (state) => {
     return {
-        authorizedUserData: state.authorization.authorizedUserData
+        authorizedUserData: state.authorization.authorizedUserData,
+        isLoading: state.authorization.isLoading,
+        checkedTheme: state.themes.checkedTheme
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default connect(mapStateToProps)(Profile)

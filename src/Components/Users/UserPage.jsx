@@ -1,32 +1,32 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import firebase from 'firebase/app';
+import PropTypes from 'prop-types';
 import '../../App.css';
-import stylesUserPage from './UserPage.module.css';
 import FriendsList from '../FriendsList/FriendsList';
+import Loader from '../Loader/Loader';
 
-const UserPage = ({isLoading, ...ownProps}) => {
+const UserPage = ({isLoading, checkedTheme, ...ownProps}) => {
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
-        firebase.firestore().collection('users').doc(ownProps.match.params.index).get()
+        firebase.firestore().collection('users').doc(ownProps.match.params.index)
+            .get()
             .then(response => setUserData(response.data()))
             .catch(err => console.log(err.message));
     }, [ownProps.match.params.index]);
 
     if (!userData && !isLoading) {
-        return (
-            <div>No such person...</div>
-        )
+        return <Loader />
     }
 
     const friends = userData?.friends?.map((friend, index) => <FriendsList friend={friend} key={index} />);
 
     return (
-        <div className='wrapper'>
-            <div className='container'>
+        <div className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
+            <div className='container bgColorGray'>
                 <div className='flex-container'>
-                    {isLoading && <div>Loading...</div>}
+                    {isLoading && <Loader />}
                     <div>
                         <img src={userData?.image} alt="" className='middle-avatar' />
                     </div>
@@ -46,9 +46,15 @@ const UserPage = ({isLoading, ...ownProps}) => {
     )
 };
 
+UserPage.propTypes = {
+    isLoading: PropTypes.bool,
+    checkedTheme: PropTypes.string
+};
+
 const mapStateToProps = state => {
     return {
         isLoading: state.users.isLoading,
+        checkedTheme: state.themes.checkedTheme
     }
 };
 

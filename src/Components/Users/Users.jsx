@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import '../../App.css';
 import User from './User';
 
-const Users = ({usersFromProps, authorizedUserId}) => {
+const Users = ({usersFromProps, authorizedUserId, checkedTheme}) => {
     const users = usersFromProps
         .filter(user => user.userId !== authorizedUserId)
         .map((user, index) => {
@@ -18,7 +18,7 @@ const Users = ({usersFromProps, authorizedUserId}) => {
     });
 
     return (
-        <div className='wrapper'>
+        <div className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
             {users}
         </div>
     );
@@ -26,18 +26,16 @@ const Users = ({usersFromProps, authorizedUserId}) => {
 
 Users.propTypes = {
     usersFromProps: PropTypes.array,
-    authorizedUserId: PropTypes.string
+    authorizedUserId: PropTypes.string,
+    checkedTheme: PropTypes.string
 };
 
 const mapStateToProps = (state) => {
     return {
         usersFromProps: state.users.users,
-        authorizedUserId: state.authorization.authorizedUser.uid
+        authorizedUserId: state.authorization.authorizedUser.uid,
+        checkedTheme: state.themes.checkedTheme
     }
 };
 
-const mapDispatchToProps = {
-
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default connect(mapStateToProps)(Users);

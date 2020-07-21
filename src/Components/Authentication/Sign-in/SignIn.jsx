@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import stylesSignIn from './signIn.module.css'
+import '../../../App.css';
+import stylesSignIn from './signIn.module.css';
 import styles from '../Authentication.module.css';
 import {
     onChangeEmailFromProps,
@@ -9,7 +10,7 @@ import {
     signInFromProps
 } from '../../../Redux/actions/authorization-actions';
 
-const SignIn = ({email, password, onChangeEmailFromProps, onChangePasswordFromProps, signInFromProps}) => {
+const SignIn = ({email, password, checkedTheme, onChangeEmailFromProps, onChangePasswordFromProps, signInFromProps}) => {
     const signIn = event => {
         event.preventDefault();
         signInFromProps();
@@ -28,7 +29,8 @@ const SignIn = ({email, password, onChangeEmailFromProps, onChangePasswordFromPr
                     <span>E-mail: </span>
                     <input type='email'
                            onChange={onChangeEmail}
-                           value={email} />
+                           value={email}
+                           className={`br5 btDefault bt${checkedTheme} ${stylesSignIn.btn}`} />
                 </label>
                 <label className={styles.label}>
                     <span>Password: </span>
@@ -36,11 +38,13 @@ const SignIn = ({email, password, onChangeEmailFromProps, onChangePasswordFromPr
                            minLength='6'
                            maxLength='6'
                            onChange={onChangePassword}
-                           value={password} />
+                           value={password}
+                           className={`br5 btDefault bt${checkedTheme} ${stylesSignIn.btn}`} />
                 </label>
             </fieldset>
             <input type='submit'
-                   value='Sign in' />
+                   value='Sign in'
+                   className={`btn ${styles.buttons}`} />
         </form>
     )
 };
@@ -48,6 +52,7 @@ const SignIn = ({email, password, onChangeEmailFromProps, onChangePasswordFromPr
 SignIn.propTypes = {
     email: PropTypes.string,
     password: PropTypes.string,
+    checkedTheme: PropTypes.string,
     onChangeEmailFromProps: PropTypes.func,
     onChangePasswordFromProps: PropTypes.func,
     signInFromProps: PropTypes.func
@@ -56,7 +61,8 @@ SignIn.propTypes = {
 const mapStateToProps = state => {
     return {
         email: state.authorization.emailSignIn,
-        password: state.authorization.passwordSignIn
+        password: state.authorization.passwordSignIn,
+        checkedTheme: state.themes.checkedTheme
     }
 
 };

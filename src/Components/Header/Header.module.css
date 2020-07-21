@@ -1,11 +1,10 @@
 .header {
-    height: 60px;
+    height: 6vh;
     width: 100%;
-    background-color: #276899;
 }
 
 .header__logo {
-    height: 60px;
+    height: 6vh;
     font-size: 30px;
     color: white;
     display: flex;
@@ -45,56 +44,41 @@
 }
 
 .header__contentUnvisible {
-    display: none;
-}
-
-.header__contentVisible {
     display: block;
-    height: 225px;
-    padding: 5px;
-
-    background-color: white;
+    opacity: 0;
 
     position: absolute;
     top: 30px;
     right: 30px;
     border-radius: 5px;
+
+    transition: .2s;
 }
 
-.header__colorSchemes {
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
+.header__contentVisible {
+    display: block;
+    opacity: 1;
+    height: 90px;
+    padding: 15px;
+
+    background-color: #DDD;
+
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    border-radius: 5px;
+
+    transition: .2s;
 }
 
-.header__bgColorYellow {
-    background-color: #F9CB00;
+.header__logout {
+    display: block;
+    margin: 0 auto 5px;
 }
 
-.header__bgColorBlack {
-    background-color: #0D0A0E;
-}
+.header__border {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
 
-.header__bgColorGold {
-    background-color: #E9B100;
-}
-
-.header__bgColorOrange {
-    background-color: #FF6A22;
-}
-
-.header__bgColorPink {
-    background-color: #FF6A71;
-}
-
-.header__bgColorBlue {
-    background-color: #82B2BB;
-}
-
-.header__bgColorGreen {
-    background-color: #47BA7E;
-}
-
-.header__bgColorIndigo {
-    background-color: #276899;
 }

@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import stylesSignUp from './signUp.module.css'
+import '../../../App.css';
+import stylesSignUp from './signUp.module.css';
 import styles from '../Authentication.module.css';
 import {onChangeEmailSignUp, onChangePasswordSignUp, signUpFromProps} from '../../../Redux/actions/authorization-actions';
 
-const SignUp = ({emailSignUp, passwordSignUp, onChangeEmailSignUp, onChangePasswordSignUp, signUpFromProps}) => {
+const SignUp = ({emailSignUp, passwordSignUp, checkedTheme, onChangeEmailSignUp, onChangePasswordSignUp, signUpFromProps}) => {
     const signUp = event => {
         event.preventDefault();
         signUpFromProps();
@@ -23,7 +24,8 @@ const SignUp = ({emailSignUp, passwordSignUp, onChangeEmailSignUp, onChangePassw
                     <span>E-mail: </span>
                     <input type='email'
                            onChange={onChangeEmail}
-                           value={emailSignUp} />
+                           value={emailSignUp}
+                           className={`br5 btDefault bt${checkedTheme} ${stylesSignUp.btn}`} />
                 </label>
                 <label className={styles.label}>
                     <span>Password: </span>
@@ -31,11 +33,13 @@ const SignUp = ({emailSignUp, passwordSignUp, onChangeEmailSignUp, onChangePassw
                            minLength='6'
                            maxLength='6'
                            onChange={onChangePassword}
-                           value={passwordSignUp} />
+                           value={passwordSignUp}
+                           className={`br5 btDefault bt${checkedTheme} ${stylesSignUp.btn}`} />
                 </label>
             </fieldset>
-            <input type="submit"
-                   value="Sign up" />
+            <input type='submit'
+                   value='Sign up'
+                   className={`btn ${styles.buttons}`} />
         </form>
     )
 };
@@ -43,7 +47,8 @@ const SignUp = ({emailSignUp, passwordSignUp, onChangeEmailSignUp, onChangePassw
 const mapStateToProps = state => {
     return {
         emailSignUp: state.authorization.emailSignUp,
-        passwordSignUp: state.authorization.passwordSignUp
+        passwordSignUp: state.authorization.passwordSignUp,
+        checkedTheme: state.themes.checkedTheme
     }
 };
 

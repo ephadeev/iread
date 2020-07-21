@@ -2,17 +2,24 @@ import React from "react";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import stylesNav from './Nav.module.css';
+import '../../App.css';
 import {NavLink} from "react-router-dom";
 
-const Nav = ({authorizedUser}) => {
+const Nav = ({authorizedUser, checkedTheme}) => {
     return (
-        <div className={stylesNav.links}>
+        <div className={`bgColorDefault bgColor${checkedTheme}`}>
             <div className={stylesNav.containerNav}>
                 {authorizedUser &&
                 <NavLink to='/profile'
                          className={stylesNav.link}
                          activeClassName={stylesNav.activeLink} >
                     Profile
+                </NavLink>}
+                {authorizedUser &&
+                <NavLink to='/messages'
+                         className={stylesNav.link}
+                         activeClassName={stylesNav.activeLink} >
+                    Messages
                 </NavLink>}
                 {authorizedUser &&
                 <NavLink to='/activity'
@@ -25,6 +32,12 @@ const Nav = ({authorizedUser}) => {
                          className={stylesNav.link}
                          activeClassName={stylesNav.activeLink} >
                     Users
+                </NavLink>}
+                {authorizedUser &&
+                <NavLink to='/friends'
+                         className={stylesNav.link}
+                         activeClassName={stylesNav.activeLink} >
+                    Friends
                 </NavLink>}
                 {!authorizedUser &&
                 <NavLink to='/authentication'
@@ -39,12 +52,14 @@ const Nav = ({authorizedUser}) => {
 };
 
 Nav.propTypes = {
-    authorizedUser: PropTypes.object
+    authorizedUser: PropTypes.object,
+    checkedTheme: PropTypes.string
 };
 
 const mapStateToProps = state => {
     return {
-        authorizedUser: state.authorization.authorizedUser
+        authorizedUser: state.authorization.authorizedUser,
+        checkedTheme: state.themes.checkedTheme
     }
 };
 
