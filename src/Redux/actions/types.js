@@ -1,8 +1,0 @@
-export const SIGN_IN = 'SIGN_IN';
-export const GET_USERS_STARTED = 'GET_USERS_STARTED';
-export const SET_USERS = 'SET_USERS';
-export const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
-
-export const CHECK_AMOUNT_OF_CHECKED_ELEMENT = 'CHECK_AMOUNT_OF_CHECKED_ELEMENT';
-
-export const ADD_POST = 'ADD_POST';

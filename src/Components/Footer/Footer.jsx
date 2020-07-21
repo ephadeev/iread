@@ -1,19 +1,30 @@
-import React from "react";
-
+import React from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import '../../App.css';
 import stylesFooter from './Footer.module.css';
-import {NavLink} from 'react-router-dom';
 
-const Footer = () => {
+const Footer = ({checkedTheme}) => {
     return (
-        <div className={stylesFooter.footer}>
-            <div className={stylesFooter.container}>
-                <NavLink to="/careers"
-                         className={stylesFooter.footer__link}>
-                    Careers
-                </NavLink>
+        <div className={`bgColorDefault bgColor${checkedTheme}`}>
+            <div className={`${stylesFooter.container} container texAlCenter bgColorGray`}>
+                <a href='https://www.linkedin.com/in/evgeny-phadeev-0a639899/?locale=en_US'
+                   target='_blank'
+                   rel='noopener noreferrer'
+                   className={stylesFooter.footer__link} >developed by ephadeev</a>
             </div>
         </div>
     );
 };
 
-export default Footer;
+Footer.propTypes = {
+    checkedTheme: PropTypes.string
+};
+
+const mapStateToProps = state => {
+    return {
+        checkedTheme: state.themes.checkedTheme
+    }
+};
+
+export default connect(mapStateToProps)(Footer);

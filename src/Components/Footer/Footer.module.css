@@ -1,16 +1,10 @@
-.footer {
-    background-color: #F9CB00;
-}
-
 .container {
-    max-width: 1200px;
     margin: 0 auto;
-    background-color: #FF6A71;
 }
 
 .footer__link {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .footer__link--active {

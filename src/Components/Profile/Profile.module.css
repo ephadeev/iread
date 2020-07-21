@@ -1,8 +1,3 @@
-.profile {
-    background-color: #F9CB00;
-    padding: 10px;
-}
-
 .containerProfile {
     max-width: 1200px;
     margin: 0 auto;
@@ -15,6 +10,8 @@
 
 .profile__avatar {
     width: 115px;
+    border-radius: 5px;
+    object-fit: cover;
 }
 
 .profile__information {

@@ -1,14 +1,3 @@
 .wall {
 
 }
-
-.newPost {
-    margin: 5px;
-    padding: 10px;
-    background-color: white;
-    border-radius: 5px;
-}
-
-.textarea {
-    resize: none;
-}

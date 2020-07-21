@@ -1,0 +1,7 @@
+.btn {
+
+}
+
+.btn:focus {
+    outline: 0;
+}

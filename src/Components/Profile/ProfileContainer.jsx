@@ -1,18 +1,12 @@
-import React from "react";
 import {connect} from 'react-redux';
 import Profile from "./Profile";
 
 const mapStateToProps = (state) => {
     return {
-        users: state.activity.users,
-        posts: state.activity.posts
+        authorizedUserData: state.authorization.authorizedUserData,
+        isLoading: state.authorization.isLoading,
+        checkedTheme: state.themes.checkedTheme
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default connect(mapStateToProps)(Profile)

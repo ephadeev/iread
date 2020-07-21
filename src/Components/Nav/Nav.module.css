@@ -1,11 +1,7 @@
-.links {
-    background-color: #F9CB00;
-}
-
 .containerNav {
     max-width: 1200px;
     margin: 0 auto;
-    background-color: #FF6A71;
+    background-color: white;
     border-radius: 5px;
     padding: 5px;
 }
@@ -16,5 +12,5 @@
 }
 
 .activeLink {
-    color: #fff;
+    color: #276899;
 }

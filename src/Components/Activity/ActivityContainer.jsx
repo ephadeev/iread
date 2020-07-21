@@ -1,21 +1,11 @@
-import React from "react";
-import Activity from "./Activity";
-import {connect} from "react-redux";
-import {addPostActionCreator} from "../../Redux/reducers/activity-reducer";
+import Activity from './Activity';
+import {connect} from 'react-redux';
 
-let mapStateToProps = (state) => {
+let mapStateToProps = state => {
     return {
-        posts: state.activity.posts,
-        users: state.activity.users
+        postsFromProps: state.posts.posts,
+        checkedTheme: state.themes.checkedTheme
     }
 };
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        addPost: (text) => {
-            dispatch(addPostActionCreator(text))
-        }
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Activity);
+export default connect(mapStateToProps)(Activity);

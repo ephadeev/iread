@@ -1,0 +1,10 @@
+.friend {
+    text-decoration: none;
+    color: black;
+}
+
+.user__friendImage {
+    width: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}

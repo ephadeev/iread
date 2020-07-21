@@ -3,8 +3,8 @@
 }
 
 .wrapper {
-    background-color: #F9CB00;
     padding: 10px;
+    min-height: calc(100vh - 6vh - 31px - 10px - 10px - 31px);
 }
 
 .container {
@@ -19,13 +19,277 @@
     width: 100px;
 }
 
+.small-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 5px;
+}
+
 .flex-container {
     display: flex;
+}
+
+.user__container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .user {
     text-decoration: none;
     color: black;
+}
+
+.textarea {
+    resize: none;
+}
+
+.texAlCenter {
+    text-align: center;
+}
+
+.buttons {
+    color: #777;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: calc(50% - 8px);
+}
+
+.button {
+
+}
+
+.button:focus {
+    outline: 0;
+}
+
+/* background-colors */
+.bgColorGray {
+    background-color: #DDD;
+    transition: .2s;
+}
+.bgColorDefault {
+    background-color: #276899;
+    transition: .2s;
+}
+
+.bgColorYellow {
+    background-color: #F9CB00;
+    transition: .2s;
+}
+
+.bgColorBlack {
+    background-color: #0D0A0E;
+    transition: .2s;
+}
+
+.bgColorGold {
+    background-color: #E9B100;
+    transition: .2s;
+}
+
+.bgColorOrange {
+    background-color: #FF6A22;
+    transition: .2s;
+}
+
+.bgColorPink {
+    background-color: #FF6A71;
+    transition: .2s;
+}
+
+.bgColorBlue {
+    background-color: #82B2BB;
+    transition: .2s;
+}
+
+.bgColorGreen {
+    background-color: #47BA7E;
+    transition: .2s;
+}
+
+.bgColorIndigo {
+    background-color: #276899;
+    transition: .2s;
+}
+
+/* font colors */
+.colorDefault {
+    color: #276899;
+    transition: .2s;
+}
+
+.colorYellow {
+    color: #F9CB00;
+    transition: .2s;
+}
+
+.colorBlack {
+    color: #0D0A0E;
+    transition: .2s;
+}
+
+.colorGold {
+    color: #E9B100;
+    transition: .2s;
+}
+
+.colorOrange {
+    color: #FF6A22;
+    transition: .2s;
+}
+
+.colorPink {
+    color: #FF6A71;
+    transition: .2s;
+}
+
+.colorBlue {
+    color: #82B2BB;
+    transition: .2s;
+}
+
+.colorGreen {
+    color: #47BA7E;
+    transition: .2s;
+}
+
+.colorIndigo {
+    color: #276899;
+    transition: .2s;
+}
+
+/* border colors */
+.btDefault {
+    border: 2px solid #276899;
+    transition: .2s;
+}
+
+.btYellow {
+    border: 2px solid #F9CB00;
+    transition: .2s;
+}
+
+.btBlack {
+    border: 2px solid #0D0A0E;
+    transition: .2s;
+}
+
+.btGold {
+    border: 2px solid #E9B100;
+    transition: .2s;
+}
+
+.btOrange {
+    border: 2px solid #FF6A22;
+    transition: .2s;
+}
+
+.btPink {
+    border: 2px solid #FF6A71;
+    transition: .2s;
+}
+
+.btBlue {
+    border: 2px solid #82B2BB;
+    transition: .2s;
+}
+
+.btGreen {
+    border: 2px solid #47BA7E;
+    transition: .2s;
+}
+
+.btIndigo {
+    border: 2px solid #276899;
+    transition: .2s;
+}
+
+.btn {
+    color: #666;
+    background-color: #f3f0f1;
+    font-size: 12px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    letter-spacing: 2px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border-bottom-width: 3px;
+    position: relative;
+    transition: all 0.1s ease-in-out;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+    border: none;
+}
+
+.btn:focus {
+    outline: 0;
+}
+
+.btn:hover {
+    opacity: 0.7;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    opacity: 1;
+    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.br5 {
+    border-radius: 5px;
+}
+
+.m15 {
+    margin: 15px;
+}
+
+.message {
+    margin: 0 0 5px;
+}
+
+.message--incoming {
+    justify-content: flex-start;
+}
+
+.message-outgoing {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+.message__container {
+    background-color: #33393F;
+    color: white;
+    padding: 5px;
+}
+
+.message__text {
+    margin: auto 2px;
+}
+
+.message__time {
+    margin: 2px;
+    align-self: flex-end;
+}
+
+.post__container {
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    margin: 5px 0;
+}
+
+.post__time {
+    position: absolute;
+    right: 25px;
+    top: calc(50% - 11px);
+}
+
+.pos--relative {
+    position: relative;
 }
 
 /*

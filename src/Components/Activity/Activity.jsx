@@ -1,21 +1,36 @@
 import React from "react";
-import stylesActivity from './Activity.module.css';
-import Post from './Posts/Post';
+import PropTypes from 'prop-types';
+import '../../App.css';
+import Post from './Post/Post';
+import AddPost from '../AddPost/AddPost';
 
-const Activity = (props) => {
-    console.log(props);
-    let posts = props.posts.map(post => <Post userName={props.users[post.userId].name}
-                                              userImage={props.users[post.userId].image}
-                                              message={post.text}
-                                              key={post.userId} />);
-
+const Activity = ({postsFromProps, checkedTheme}) => {
+    let posts = postsFromProps
+        .sort((a, b) => a.time?.seconds - b.time?.seconds)
+        .map((post, index) => {
+            let hours = new Date(post.time?.seconds * 1000).getHours();
+            let minutes = new Date(post.time?.seconds * 1000).getMinutes();
+            return <Post userId={post.userId}
+                         postText={post.text}
+                         key={index}
+                         hours={hours > 9 ? hours : `0${hours}`}
+                         minutes={minutes > 9 ? minutes : `0${minutes}`}
+                         checkedTheme={checkedTheme} />
+        });
+    // TODO: need to show only posts with isPrivate=false
+    // TODO: on Avatar click open http://localhost:3000/user/id
+    // TODO: on Avatar mouseover show a little bit more info about user
     return (
-        <div className={stylesActivity.activity}>
+        <div className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
+            <AddPost />
             {posts}
         </div>
     );
 };
-/*Стена с общедоступными постами друзей. Что-то наподобии активности в steam.
-            При клике на аватар или имя автора поста должен открываться http://localhost:3000/profile/id.
-            А при наведении мыши всплывашка с немного большей информацией о человеке.*/
+
+Activity.propTypes = {
+    postsFromProps: PropTypes.array,
+    checkedTheme: PropTypes.string
+};
+
 export default Activity;

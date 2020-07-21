@@ -1,31 +1,35 @@
-import React from "react";
+import React from 'react';
 import stylesWall from './Wall.module.css';
-import Posts from "./Posts/Posts";
+import Post from './Post/Post';
+import PropTypes from 'prop-types';
+import AddPost from '../../AddPost/AddPost';
 
-const Wall = (props) => {
-    let newPost = React.createRef();
-
-    let addPost = () => {
-        let text = newPost.current.value;
-        props.addPost(text);
-        newPost.current.value = '';
-    };
-
-    let posts = props.posts.map(post => {
-        if (post.userId === 'pczX7HckW1e8bydZ91wAFPN0V443') {
-            return <Posts posts={post.text} />
-        }
+const Wall = ({postsFromProps, authorizedUser}) => {
+    const posts = postsFromProps
+        .sort((a, b) => a.time?.seconds - b.time?.seconds)
+        .map((post, index) => {
+            let hours = new Date(post.time?.seconds * 1000).getHours();
+            let minutes = new Date(post.time?.seconds * 1000).getMinutes();
+            if (post.userId === authorizedUser.uid) {
+                return <Post postText={post.text}
+                             postId={post.postId}
+                             key={index}
+                             hours={hours}
+                             minutes={minutes > 9 ? minutes : `0${minutes}`} />
+            }
     });
 
     return (
         <div className={stylesWall.wall}>
-            <div className={stylesWall.newPost}>
-                <textarea ref={newPost} placeholder="anything new?" className={stylesWall.textarea}></textarea>
-                <button onClick={addPost}>add post</button>
-            </div>
+            <AddPost />
             {posts}
         </div>
     );
+};
+
+Wall.propTypes = {
+    postsFromProps: PropTypes.array,
+    authorizedUser: PropTypes.object
 };
 
 export default Wall;

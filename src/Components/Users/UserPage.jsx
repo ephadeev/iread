@@ -1,62 +1,44 @@
-import React, {useEffect, useState} from "react";
-import axios from 'axios';
-import {Link} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import firebase from 'firebase/app';
+import PropTypes from 'prop-types';
 import '../../App.css';
-import stylesUserPage from './UserPage.module.css';
+import FriendsList from '../FriendsList/FriendsList';
+import Loader from '../Loader/Loader';
 
-const UserPage = (props) => {
+const UserPage = ({isLoading, checkedTheme, ...ownProps}) => {
     const [userData, setUserData] = useState(null);
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setLoading(true);
-        axios.get(`https://serverless-backend-ky9b8rmuq.now.sh/api/users/${props.match.params.index}`)
-            .then(response => {
-                    setUserData(response.data);
-                    setLoading(false);
-            })
-            .catch((err) => {
-                console.log(err.message);
-                setLoading(false);
-            })
-    }, [props.match.params.index]);
+        firebase.firestore().collection('users').doc(ownProps.match.params.index)
+            .get()
+            .then(response => setUserData(response.data()))
+            .catch(err => console.log(err.message));
+    }, [ownProps.match.params.index]);
 
-    if (!userData && !loading) {
-        return (
-            <div>Опаньки, нет такого человека...</div>
-        )
+    if (!userData && !isLoading) {
+        return <Loader />
     }
 
-
-    let friends = userData?.friends.map(friend => {
-        return (
-
-            <Link to={`/users/${friend.index}`} className={stylesUserPage.friend}>
-                <div className={stylesUserPage.friend__item}>
-                    <img src={friend.picture} alt="" className={stylesUserPage.user__friendImage} />
-                    <span>{`${friend.name.first} ${friend.name.last}`}</span>
-                </div>
-            </Link>
-        )
-    });
+    const friends = userData?.friends?.map((friend, index) => <FriendsList friend={friend} key={index} />);
 
     return (
-        <div className='wrapper'>
-            <div className='container'>
+        <div className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
+            <div className='container bgColorGray'>
                 <div className='flex-container'>
-                    {loading && <div>Loading...</div>}
+                    {isLoading && <Loader />}
                     <div>
-                        <img src={userData?.picture} alt="" className='middle-avatar' />
+                        <img src={userData?.image} alt="" className='middle-avatar' />
                     </div>
                     <div>
-                        <div> {`${userData?.name.first} ${userData?.name.last}`}</div>
-
-                        <div>About me: {userData?.about}</div>
+                        <div> {`${userData?.firstName} ${userData?.lastName}`}</div>
+                        <div>Hometown: {userData?.Hometown}</div>
                         <div>
                             Friends:
-                            {friends}
+                            {(userData?.friends)
+                                ? friends
+                                : ' It seems like there are no friends here...'}
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -64,4 +46,16 @@ const UserPage = (props) => {
     )
 };
 
-export default UserPage;
+UserPage.propTypes = {
+    isLoading: PropTypes.bool,
+    checkedTheme: PropTypes.string
+};
+
+const mapStateToProps = state => {
+    return {
+        isLoading: state.users.isLoading,
+        checkedTheme: state.themes.checkedTheme
+    }
+};
+
+export default connect(mapStateToProps)(UserPage);

@@ -1,11 +1,13 @@
-import React from "react";
+import React from 'react';
+import {connect} from 'react-redux';
+import firebase from 'firebase/app';
+import PropTypes from 'prop-types';
+import '../../App.css';
 import stylesHeader from './Header.module.css';
-import firebase from "firebase";
-import SignIn from "./Sign-in/SignIn";
-import SignUp from "./Sign-up/SignUp";
+import {signOut} from '../../Redux/actions/authorization-actions';
+import Themes from '../Themes/Themes';
 
-const Header = (props) => {
-    let login = React.createRef();
+const Header = ({colorSchemes, checkedTheme, signOut}) => {
     let settings = React.createRef();
 
     let showHiddenContent = (container) => {
@@ -18,24 +20,20 @@ const Header = (props) => {
         }
     };
 
-    let LogOut = event => {
+    const LogOut = event => {
         event.preventDefault();
         firebase.auth().signOut()
-            .then(() => console.log('user signed out'));
+            .then(() => signOut())
+            .catch(err => console.log(err.message))
     };
 
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            console.log('user logged: ', user.uid);
-            let id = user.uid;
-            props.signIn(id);
-        } else {
-            console.log('user logged out');
-        }
+    let themes = colorSchemes.map((colorScheme, index) => {
+        return <Themes colorScheme={colorScheme.colorScheme}
+                       key={index} />
     });
 
     return (
-        <div className={stylesHeader.header}>
+        <div className={`${stylesHeader.header} bgColorDefault bgColor${checkedTheme}`}>
             <div className={stylesHeader.header__container}>
                 <div className={stylesHeader.header__logo}>
                     <i className="fas fa-book-open">
@@ -43,20 +41,6 @@ const Header = (props) => {
                 </div>
 
                 <div className={stylesHeader.header__title}>iRead</div>
-
-                <div className={stylesHeader.header__login}>
-                    <i
-                        className="fas fa-user"
-                        onClick={() => showHiddenContent(login)}>
-                    </i>
-                </div>
-
-                <div className={stylesHeader.header__contentUnvisible}
-                     ref={login}>
-                    <SignIn />
-                    <SignUp />
-                    <button onClick={LogOut}>Logout</button>
-                </div>
 
                 <div className={stylesHeader.header__settings}>
                     <i
@@ -67,51 +51,31 @@ const Header = (props) => {
 
                 <div className={stylesHeader.header__contentUnvisible}
                      ref={settings}>
-                    Select color scheme:
-                    <div className={`
-                    ${stylesHeader.header__bgColorYellow} 
-                    ${stylesHeader.header__colorSchemes}
-                    `}>
-                    </div>
-                    <div className={`
-                    ${stylesHeader.header__bgColorBlack} 
-                    ${stylesHeader.header__colorSchemes}
-                    `}>
-                    </div>
-                    <div className={`
-                    ${stylesHeader.header__bgColorGold} 
-                    ${stylesHeader.header__colorSchemes}
-                    `}>
-                    </div>
-                    <div className={`
-                    ${stylesHeader.header__bgColorOrange} 
-                    ${stylesHeader.header__colorSchemes}
-                    `}>
-                    </div>
-                    <div className={`
-                    ${stylesHeader.header__bgColorPink} 
-                    ${stylesHeader.header__colorSchemes}
-                    `}>
-                    </div>
-                    <div className={`
-                    ${stylesHeader.header__bgColorBlue} 
-                    ${stylesHeader.header__colorSchemes}
-                    `}>
-                    </div>
-                    <div className={`
-                    ${stylesHeader.header__bgColorGreen} 
-                    ${stylesHeader.header__colorSchemes}
-                    `}>
-                    </div>
-                    <div className={`
-                    ${stylesHeader.header__bgColorIndigo} 
-                    ${stylesHeader.header__colorSchemes}
-                    `}>
-                    </div>
+                    <button onClick={LogOut}
+                            className={`${stylesHeader.header__logout} btn`}>Logout</button>
+                    <div className={`btDefault bt${checkedTheme} colorDefault color${checkedTheme} texAlCenter ${stylesHeader.header__border}`}>Themes</div>
+                    <div className={`btDefault bt${checkedTheme} ${stylesHeader.header__border}`}>{themes}</div>
                 </div>
             </div>
         </div>
     );
 };
 
-export default Header;
+Header.propTypes = {
+    colorSchemes: PropTypes.array,
+    checkedTheme: PropTypes.string,
+    signOut: PropTypes.func
+};
+
+const mapStateToProps = state => {
+    return {
+        colorSchemes: state.themes.colorSchemes,
+        checkedTheme: state.themes.checkedTheme
+    }
+};
+
+const mapDispatchToProps = {
+    signOut
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

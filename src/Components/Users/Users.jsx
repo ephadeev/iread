@@ -1,27 +1,41 @@
-import React, {useEffect} from "react";
-import User from "./User";
-import '../../App.css'
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import '../../App.css';
+import User from './User';
 
-const Users = (props) => {
-    console.log(props);
-
-    useEffect(() => props.onGetUsers(), []);
-
-    let usersFromProps = props.users.map(user => {
+const Users = ({usersFromProps, authorizedUserId, checkedTheme}) => {
+    const users = usersFromProps
+        .filter(user => user.userId !== authorizedUserId)
+        .map((user, index) => {
         return (
-            <User userIndex={user.index}
-                  firstName={user.name.first}
-                  lastName={user.name.last}
-                  userAvatar={user.picture}
-                  key={user._id} />
+            <User firstName={user.firstName}
+                  lastName={user.lastName}
+                  userIndex={user.userId}
+                  userAvatar={user.image}
+                  key={index} />
         )
     });
 
     return (
-        <div className='wrapper'>
-            {usersFromProps}
+        <div className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
+            {users}
         </div>
     );
 };
 
-export default Users;
+Users.propTypes = {
+    usersFromProps: PropTypes.array,
+    authorizedUserId: PropTypes.string,
+    checkedTheme: PropTypes.string
+};
+
+const mapStateToProps = (state) => {
+    return {
+        usersFromProps: state.users.users,
+        authorizedUserId: state.authorization.authorizedUser.uid,
+        checkedTheme: state.themes.checkedTheme
+    }
+};
+
+export default connect(mapStateToProps)(Users);

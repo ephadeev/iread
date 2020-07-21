@@ -1,0 +1,108 @@
+.themes {
+  position: relative;
+}
+
+.radio {
+  opacity: 0;
+  position: absolute;
+}
+
+.fake {
+  position: relative;
+  padding: 5px 0 5px 25px;
+  display: inline-block;
+}
+.fake::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+}
+.fake::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  display: block;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  transition: 0.2s;
+  border-radius: 50%;
+}
+
+.radio:checked + .fake::after {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+.radio[value=Yellow] + .fake::after {
+  background-color: #F9CB00;
+}
+
+.radio[value=Black] + .fake::after {
+  background-color: #0D0A0E;
+}
+
+.radio[value=Gold] + .fake::after {
+  background-color: #E9B100;
+}
+
+.radio[value=Orange] + .fake::after {
+  background-color: #FF6A22;
+}
+
+.radio[value=Pink] + .fake::after {
+  background-color: #FF6A71;
+}
+
+.radio[value=Blue] + .fake::after {
+  background-color: #82B2BB;
+}
+
+.radio[value=Green] + .fake::after {
+  background-color: #47BA7E;
+}
+
+.radio[value=Indigo] + .fake::after {
+  background-color: #276899;
+}
+
+/* color for button frames */
+.radio[value=Yellow] + .fake::before {
+  border: 2px solid #F9CB00;
+}
+
+.radio[value=Black] + .fake::before {
+  border: 2px solid #0D0A0E;
+}
+
+.radio[value=Gold] + .fake::before {
+  border: 2px solid #E9B100;
+}
+
+.radio[value=Orange] + .fake::before {
+  border: 2px solid #FF6A22;
+}
+
+.radio[value=Pink] + .fake::before {
+  border: 2px solid #FF6A71;
+}
+
+.radio[value=Blue] + .fake::before {
+  border: 2px solid #82B2BB;
+}
+
+.radio[value=Green] + .fake::before {
+  border: 2px solid #47BA7E;
+}
+
+.radio[value=Indigo] + .fake::before {
+  border: 2px solid #276899;
+}
+
+/*# sourceMappingURL=Themes.module.css.map */
