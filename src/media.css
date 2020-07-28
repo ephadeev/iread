@@ -1,0 +1,25 @@
+/* 1000 - 1200*/
+@media (max-width: 1200px) {
+    .container {
+        width: 906px;
+    }
+}
+/* 800 - 1000 */
+@media (max-width: 1000px) {
+    .container {
+        width: 720px;
+    }
+}
+/* 576 - 800 */
+@media (max-width: 800px) {
+    .container {
+        width: 540px;
+    }
+}
+/* 0 - 576 */
+@media (max-width: 576px) {
+    .container {
+        width: calc(100% - 12px - 12px);
+        padding: 0 12px;
+    }
+}
