@@ -17,19 +17,27 @@ const AddPost = ({postText, authorizedUserUid, checkedTheme, onChangePost}) => {
             .catch(err => console.log('Error adding document: ', err))
     };
 
-    const addPost = () => addPostHandler(postText, authorizedUserUid);
+    const addPost = event => {
+        event.preventDefault();
+        addPostHandler(postText, authorizedUserUid)
+    };
     const onChange = event => onChangePost(event.target.value);
 
     return (
-        <div>
-            <div className='container bgColorGray'>
-                <textarea placeholder='anything new?'
-                          className={`textarea br5 btDefault bt${checkedTheme} button`}
-                          onChange={onChange}
-                          value={postText} >
-                </textarea>
-                <button onClick={addPost} className={`btn m15`}>add post</button>
-            </div>
+        <div className='container bgColorGray flex-container'>
+            <form onSubmit={addPost}
+                  className='post__button'>
+                <input type='text'
+                       placeholder='anything new?'
+                       className={`br5 btDefault bt${checkedTheme} button`}
+                       onChange={onChange}
+                       value={postText} />
+            </form>
+            <button onClick={addPost}
+                    className={`btn m15`}>
+                <i className='fas fa-paper-plane'>
+                </i>
+            </button>
         </div>
     )
 };

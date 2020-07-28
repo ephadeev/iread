@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 import '../../App.css';
 import {deleteFriendFromProps} from '../../Redux/actions/authorization-actions';
 
-const DeleteFriend = ({authorizedUserUid, friendsId, deleteFriendFromProps}) => {
+const DeleteFriend = ({authorizedUserUid, checkedTheme, friendsId, deleteFriendFromProps}) => {
     const deleteFriend = () => {
         return firebase.firestore().collection('users').doc(authorizedUserUid).update({
             friends: firebase.firestore.FieldValue.arrayRemove(friendsId)
@@ -15,7 +15,7 @@ const DeleteFriend = ({authorizedUserUid, friendsId, deleteFriendFromProps}) => 
     };
 
     return (
-        <i className='fas fa-user-times buttons'
+        <i className={`fas fa-user-times buttons colorDefault color${checkedTheme}`}
            onClick={deleteFriend}>
         </i>
     )
@@ -23,13 +23,15 @@ const DeleteFriend = ({authorizedUserUid, friendsId, deleteFriendFromProps}) => 
 
 DeleteFriend.propTypes = {
     authorizedUserUid: PropTypes.string,
+    checkedTheme: PropTypes.string,
     friendsId: PropTypes.string,
     deleteFriendFromProps: PropTypes.func
 };
 
 const mapStateToProps = state => {
     return {
-        authorizedUserUid: state.authorization.authorizedUser.uid
+        authorizedUserUid: state.authorization.authorizedUser.uid,
+        checkedTheme: state.themes.checkedTheme
     }
 };
 

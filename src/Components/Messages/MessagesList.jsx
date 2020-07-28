@@ -15,11 +15,11 @@ const MessagesList = ({friend}) => {
 
     return (
         <Link to={`/messages/${friend}`} className={stylesMessages.friend}>
-            <div>
+            <div className='flex-container'>
                 <img src={friendObject?.image}
                      alt=''
                      className={stylesMessages.user__friendImage} />
-                <span>{`${friendObject?.firstName} ${friendObject?.lastName}`}</span>
+                <span className='message__text'>{`${friendObject?.firstName} ${friendObject?.lastName}`}</span>
             </div>
         </Link>
     )

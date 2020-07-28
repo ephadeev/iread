@@ -5,8 +5,7 @@ import firebase from 'firebase/app';
 import '../../App.css';
 import {addFriendFromProps} from "../../Redux/actions/authorization-actions";
 
-// 10 state.authorizedUserData.friends is not iterable
-const AddFriend = ({authorizedUserUid, friendsId, addFriendFromProps}) => {
+const AddFriend = ({authorizedUserUid, checkedTheme, friendsId, addFriendFromProps}) => {
     const addFriend = () => {
         return firebase.firestore().collection('users').doc(authorizedUserUid).update({
             friends: firebase.firestore.FieldValue.arrayUnion(friendsId)
@@ -16,7 +15,7 @@ const AddFriend = ({authorizedUserUid, friendsId, addFriendFromProps}) => {
     };
 
     return (
-        <i className='fas fa-user-plus buttons'
+        <i className={`fas fa-user-plus buttons colorDefault color${checkedTheme}`}
            onClick={addFriend}>
         </i>
     )
@@ -24,13 +23,15 @@ const AddFriend = ({authorizedUserUid, friendsId, addFriendFromProps}) => {
 
 AddFriend.propTypes = {
     authorizedUserUid: PropTypes.string,
+    checkedTheme: PropTypes.string,
     friendsId: PropTypes.string,
     addFriendFromProps: PropTypes.func
 };
 
 const mapStateToProps = state => {
     return {
-        authorizedUserUid: state.authorization.authorizedUser.uid
+        authorizedUserUid: state.authorization.authorizedUser.uid,
+        checkedTheme: state.themes.checkedTheme
     }
 };
 

@@ -11,10 +11,10 @@ const Post = ({postText, postId, deletePost, hours, minutes, checkedTheme}) => {
         .catch(err => console.log(err.message));
 
     return (
-        <div className='post__container bgColorGray'>
+        <div className='container post__container bgColorGray'>
             {postText}
             <span className={`post__time colorDefault color${checkedTheme}`}>{`${hours}:${minutes}`}</span>
-            <i className='fas fa-trash buttons'
+            <i className={`fas fa-trash buttons colorDefault color${checkedTheme}`}
                onClick={delPost}>
             </i>
         </div>

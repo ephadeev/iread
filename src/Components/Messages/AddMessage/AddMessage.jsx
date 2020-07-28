@@ -24,13 +24,21 @@ const AddMessage = ({CurrentUserUid, FriendsUid, messageText, onChaneMessage, ch
     const onChange = event => onChaneMessage(event.target.value);
 
     return (
-        <form className='container bgColorGray' onSubmit={addMessage} >
-            <input type='text'
-                   placeholder='Write a message...'
-                   className={`br5 btDefault bt${checkedTheme} button p5`}
-                   onChange={onChange}
-                   value={messageText} />
-        </form>
+        <div className='bgColorGray flex-container'>
+            <form className='post__button'
+                  onSubmit={addMessage}>
+                <input type='text'
+                       placeholder='Write a message...'
+                       className={`br5 btDefault bt${checkedTheme} button`}
+                       onChange={onChange}
+                       value={messageText} />
+            </form>
+            <button onClick={addMessage}
+                    className={`btn m15`}>
+                <i className='fas fa-paper-plane'>
+                </i>
+            </button>
+        </div>
     )
 };
 

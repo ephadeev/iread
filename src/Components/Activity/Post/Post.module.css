@@ -3,5 +3,6 @@
 }
 
 .posts__author {
+    margin: auto 0;
     font-weight: bold;
 }

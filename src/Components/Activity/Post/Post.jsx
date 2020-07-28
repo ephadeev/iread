@@ -17,18 +17,18 @@ const Post = ({userId, postText, hours, minutes, checkedTheme}) => {
 
     return (
         <div className={stylesPost.posts}>
-            <div className='container bgColorGray pos--relative'>
-                <span>
+            <div className='container flex-container bgColorGray post__container'>
+                <>
                     <img className='small-avatar'
                          src={authorOfPost?.image
                              ? authorOfPost?.image
                              : 'https://lookp.ru/images/user_unknown_icon.jpg'}
-                         alt="Profile avatar"/>
+                         alt='Profile avatar' />
                     <span className={stylesPost.posts__author}>
-                        {`${authorOfPost?.firstName} ${authorOfPost?.lastName}: `}
+                        {`${authorOfPost?.firstName} ${authorOfPost?.lastName}:`}
                     </span>
-                </span>
-                {postText}
+                </>
+                <span className='post__text'>{postText}</span>
                 <span className={`post__time colorDefault color${checkedTheme}`}>{`${hours}:${minutes}`}</span>
             </div>
         </div>

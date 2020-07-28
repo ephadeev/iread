@@ -1,53 +1,63 @@
 import React from "react";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import stylesNav from './Nav.module.css';
 import '../../App.css';
 import {NavLink} from "react-router-dom";
 
 const Nav = ({authorizedUser, checkedTheme}) => {
     return (
-        <div className={`bgColorDefault bgColor${checkedTheme}`}>
-            <div className={stylesNav.containerNav}>
+        <nav className={`bgColorDefault bgColor${checkedTheme}`}>
+            <div className='container nav__container flex-container'>
                 {authorizedUser &&
                 <NavLink to='/profile'
-                         className={stylesNav.link}
-                         activeClassName={stylesNav.activeLink} >
-                    Profile
+                         className='links'
+                         activeClassName={`colorDefault color${checkedTheme}`} >
+                    <i className='fas fa-user-circle'>
+                    </i>
+                    <span>Profile</span>
                 </NavLink>}
                 {authorizedUser &&
                 <NavLink to='/messages'
-                         className={stylesNav.link}
-                         activeClassName={stylesNav.activeLink} >
-                    Messages
+                         className='links'
+                         activeClassName={`colorDefault color${checkedTheme}`} >
+                    <i className='fas fa-comments'>
+                    </i>
+                    <span>Messages</span>
                 </NavLink>}
                 {authorizedUser &&
                 <NavLink to='/activity'
-                         className={stylesNav.link}
-                         activeClassName={stylesNav.activeLink} >
-                    Activity
+                         className='links'
+                         activeClassName={`colorDefault color${checkedTheme}`} >
+                    <i className='fas fa-envelope'>
+                    </i>
+                    <span>Activity</span>
                 </NavLink>}
                 {authorizedUser &&
                 <NavLink to='/users'
-                         className={stylesNav.link}
-                         activeClassName={stylesNav.activeLink} >
-                    Users
+                         className='links'
+                         activeClassName={`colorDefault color${checkedTheme}`} >
+                    <i className='fas fa-users'>
+                    </i>
+                    <span>Users</span>
                 </NavLink>}
                 {authorizedUser &&
                 <NavLink to='/friends'
-                         className={stylesNav.link}
-                         activeClassName={stylesNav.activeLink} >
-                    Friends
+                         className='links'
+                         activeClassName={`colorDefault color${checkedTheme}`} >
+                    <i className='fas fa-user-friends'>
+                    </i>
+                    <span>Friends</span>
                 </NavLink>}
                 {!authorizedUser &&
                 <NavLink to='/authentication'
-                         className={stylesNav.link}
-                         activeClassName={stylesNav.activeLink} >
+                         className='links'
+                         activeClassName={`colorDefault color${checkedTheme}`} >
                     <i className="fas fa-user">
-                    </i>Login
+                    </i>
+                    <span>Login</span>
                 </NavLink>}
             </div>
-        </div>
+        </nav>
     );
 };
 

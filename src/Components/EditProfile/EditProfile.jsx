@@ -12,7 +12,7 @@ import {setNewFieldsInAuthorizedUserData} from "../../Redux/actions/authorizatio
 
 const EditProfile = ({
                          inputType, firstName, lastName,
-                         Hometown, image, authorizedUserUid, onChangeFirstName,
+                         Hometown, image, authorizedUserUid, checkedTheme, onChangeFirstName,
                          onChangeLastName, onChangeHometown, onChangeImage, setNewFieldsInAuthorizedUserData}) => {
 
     const chooseField = (inputType) => {
@@ -58,7 +58,7 @@ const EditProfile = ({
             <input placeholder={inputType}
                    type="text"
                    onChange={onChange}
-                   value={chooseField(inputType)} />
+                   value={chooseField(inputType)} className={`br5 btDefault bt${checkedTheme}`} />
             <button onClick={editUserData}>save</button>
         </div>
     )
@@ -71,6 +71,7 @@ EditProfile.propTypes = {
     HomeTown: PropTypes.string,
     image: PropTypes.string,
     authorizedUserUid: PropTypes.string,
+    checkedTheme: PropTypes.string,
     onChangeFirstName: PropTypes.func,
     onChangeLastName: PropTypes.func,
     onChangeHometown: PropTypes.func,
@@ -85,6 +86,7 @@ const mapStateToProps = state => {
         Hometown: state.editProfile.Hometown,
         image: state.editProfile.image,
         authorizedUserUid: state.authorization.authorizedUser.uid,
+        checkedTheme: state.themes.checkedTheme
     }
 };
 

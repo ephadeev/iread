@@ -1,3 +1,5 @@
+@import 'media.css';
+
 .App {
 
 }
@@ -13,6 +15,19 @@
     background-color: white;
     padding: 5px;
     border-radius: 5px;
+}
+
+.header__container {
+    margin: 0 auto;
+    position: relative;
+    justify-content: space-around;
+    background-color: transparent;
+}
+
+.nav__container {
+    margin: 0 auto;
+    background-color: #33393F;
+    justify-content: space-evenly;
 }
 
 .middle-avatar {
@@ -31,19 +46,29 @@
     display: flex;
 }
 
+.user {
+    background-color: transparent;
+}
+
 .user__container {
     position: relative;
-    max-width: 1200px;
     margin: 0 auto;
+    padding: 5px;
 }
 
-.user {
+.user__wrapper {
+    background-color: #33393F;
+    margin: 0 0 5px;
+    padding: 5px;
+}
+
+.user__name {
+    margin: auto 0;
+}
+
+.links {
     text-decoration: none;
-    color: black;
-}
-
-.textarea {
-    resize: none;
+    color: white;
 }
 
 .texAlCenter {
@@ -51,15 +76,17 @@
 }
 
 .buttons {
-    color: #777;
     cursor: pointer;
     position: absolute;
-    right: 5px;
+    right: 10px;
     top: calc(50% - 8px);
 }
 
 .button {
-
+    padding: 5px;
+    width: 100%;
+    margin: 0 auto;
+    flex-grow: 1;
 }
 
 .button:focus {
@@ -243,6 +270,12 @@
     border-radius: 5px;
 }
 
+.profile__container {
+    justify-content: space-between;
+    background-color: transparent;
+    border-radius: 0;
+}
+
 .m15 {
     margin: 15px;
 }
@@ -276,10 +309,11 @@
 }
 
 .post__container {
-    padding: 10px;
-    border-radius: 5px;
     position: relative;
-    margin: 5px 0;
+}
+
+.post__text {
+    margin: auto 5px;
 }
 
 .post__time {
@@ -288,8 +322,17 @@
     top: calc(50% - 11px);
 }
 
-.pos--relative {
-    position: relative;
+.post__button {
+    flex-grow: 1;
+    margin: auto;
+}
+
+.footer__container {
+    background-color: #33393F;
+}
+
+.footer__link {
+    text-decoration: none;
 }
 
 /*
