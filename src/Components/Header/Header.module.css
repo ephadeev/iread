@@ -3,35 +3,11 @@
     width: 100%;
 }
 
-.header__logo {
-    height: 6vh;
-    font-size: 30px;
-    color: white;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
 .header__login {
     font-size: 30px;
     color: white;
     display: flex;
     align-items: center;
-    cursor: pointer;
-}
-
-.header__settings {
-    font-size: 30px;
-    color: white;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.header__title {
-    color: white;
-    font-size: 30px;
-    font-family: 'Kaushan Script', cursive;
     cursor: pointer;
 }
 

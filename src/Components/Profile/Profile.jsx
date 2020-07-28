@@ -21,7 +21,7 @@ const Profile = ({authorizedUserData, isLoading, checkedTheme}) => {
                                  className={stylesProfile.profile__avatar} />
                             {!authorizedUserData?.image && <EditProfile inputType='image' />}
                             <div className={stylesProfile.profile__information}>
-                                <h4 className={stylesProfile.name}>
+                                <h4 className='profile__name'>
                                     {authorizedUserData?.firstName
                                         ? `${authorizedUserData?.firstName} `
                                         : <>

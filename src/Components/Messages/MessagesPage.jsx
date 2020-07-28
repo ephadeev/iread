@@ -8,7 +8,7 @@ import AddMessage from './AddMessage/AddMessage';
 import {getIncomeMessagesFromFirestore, getSentMessagesFromFirestore} from '../../Redux/actions/messages-actions';
 import Loader from '../Loader/Loader';
 
-const MessagesPage = ({incomeMessages, sentMessages, isLoading, checkedTheme, CurrentUserUid, CurrentUserImage, getIncomeMessagesFromFirestore, getSentMessagesFromFirestore, ...ownProps}) => {
+const MessagesPage = ({incomeMessages, sentMessages, isLoading, isLoadingMessages, checkedTheme, CurrentUserUid, CurrentUserImage, getIncomeMessagesFromFirestore, getSentMessagesFromFirestore, ...ownProps}) => {
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
@@ -43,7 +43,15 @@ const MessagesPage = ({incomeMessages, sentMessages, isLoading, checkedTheme, Cu
                         checkedTheme={checkedTheme} />;
     });
 
+    if (isLoadingMessages) {
+        console.log(isLoadingMessages);
+        return (
+            <Loader />
+        )
+    }
+
     if (!userData && !isLoading) {
+        console.log(isLoading);
         return (
             <div>No such person...</div>
         )
@@ -63,6 +71,7 @@ MessagesPage.propTypes = {
     incomeMessages: PropTypes.array,
     sentMessages: PropTypes.array,
     isLoading: PropTypes.bool,
+    isLoadingMessages: PropTypes.bool,
     checkedTheme: PropTypes.string,
     CurrentUserUid: PropTypes.string,
     CurrentUserImage: PropTypes.string,
@@ -75,6 +84,7 @@ const mapStateToProps = state => {
         incomeMessages: state.messages.incomeMessages,
         sentMessages: state.messages.sentMessages,
         isLoading: state.users.isLoading,
+        isLoadingMessages: state.messages.isLoading,
         checkedTheme: state.themes.checkedTheme,
         CurrentUserUid: state.authorization.authorizedUser?.uid,
         CurrentUserImage: state.authorization.authorizedUserData?.image

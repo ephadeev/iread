@@ -9,6 +9,9 @@
     .container {
         width: 720px;
     }
+    .header__logo, .header__title, .header__settings {
+        font-size: 26px !important;
+    }
 }
 /* 576 - 800 */
 @media (max-width: 800px) {
@@ -21,5 +24,14 @@
     .container {
         width: calc(100% - 12px - 12px);
         padding: 0 12px;
+    }
+    .nav__text {
+        display: none;
+    }
+    .header__logo, .header__title, .header__settings {
+        font-size: 22px !important;
+    }
+    .profile__name {
+        font-size: 22px;
     }
 }

@@ -14,7 +14,7 @@ const Nav = ({authorizedUser, checkedTheme}) => {
                          activeClassName={`colorDefault color${checkedTheme}`} >
                     <i className='fas fa-user-circle'>
                     </i>
-                    <span>Profile</span>
+                    <span className='nav__text'>Profile</span>
                 </NavLink>}
                 {authorizedUser &&
                 <NavLink to='/messages'
@@ -22,7 +22,7 @@ const Nav = ({authorizedUser, checkedTheme}) => {
                          activeClassName={`colorDefault color${checkedTheme}`} >
                     <i className='fas fa-comments'>
                     </i>
-                    <span>Messages</span>
+                    <span className='nav__text'>Messages</span>
                 </NavLink>}
                 {authorizedUser &&
                 <NavLink to='/activity'
@@ -30,7 +30,7 @@ const Nav = ({authorizedUser, checkedTheme}) => {
                          activeClassName={`colorDefault color${checkedTheme}`} >
                     <i className='fas fa-envelope'>
                     </i>
-                    <span>Activity</span>
+                    <span className='nav__text'>Activity</span>
                 </NavLink>}
                 {authorizedUser &&
                 <NavLink to='/users'
@@ -38,7 +38,7 @@ const Nav = ({authorizedUser, checkedTheme}) => {
                          activeClassName={`colorDefault color${checkedTheme}`} >
                     <i className='fas fa-users'>
                     </i>
-                    <span>Users</span>
+                    <span className='nav__text'>Users</span>
                 </NavLink>}
                 {authorizedUser &&
                 <NavLink to='/friends'
@@ -46,7 +46,7 @@ const Nav = ({authorizedUser, checkedTheme}) => {
                          activeClassName={`colorDefault color${checkedTheme}`} >
                     <i className='fas fa-user-friends'>
                     </i>
-                    <span>Friends</span>
+                    <span className='nav__text'>Friends</span>
                 </NavLink>}
                 {!authorizedUser &&
                 <NavLink to='/authentication'

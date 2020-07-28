@@ -35,14 +35,14 @@ const Header = ({colorSchemes, checkedTheme, signOut}) => {
     return (
         <header className={`${stylesHeader.header} bgColorDefault bgColor${checkedTheme}`}>
             <div className='container header__container flex-container'>
-                <div className={stylesHeader.header__logo}>
+                <div className='header__logo'>
                     <i className="fas fa-book-open">
                     </i>
                 </div>
 
-                <div className={stylesHeader.header__title}>iRead</div>
+                <div className='header__title'>iRead</div>
 
-                <div className={stylesHeader.header__settings}>
+                <div className='header__settings'>
                     <i
                         className="fas fa-cog"
                         onClick={() => showHiddenContent(settings)}>

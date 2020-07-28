@@ -18,10 +18,35 @@
 }
 
 .header__container {
+    box-sizing: border-box;
+    height: 100%;
     margin: 0 auto;
     position: relative;
     justify-content: space-around;
     background-color: transparent;
+}
+
+.header__logo {
+    font-size: 30px;
+    color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header__title {
+    color: white;
+    font-size: 30px;
+    font-family: 'Kaushan Script', cursive;
+    cursor: pointer;
+}
+
+.header__settings {
+    font-size: 30px;
+    color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
 .nav__container {
@@ -274,6 +299,12 @@
     justify-content: space-between;
     background-color: transparent;
     border-radius: 0;
+}
+
+.profile__name {
+    font-size: 32px;
+    color: white;
+    margin: 0;
 }
 
 .m15 {
