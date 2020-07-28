@@ -9,13 +9,13 @@ const Friends = ({friends, checkedTheme}) => {
     const friendsHandler = friends?.map((friend, index) => <FriendsList friend={friend} key={index} />);
 
     return (
-        <div className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
+        <main className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
             <div className='container bgColorGray'>
                 {friends
                     ? friendsHandler
                     : ' It seems like there are no friends here...'}
             </div>
-        </div>
+        </main>
     )
 };
 

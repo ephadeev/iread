@@ -21,10 +21,10 @@ const Activity = ({postsFromProps, checkedTheme}) => {
     // TODO: on Avatar click open http://localhost:3000/user/id
     // TODO: on Avatar mouseover show a little bit more info about user
     return (
-        <div className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
+        <main className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
             <AddPost />
             {posts}
-        </div>
+        </main>
     );
 };
 

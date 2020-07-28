@@ -9,11 +9,11 @@ import Loader from '../Loader/Loader';
 
 const Profile = ({authorizedUserData, isLoading, checkedTheme}) => {
     return (
-        <div className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
-                <div className={stylesProfile.containerProfile}>
+        <main className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
+                <div>
                     {isLoading
                         ? <Loader />
-                        : <div className={stylesProfile.profile__flexContainer}>
+                        : <div className='container flex-container profile__container'>
                             <img src={authorizedUserData?.image
                                 ? authorizedUserData?.image
                                 : 'https://lookp.ru/images/user_unknown_icon.jpg'}
@@ -23,11 +23,17 @@ const Profile = ({authorizedUserData, isLoading, checkedTheme}) => {
                             <div className={stylesProfile.profile__information}>
                                 <h4 className={stylesProfile.name}>
                                     {authorizedUserData?.firstName
-                                        ? authorizedUserData?.firstName
-                                        : <EditProfile inputType='firstName' />}
+                                        ? `${authorizedUserData?.firstName} `
+                                        : <>
+                                            <span>First name: </span>
+                                            <EditProfile inputType='firstName' />
+                                          </>}
                                     {authorizedUserData?.lastName
                                         ? authorizedUserData?.lastName
-                                        : <EditProfile inputType='lastName' />}
+                                        : <>
+                                            <span>Last name: </span>
+                                            <EditProfile inputType='lastName' />
+                                          </>}
                                 </h4>
                                 <div>
                                     Hometown: {authorizedUserData?.Hometown
@@ -38,7 +44,7 @@ const Profile = ({authorizedUserData, isLoading, checkedTheme}) => {
                         </div>}
                     <WallContainer />
                 </div>
-        </div>
+        </main>
     );
 };
 

@@ -33,8 +33,8 @@ const Header = ({colorSchemes, checkedTheme, signOut}) => {
     });
 
     return (
-        <div className={`${stylesHeader.header} bgColorDefault bgColor${checkedTheme}`}>
-            <div className={stylesHeader.header__container}>
+        <header className={`${stylesHeader.header} bgColorDefault bgColor${checkedTheme}`}>
+            <div className='container header__container flex-container'>
                 <div className={stylesHeader.header__logo}>
                     <i className="fas fa-book-open">
                     </i>
@@ -57,7 +57,7 @@ const Header = ({colorSchemes, checkedTheme, signOut}) => {
                     <div className={`btDefault bt${checkedTheme} ${stylesHeader.header__border}`}>{themes}</div>
                 </div>
             </div>
-        </div>
+        </header>
     );
 };
 

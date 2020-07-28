@@ -18,9 +18,11 @@ const Users = ({usersFromProps, authorizedUserId, checkedTheme}) => {
     });
 
     return (
-        <div className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
-            {users}
-        </div>
+        <main className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
+            <div className='container user'>
+                {users}
+            </div>
+        </main>
     );
 };
 
