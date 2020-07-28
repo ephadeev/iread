@@ -48,7 +48,8 @@ const messagesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                sentMessages: action.payload
+                sentMessages: action.payload,
+                newMessageText: ''
             }
         }
         case GET_SENT_MESSAGES_FROM_FIRESTORE_FAILURE: {
