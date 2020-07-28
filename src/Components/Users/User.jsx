@@ -10,14 +10,18 @@ import Loader from '../Loader/Loader';
 const User = ({userIndex, firstName, lastName, userAvatar, authorizedUserData, isLoading}) => {
     return (
         <div className='user__container'>
-            <Link to={`/users/${userIndex}`} className='user'>
-                <div className={`container flex-container bgColorGray`}>
+            <Link to={`/users/${userIndex}`} className='links'>
+                <div className={`flex-container user__wrapper br5`}>
                     {!isLoading
                         ? <>
                             <div>
-                                <img src={userAvatar} alt="" className='small-avatar' />
+                                <img src={userAvatar
+                                    ? userAvatar
+                                    : 'https://lookp.ru/images/user_unknown_icon.jpg'}
+                                     alt='Profile avatar'
+                                     className='small-avatar' />
                             </div>
-                            <div>
+                            <div className='user__name'>
                                 {`${firstName} ${lastName}`}
                             </div>
                         </>
