@@ -10,17 +10,9 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
+import SECRET_API from './SECRET_API';
 
-firebase.initializeApp({
-    apiKey: "AIzaSyB_1Y2KFoOMHSSmrkbgX2_VQB5ZDI_BuZY",
-    authDomain: "iread-529b4.firebaseapp.com",
-    databaseURL: "https://iread-529b4.firebaseio.com",
-    projectId: "iread-529b4",
-    storageBucket: "iread-529b4.appspot.com",
-    messagingSenderId: "598382842689",
-    appId: "1:598382842689:web:8e579c1da14f9e5cc547c0",
-    measurementId: "G-S5GF7FYN7K"
-});
+firebase.initializeApp(SECRET_API);
 
 ReactDOM.render(
     <Provider store={store}>
