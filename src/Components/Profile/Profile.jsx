@@ -1,13 +1,14 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 import stylesProfile from './Profile.module.css';
 import '../../App.css';
-import WallContainer from "./Wall/WallContainer";
+import WallContainer from './Wall/WallContainer';
 import EditProfile from '../EditProfile/EditProfile';
 import Loader from '../Loader/Loader';
-
+import UploadImage from '../UploadImage/UploadImage';
 
 const Profile = ({authorizedUserData, isLoading, checkedTheme}) => {
+
     return (
         <main className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
                 <div>
@@ -19,6 +20,7 @@ const Profile = ({authorizedUserData, isLoading, checkedTheme}) => {
                                 : 'https://lookp.ru/images/user_unknown_icon.jpg'}
                                  alt="Profile avatar"
                                  className={stylesProfile.profile__avatar} />
+                            <UploadImage />
                             {!authorizedUserData?.image && <EditProfile inputType='image' />}
                             <div className={stylesProfile.profile__information}>
                                 <h4 className='profile__name'>
