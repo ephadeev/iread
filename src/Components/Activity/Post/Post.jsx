@@ -38,8 +38,8 @@ const Post = ({userId, postText, hours, minutes, checkedTheme}) => {
 Post.propTypes = {
     userId: PropTypes.string,
     postText: PropTypes.string,
-    hours: PropTypes.number,
-    minutes: PropTypes.number,
+    hours: PropTypes.string,
+    minutes: PropTypes.string,
     checkedTheme: PropTypes.string
 };
 
