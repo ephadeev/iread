@@ -25,7 +25,13 @@ const Post = ({userId, postText, hours, minutes, checkedTheme}) => {
                              : 'https://lookp.ru/images/user_unknown_icon.jpg'}
                          alt='Profile avatar' />
                     <span className={stylesPost.posts__author}>
-                        {`${authorOfPost?.firstName} ${authorOfPost?.lastName}:`}
+                        {`
+                        ${authorOfPost?.firstName 
+                            ? authorOfPost?.firstName 
+                            : 'John'} 
+                        ${authorOfPost?.lastName 
+                            ? authorOfPost?.lastName 
+                            : 'Smith'}:`}
                     </span>
                 </>
                 <span className='post__text'>{postText}</span>
