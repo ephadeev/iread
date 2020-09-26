@@ -5,15 +5,14 @@ import {connect} from 'react-redux';
 import {
     onChangeFirstName,
     onChangeHometown,
-    onChangeImage,
     onChangeLastName
 } from '../../Redux/actions/editProfile-actions';
 import {setNewFieldsInAuthorizedUserData} from "../../Redux/actions/authorization-actions";
 
 const EditProfile = ({
                          inputType, firstName, lastName,
-                         Hometown, image, authorizedUserUid, checkedTheme, onChangeFirstName,
-                         onChangeLastName, onChangeHometown, onChangeImage, setNewFieldsInAuthorizedUserData}) => {
+                         Hometown, authorizedUserUid, checkedTheme, onChangeFirstName,
+                         onChangeLastName, onChangeHometown, setNewFieldsInAuthorizedUserData}) => {
 
     const chooseField = (inputType) => {
         switch (inputType) {
@@ -23,8 +22,6 @@ const EditProfile = ({
                 return lastName;
             case 'Hometown':
                 return Hometown;
-            case 'image':
-                return image;
             default:
                 return;
         }
@@ -46,8 +43,6 @@ const EditProfile = ({
                 return onChangeLastName(event.target.value);
             case 'Hometown':
                 return onChangeHometown(event.target.value);
-            case 'image':
-                return onChangeImage(event.target.value);
             default:
                 return;
         }
@@ -69,7 +64,6 @@ EditProfile.propTypes = {
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     HomeTown: PropTypes.string,
-    image: PropTypes.string,
     authorizedUserUid: PropTypes.string,
     checkedTheme: PropTypes.string,
     onChangeFirstName: PropTypes.func,
@@ -84,7 +78,6 @@ const mapStateToProps = state => {
         firstName: state.editProfile.firstName,
         lastName: state.editProfile.lastName,
         Hometown: state.editProfile.Hometown,
-        image: state.editProfile.image,
         authorizedUserUid: state.authorization.authorizedUser.uid,
         checkedTheme: state.themes.checkedTheme
     }
@@ -94,7 +87,6 @@ const mapDispatchToProps = {
     onChangeFirstName,
     onChangeLastName,
     onChangeHometown,
-    onChangeImage,
     setNewFieldsInAuthorizedUserData
 };
 

@@ -15,13 +15,14 @@ const Profile = ({authorizedUserData, isLoading, checkedTheme}) => {
                     {isLoading
                         ? <Loader />
                         : <div className='container flex-container profile__container'>
-                            <img src={authorizedUserData?.image
-                                ? authorizedUserData?.image
-                                : 'https://lookp.ru/images/user_unknown_icon.jpg'}
-                                 alt="Profile avatar"
-                                 className={stylesProfile.profile__avatar} />
-                            <UploadImage />
-                            {!authorizedUserData?.image && <EditProfile inputType='image' />}
+                            <div>
+                                <img src={authorizedUserData?.image
+                                    ? authorizedUserData?.image
+                                    : 'https://firebasestorage.googleapis.com/v0/b/iread-529b4.appspot.com/o/user_unknown_icon.jpg?alt=media&token=307e6ea3-c5ae-447a-977e-57aca93931d8'}
+                                     alt="Profile avatar"
+                                     className={stylesProfile.profile__avatar} />
+                                <UploadImage />
+                            </div>
                             <div className={stylesProfile.profile__information}>
                                 <h4 className='profile__name'>
                                     {authorizedUserData?.firstName
