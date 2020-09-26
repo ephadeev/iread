@@ -123,10 +123,6 @@
     outline: 0;
 }
 
-#uploader {
-    appearance: none;
-}
-
 /* background-colors */
 .bgColorGray {
     background-color: #DDD;
