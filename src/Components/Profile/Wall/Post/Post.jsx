@@ -26,7 +26,7 @@ Post.propTypes = {
     postId: PropTypes.string,
     deletePost: PropTypes.func,
     hours: PropTypes.number,
-    minutes: PropTypes.number,
+    minutes: PropTypes.string,
     checkedTheme: PropTypes.string
 };
 

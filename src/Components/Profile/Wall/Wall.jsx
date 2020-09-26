@@ -15,7 +15,7 @@ const Wall = ({postsFromProps, authorizedUser}) => {
                              postId={post.postId}
                              key={index}
                              hours={hours}
-                             minutes={minutes > 9 ? minutes : `0${minutes}`} />
+                             minutes={minutes > 9 ? `${minutes}` : `0${minutes}`} />
             }
     });
 

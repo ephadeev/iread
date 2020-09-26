@@ -22,7 +22,7 @@ const User = ({userIndex, firstName, lastName, userAvatar, authorizedUserData, i
                                      className='small-avatar' />
                             </div>
                             <div className='user__name'>
-                                {`${firstName} ${lastName}`}
+                                {`${firstName ? firstName : 'John'} ${lastName ? lastName : 'Smith'}`}
                             </div>
                         </>
                         : <Loader />}

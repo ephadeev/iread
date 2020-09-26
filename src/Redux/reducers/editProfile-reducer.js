@@ -1,11 +1,10 @@
-import {ON_CHANGE_FIRST_NAME, ON_CHANGE_HOME_TOWN, ON_CHANGE_IMAGE, ON_CHANGE_LAST_NAME} from "../types";
+import {ON_CHANGE_FIRST_NAME, ON_CHANGE_HOME_TOWN, ON_CHANGE_LAST_NAME} from "../types";
 
 
 const initialState = {
     firstName: '',
     lastName: '',
     Hometown: '',
-    image: '',
     isLoading: false,
     error: null
 };
@@ -31,13 +30,6 @@ const editProfileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 Hometown: action.payload
-            }
-        }
-        // edit image url
-        case ON_CHANGE_IMAGE: {
-            return {
-                ...state,
-                image: action.payload
             }
         }
         default: {

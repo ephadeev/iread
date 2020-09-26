@@ -19,7 +19,9 @@ const AddPost = ({postText, authorizedUserUid, checkedTheme, onChangePost}) => {
 
     const addPost = event => {
         event.preventDefault();
-        addPostHandler(postText, authorizedUserUid)
+        if (postText) {
+            addPostHandler(postText, authorizedUserUid);
+        }
     };
     const onChange = event => onChangePost(event.target.value);
 
@@ -31,9 +33,11 @@ const AddPost = ({postText, authorizedUserUid, checkedTheme, onChangePost}) => {
                        placeholder='anything new?'
                        className={`br5 btDefault bt${checkedTheme} button`}
                        onChange={onChange}
-                       value={postText} />
+                       value={postText}
+                       required />
             </form>
-            <button onClick={addPost}
+            <button type='submit'
+                    onClick={addPost}
                     className={`btn m15`}>
                 <i className='fas fa-paper-plane'>
                 </i>

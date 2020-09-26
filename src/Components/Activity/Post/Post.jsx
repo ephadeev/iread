@@ -25,7 +25,13 @@ const Post = ({userId, postText, hours, minutes, checkedTheme}) => {
                              : 'https://lookp.ru/images/user_unknown_icon.jpg'}
                          alt='Profile avatar' />
                     <span className={stylesPost.posts__author}>
-                        {`${authorOfPost?.firstName} ${authorOfPost?.lastName}:`}
+                        {`
+                        ${authorOfPost?.firstName 
+                            ? authorOfPost?.firstName 
+                            : 'John'} 
+                        ${authorOfPost?.lastName 
+                            ? authorOfPost?.lastName 
+                            : 'Smith'}:`}
                     </span>
                 </>
                 <span className='post__text'>{postText}</span>
@@ -38,8 +44,8 @@ const Post = ({userId, postText, hours, minutes, checkedTheme}) => {
 Post.propTypes = {
     userId: PropTypes.string,
     postText: PropTypes.string,
-    hours: PropTypes.number,
-    minutes: PropTypes.number,
+    hours: PropTypes.string,
+    minutes: PropTypes.string,
     checkedTheme: PropTypes.string
 };
 

@@ -4,6 +4,7 @@ import {
     GET_AUTHORIZED_USER_DATA_FAILURE, SIGN_OUT, ON_CHANGE_EMAIL_SIGN_UP,
     ON_CHANGE_PASSWORD_SIGN_UP, SIGN_UP_STARTED, SIGN_UP_FAILURE,
     DELETE_FRIEND, ADD_FRIEND, SET_FIELDS_IN_AUTHORIZED_USER_DATA,
+    UPLOAD_IMAGE_STARTED, UPLOAD_IMAGE, UPLOAD_IMAGE_FAILURE
 } from '../types';
 
 let initialState = {
@@ -14,7 +15,7 @@ let initialState = {
     emailSignIn: '',
     passwordSignIn: '',
     emailSignUp: '',
-    passwordSignUp: ''
+    passwordSignUp: '',
 };
 
 const authorizationReducer = (state = initialState, action) => {
@@ -132,6 +133,30 @@ const authorizationReducer = (state = initialState, action) => {
                     ...state.authorizedUserData,
                     [action.payload.field]: action.payload.data
                 }
+            }
+        }
+        // update profile image
+        case UPLOAD_IMAGE_STARTED: {
+            return {
+                ...state,
+                isLoading: true
+            }
+        }
+        case UPLOAD_IMAGE: {
+            return {
+                ...state,
+                isLoading: false,
+                authorizedUserData: {
+                    ...state.authorizedUserData,
+                    image: action.payload
+                }
+            }
+        }
+        case UPLOAD_IMAGE_FAILURE: {
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload.error
             }
         }
         // default

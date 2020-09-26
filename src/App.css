@@ -55,6 +55,11 @@
     justify-content: space-evenly;
 }
 
+/* Authentication */
+.authentication__error {
+    color: red;
+}
+
 .middle-avatar {
     width: 100px;
 }

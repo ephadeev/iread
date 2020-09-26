@@ -13,8 +13,8 @@ const Activity = ({postsFromProps, checkedTheme}) => {
             return <Post userId={post.userId}
                          postText={post.text}
                          key={index}
-                         hours={hours > 9 ? hours : `0${hours}`}
-                         minutes={minutes > 9 ? minutes : `0${minutes}`}
+                         hours={hours > 9 ? `${hours}` : `0${hours}`}
+                         minutes={minutes > 9 ? `${minutes}` : `0${minutes}`}
                          checkedTheme={checkedTheme} />
         });
     // TODO: need to show only posts with isPrivate=false
