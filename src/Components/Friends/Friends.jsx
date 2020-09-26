@@ -11,9 +11,9 @@ const Friends = ({friends, checkedTheme}) => {
     return (
         <main className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
             <div className='container bgColorGray'>
-                {friends
+                {friends.length !== 0
                     ? friendsHandler
-                    : ' It seems like there are no friends here...'}
+                    : 'It seems you don\'t have anyone on your friends list yet...'}
             </div>
         </main>
     )
