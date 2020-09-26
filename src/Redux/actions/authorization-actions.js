@@ -5,6 +5,7 @@ import {
     SET_AUTHORIZED_USER_DATA, SIGN_OUT, ON_CHANGE_EMAIL_SIGN_UP,
     ON_CHANGE_PASSWORD_SIGN_UP, SIGN_UP_STARTED, SIGN_UP_FAILURE,
     DELETE_FRIEND, ADD_FRIEND, SET_FIELDS_IN_AUTHORIZED_USER_DATA,
+    UPLOAD_IMAGE_STARTED, UPLOAD_IMAGE, UPLOAD_IMAGE_FAILURE
 } from '../types';
 
 // auth
@@ -69,3 +70,32 @@ export const addFriendFromProps = friendsId => ({type: ADD_FRIEND, payload: frie
 
 // set new fields in authorized user's data
 export const setNewFieldsInAuthorizedUserData = (field, data) => ({type: SET_FIELDS_IN_AUTHORIZED_USER_DATA, payload: {field, data}});
+
+// update profile image
+const uploadProfileImageStarted = () => ({type: UPLOAD_IMAGE_STARTED});
+const uploadProfileImage = fileUrl => ({type: UPLOAD_IMAGE, payload: fileUrl});
+const uploadProfileImageFailure = error => ({type: UPLOAD_IMAGE_FAILURE, payload: {error}});
+export const uploadProfileImageFromProps = (file, authorizedUserUid) => {
+    return dispatch => {
+        dispatch(uploadProfileImageStarted);
+
+        // Create a storage ref
+        const storageRef = firebase.storage().ref(`users/${authorizedUserUid}/`);
+
+        // Create a file ref
+        const fileRef = storageRef.child(file?.name);
+
+        // Upload ref
+        fileRef.put(file)
+            .then(() => {
+                fileRef.getDownloadURL()
+                    .then(fileUrl => {
+                        dispatch(uploadProfileImage(fileUrl));
+                        firebase.firestore().collection('users').doc(authorizedUserUid).update({
+                            image: fileUrl
+                        }).catch(err => dispatch(uploadProfileImageFailure(err.message)))
+                    });
+            })
+            .catch(err => dispatch(uploadProfileImageFailure(err.message)));
+    }
+};
