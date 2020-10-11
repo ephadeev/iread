@@ -358,6 +358,12 @@
     top: calc(50% - 11px);
 }
 
+.post__date {
+    position: absolute;
+    right: 25px;
+    top: calc(50% + 11px);
+}
+
 .post__button {
     flex-grow: 1;
     margin: auto;

@@ -4,7 +4,7 @@ import firebase from 'firebase/app';
 import stylesPost from "./Post.module.css";
 import '../../../App.css';
 
-const Post = ({userId, postText, hours, minutes, checkedTheme}) => {
+const Post = ({userId, postText, hours, minutes, date, month, year, checkedTheme}) => {
     const getAuthorOfPostData = (userId) => {
         firebase.firestore().collection('users').doc(userId).get()
             .then(response => setAuthorOfPost(response.data()))
@@ -36,6 +36,7 @@ const Post = ({userId, postText, hours, minutes, checkedTheme}) => {
                 </>
                 <span className='post__text'>{postText}</span>
                 <span className={`post__time colorDefault color${checkedTheme}`}>{`${hours}:${minutes}`}</span>
+                <span className={`post__date colorDefault color${checkedTheme}`}>{`${date}.${month}.${year}`}</span>
             </div>
         </div>
     );
@@ -46,6 +47,9 @@ Post.propTypes = {
     postText: PropTypes.string,
     hours: PropTypes.string,
     minutes: PropTypes.string,
+    date: PropTypes.number,
+    month: PropTypes.string,
+    year: PropTypes.number,
     checkedTheme: PropTypes.string
 };
 
