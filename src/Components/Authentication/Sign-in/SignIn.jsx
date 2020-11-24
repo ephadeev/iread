@@ -32,11 +32,11 @@ const SignIn = ({email, password, checkedTheme, onChangeEmailFromProps, onChange
                            value={email}
                            className={`br5 btDefault bt${checkedTheme} ${stylesSignIn.btn}`} />
                 </label>
+                <div>{}</div>
                 <label className={styles.label}>
                     <span>Password: </span>
                     <input type='password'
                            minLength='6'
-                           maxLength='6'
                            onChange={onChangePassword}
                            value={password}
                            className={`br5 btDefault bt${checkedTheme} ${stylesSignIn.btn}`} />
