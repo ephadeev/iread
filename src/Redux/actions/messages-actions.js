@@ -5,7 +5,6 @@ import {
     GET_SENT_MESSAGES_FROM_FIRESTORE_STARTED, SET_SENT_MESSAGES_FROM_FIRESTORE,
     GET_SENT_MESSAGES_FROM_FIRESTORE_FAILURE,
 } from '../types';
-import firebase from 'firebase/app';
 
 // get income messages
 const getIncomeMessagesFromFirestoreStarted = () => ({type: GET_INCOME_MESSAGES_FROM_FIRESTORE_STARTED});
@@ -14,15 +13,17 @@ const getIncomeMessagesFromFirestoreFailure = error => ({type: GET_INCOME_MESSAG
 export const getIncomeMessagesFromFirestore = (user1Uid, user2Uid) => {
     return dispatch => {
         dispatch(getIncomeMessagesFromFirestoreStarted);
-        let messagesRef = firebase.firestore().collection('messages');
 
-        let getIncomeMessagesQuery = messagesRef
-            .where('receiver_id', '==', `${user2Uid}`)
-            .where('sender_id', '==', `${user1Uid}`);
-
-        getIncomeMessagesQuery.onSnapshot(response => dispatch(setIncomeMessagesFromFirestore(response.docs.map(message => {
-            return {...message.data(), isIncomingMessage: true}
-        }))), err => dispatch(getIncomeMessagesFromFirestoreFailure(err.message)));
+        // TODO: handle this after completely removing of firebase
+        // let messagesRef = firebase.firestore().collection('messages');
+        //
+        // let getIncomeMessagesQuery = messagesRef
+        //     .where('receiver_id', '==', `${user2Uid}`)
+        //     .where('sender_id', '==', `${user1Uid}`);
+        //
+        // getIncomeMessagesQuery.onSnapshot(response => dispatch(setIncomeMessagesFromFirestore(response.docs.map(message => {
+        //     return {...message.data(), isIncomingMessage: true}
+        // }))), err => dispatch(getIncomeMessagesFromFirestoreFailure(err.message)));
     }
 };
 
@@ -33,14 +34,16 @@ const getSentMessagesFromFirestoreFailure = error => ({type: GET_SENT_MESSAGES_F
 export const getSentMessagesFromFirestore = (user1Uid, user2Uid) => {
     return dispatch => {
         dispatch(getSentMessagesFromFirestoreStarted);
-        let messagesRef = firebase.firestore().collection('messages');
-        let getSentMessagesQuery = messagesRef
-            .where('receiver_id', '==', `${user1Uid}`)
-            .where('sender_id', '==', `${user2Uid}`);
 
-        getSentMessagesQuery.onSnapshot(response => dispatch(setSentMessagesFromFirestore(response.docs.map(message => {
-            return {...message.data(), isIncomingMessage: false}
-        }))), err => dispatch(getSentMessagesFromFirestoreFailure(err.message)));
+        // TODO: handle this after completely removing of firebase
+        // let messagesRef = firebase.firestore().collection('messages');
+        // let getSentMessagesQuery = messagesRef
+        //     .where('receiver_id', '==', `${user1Uid}`)
+        //     .where('sender_id', '==', `${user2Uid}`);
+        //
+        // getSentMessagesQuery.onSnapshot(response => dispatch(setSentMessagesFromFirestore(response.docs.map(message => {
+        //     return {...message.data(), isIncomingMessage: false}
+        // }))), err => dispatch(getSentMessagesFromFirestoreFailure(err.message)));
     }
 };
 

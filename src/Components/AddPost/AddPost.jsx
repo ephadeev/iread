@@ -1,20 +1,21 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import firebase from 'firebase/app';
 import '../../App.css';
 import {onChangePost} from '../../Redux/actions/posts-actions';
 
 const AddPost = ({postText, authorizedUserUid, checkedTheme, onChangePost}) => {
     const addPostHandler = (text, userId) => {
-        firebase.firestore().collection('posts')
-            .add({
-                text: text,
-                isPrivate: false,
-                userId: userId,
-                time: new Date()
-            })
-            .catch(err => console.log('Error adding document: ', err))
+
+        // TODO: handle this after completely removing of firebase
+        // firebase.firestore().collection('posts')
+        //     .add({
+        //         text: text,
+        //         isPrivate: false,
+        //         userId: userId,
+        //         time: new Date()
+        //     })
+        //     .catch(err => console.log('Error adding document: ', err))
     };
 
     const addPost = event => {

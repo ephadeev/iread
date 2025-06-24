@@ -1,5 +1,4 @@
 import React from 'react';
-import firebase from 'firebase/app';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import '../../../App.css';
@@ -7,14 +6,16 @@ import {onChaneMessage} from '../../../Redux/actions/messages-actions';
 
 const AddMessage = ({CurrentUserUid, FriendsUid, messageText, onChaneMessage, checkedTheme}) => {
     const addMessageHandler = (messageText, CurrentUserUid, FriendsUid) => {
-        firebase.firestore().collection('messages')
-            .add({
-                text: messageText,
-                receiver_id: FriendsUid,
-                sender_id: CurrentUserUid,
-                time: new Date()
-            })
-            .catch(err => console.log('Error adding document', err))
+
+        // TODO: handle this after completely removing of firebase
+        // firebase.firestore().collection('messages')
+        //     .add({
+        //         text: messageText,
+        //         receiver_id: FriendsUid,
+        //         sender_id: CurrentUserUid,
+        //         time: new Date()
+        //     })
+        //     .catch(err => console.log('Error adding document', err))
     };
 
     const addMessage = event => {

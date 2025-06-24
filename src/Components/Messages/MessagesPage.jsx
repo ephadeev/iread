@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import firebase from 'firebase/app';
 import '../../App.css';
 import Message from './Message';
 import AddMessage from './AddMessage/AddMessage';
@@ -12,10 +11,12 @@ const MessagesPage = ({incomeMessages, sentMessages, isLoading, isLoadingMessage
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
-        firebase.firestore().collection('users').doc(ownProps.match.params.index)
-            .get()
-            .then(response => setUserData(response.data()))
-            .catch(err => console.log(err.message));
+
+        // TODO: handle this after completely removing of firebase
+        // firebase.firestore().collection('users').doc(ownProps.match.params.index)
+        //     .get()
+        //     .then(response => setUserData(response.data()))
+        //     .catch(err => console.log(err.message));
     }, [ownProps.match.params.index]);
 
     // get income messages

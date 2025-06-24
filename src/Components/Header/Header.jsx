@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import firebase from 'firebase/app';
 import PropTypes from 'prop-types';
 import '../../App.css';
 import stylesHeader from './Header.module.css';
@@ -22,9 +21,11 @@ const Header = ({colorSchemes, checkedTheme, signOut}) => {
 
     const LogOut = event => {
         event.preventDefault();
-        firebase.auth().signOut()
-            .then(() => signOut())
-            .catch(err => console.log(err.message))
+
+        // TODO: handle this after completely removing of firebase
+        // firebase.auth().signOut()
+        //     .then(() => signOut())
+        //     .catch(err => console.log(err.message))
     };
 
     let themes = colorSchemes.map((colorScheme, index) => {

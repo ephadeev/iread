@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types';
-import firebase from 'firebase/app';
 import stylesPost from "./Post.module.css";
 import '../../../App.css';
 
 const Post = ({userId, postText, hours, minutes, date, month, year, checkedTheme}) => {
-    const getAuthorOfPostData = (userId) => {
-        firebase.firestore().collection('users').doc(userId).get()
-            .then(response => setAuthorOfPost(response.data()))
-            .catch(err => console.log(err.message))
-    };
+
+    // TODO: handle this after completely removing of firebase
+    // const getAuthorOfPostData = (userId) => {
+    //     firebase.firestore().collection('users').doc(userId).get()
+    //         .then(response => setAuthorOfPost(response.data()))
+    //         .catch(err => console.log(err.message))
+    // };
 
     useEffect(() => getAuthorOfPostData(userId), []);
 

@@ -1,14 +1,16 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import firebase from 'firebase/app';
 import '../../../../App.css';
 import {deletePost} from '../../../../Redux/actions/posts-actions';
 
 const Post = ({postText, postId, deletePost, hours, minutes, checkedTheme}) => {
-    const delPost = () => firebase.firestore().collection('posts').doc(postId).delete()
-        .then(() => deletePost(postId))
-        .catch(err => console.log(err.message));
+    const delPost = () => {
+        // TODO: handle this after completely removing of firebase
+        // firebase.firestore().collection('posts').doc(postId).delete()
+        //     .then(() => deletePost(postId))
+        //     .catch(err => console.log(err.message));
+    }
 
     return (
         <div className='container post__container bgColorGray'>

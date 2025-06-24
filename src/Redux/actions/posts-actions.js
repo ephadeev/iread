@@ -1,4 +1,3 @@
-import firebase from 'firebase/app';
 import {
     GET_POSTS_FROM_FIRESTORE_FAILURE, GET_POSTS_FROM_FIRESTORE_STARTED, SET_POSTS_FROM_FIRESTORE,
     ON_CHANGE_POST, DELETE_POST,
@@ -11,10 +10,12 @@ const getPostsFromFirestoreFailure = error => ({type: GET_POSTS_FROM_FIRESTORE_F
 export const getPostsFromFirestore = () => {
     return dispatch => {
         dispatch(getPostsFromFirestoreStarted);
-        firebase.firestore().collection('posts')
-            .onSnapshot(response => dispatch(setPostsFromFirestore(response.docs.map(post => {
-                return {postId: post.id, ...post.data()}
-            }))), err => dispatch(getPostsFromFirestoreFailure(err.message)))
+
+        // TODO: handle this after completely removing of firebase
+        // firebase.firestore().collection('posts')
+        //     .onSnapshot(response => dispatch(setPostsFromFirestore(response.docs.map(post => {
+        //         return {postId: post.id, ...post.data()}
+        //     }))), err => dispatch(getPostsFromFirestoreFailure(err.message)))
     }
 };
 

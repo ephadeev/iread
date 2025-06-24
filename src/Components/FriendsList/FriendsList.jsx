@@ -2,15 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import stylesFriends from './FriendsList.module.css';
-import firebase from 'firebase/app';
 
 const FriendsList = ({friend}) => {
     const [friendObject, setFriendObject] = useState(null);
 
     useEffect(() => {
-        firebase.firestore().collection('users').doc(friend).get()
-            .then(response => setFriendObject(response.data()))
-            .catch(err => console.log(err.message));
+
+        // TODO: handle this after completely removing of firebase
+        // firebase.firestore().collection('users').doc(friend).get()
+        //     .then(response => setFriendObject(response.data()))
+        //     .catch(err => console.log(err.message));
     }, []);
 
     return (

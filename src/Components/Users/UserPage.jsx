@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import firebase from 'firebase/app';
 import PropTypes from 'prop-types';
 import '../../App.css';
 import FriendsList from '../FriendsList/FriendsList';
@@ -10,10 +9,11 @@ const UserPage = ({isLoading, checkedTheme, ...ownProps}) => {
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
-        firebase.firestore().collection('users').doc(ownProps.match.params.index)
-            .get()
-            .then(response => setUserData(response.data()))
-            .catch(err => console.log(err.message));
+        // TODO: handle this after completely removing of firebase
+        // firebase.firestore().collection('users').doc(ownProps.match.params.index)
+        //     .get()
+        //     .then(response => setUserData(response.data()))
+        //     .catch(err => console.log(err.message));
     }, [ownProps.match.params.index]);
 
     if (!userData && !isLoading) {

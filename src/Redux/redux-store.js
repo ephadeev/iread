@@ -5,7 +5,7 @@ import messagesReducer from './reducers/messages-reducer';
 import authorizationReducer from './reducers/authorization-reducer';
 import editProfileReducer from './reducers/editProfile-reducer';
 import themesReducer from './reducers/themes-reducer';
-import thunk from 'redux-thunk';
+import {thunk} from 'redux-thunk';
 import reduxLogger from 'redux-logger';
 
 let reducers = combineReducers({

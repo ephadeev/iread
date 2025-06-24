@@ -1,4 +1,3 @@
-import firebase from 'firebase/app';
 import {
     ON_CHANGE_EMAIL_SIGN_IN, ON_CHANGE_PASSWORD_SIGN_IN, SIGN_IN_FAILURE,
     SET_AUTHORIZED_USER, SIGN_IN_STARTED, GET_AUTHORIZED_USER_DATA_FAILURE,
@@ -20,20 +19,22 @@ const signUpFailure = error => ({type: SIGN_UP_FAILURE, payload: {error}});
 export const signUpFromProps = () => {
     return (dispatch, getState) => {
         dispatch(signUpStarted);
-        firebase.auth().createUserWithEmailAndPassword(getState().authorization.emailSignUp, getState().authorization.passwordSignUp)
-            .then(response => {
-                firebase.firestore().collection('users').doc(`${response.user.uid}`).set({
-                    firstName: '',
-                    lastName: '',
-                    friends: [],
-                    image: '',
-                    Hometown: ''
-                })
-                /*firebase.firestore().collection('users').doc(`${response.user.uid}`).get()
-                    .then(doc => dispatch(setAuthorizedUserData(doc.data())))
-                    .catch(err => dispatch(getAuthorizedUserDataFailure(err.message)))*/
-            })
-            .catch(err => dispatch(signUpFailure(err.message)))
+
+        // TODO: handle this after completely removing of firebase
+        // firebase.auth().createUserWithEmailAndPassword(getState().authorization.emailSignUp, getState().authorization.passwordSignUp)
+        //     .then(response => {
+        //         firebase.firestore().collection('users').doc(`${response.user.uid}`).set({
+        //             firstName: '',
+        //             lastName: '',
+        //             friends: [],
+        //             image: '',
+        //             Hometown: ''
+        //         })
+        //         /*firebase.firestore().collection('users').doc(`${response.user.uid}`).get()
+        //             .then(doc => dispatch(setAuthorizedUserData(doc.data())))
+        //             .catch(err => dispatch(getAuthorizedUserDataFailure(err.message)))*/
+        //     })
+        //     .catch(err => dispatch(signUpFailure(err.message)))
     }
 };
 
@@ -44,14 +45,15 @@ const signInFailure = error => ({type: SIGN_IN_FAILURE, payload: {error}});
 export const signInFromProps = () => {
     return (dispatch, getState) => {
         dispatch(signInStarted);
-        firebase.auth().signInWithEmailAndPassword(getState().authorization.emailSignIn, getState().authorization.passwordSignIn)
-            .then(response => {
-                dispatch(setAuthorizedUser(response.user));
-                firebase.firestore().collection('users').doc(`${response.user.uid}`).get()
-                    .then(doc => dispatch(setAuthorizedUserData(doc.data())))
-                    .catch(err => dispatch(getAuthorizedUserDataFailure(err.message)))
-            })
-            .catch(err => dispatch(signInFailure(err.message)))
+        // TODO: handle this after completely removing of firebase
+        // firebase.auth().signInWithEmailAndPassword(getState().authorization.emailSignIn, getState().authorization.passwordSignIn)
+        //     .then(response => {
+        //         dispatch(setAuthorizedUser(response.user));
+        //         firebase.firestore().collection('users').doc(`${response.user.uid}`).get()
+        //             .then(doc => dispatch(setAuthorizedUserData(doc.data())))
+        //             .catch(err => dispatch(getAuthorizedUserDataFailure(err.message)))
+        //     })
+        //     .catch(err => dispatch(signInFailure(err.message)))
     }
 };
 
@@ -79,23 +81,25 @@ export const uploadProfileImageFromProps = (file, authorizedUserUid) => {
     return dispatch => {
         dispatch(uploadProfileImageStarted);
 
+        // TODO: handle this after completely removing of firebase
         // Create a storage ref
-        const storageRef = firebase.storage().ref(`users/${authorizedUserUid}/`);
+        // const storageRef = firebase.storage().ref(`users/${authorizedUserUid}/`);
 
         // Create a file ref
-        const fileRef = storageRef.child(file?.name);
+        // const fileRef = storageRef.child(file?.name);
 
         // Upload ref
-        fileRef.put(file)
-            .then(() => {
-                fileRef.getDownloadURL()
-                    .then(fileUrl => {
-                        dispatch(uploadProfileImage(fileUrl));
-                        firebase.firestore().collection('users').doc(authorizedUserUid).update({
-                            image: fileUrl
-                        }).catch(err => dispatch(uploadProfileImageFailure(err.message)))
-                    });
-            })
-            .catch(err => dispatch(uploadProfileImageFailure(err.message)));
+        // fileRef.put(file)
+        //     .then(() => {
+        //         fileRef.getDownloadURL()
+        //             .then(fileUrl => {
+        //                 dispatch(uploadProfileImage(fileUrl));
+        //
+        //                 // firebase.firestore().collection('users').doc(authorizedUserUid).update({
+        //                 //     image: fileUrl
+        //                 // }).catch(err => dispatch(uploadProfileImageFailure(err.message)))
+        //             });
+        //     })
+        //     .catch(err => dispatch(uploadProfileImageFailure(err.message)));
     }
 };

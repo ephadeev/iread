@@ -1,6 +1,5 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import firebase from 'firebase/app';
 import {connect} from 'react-redux';
 import {
     onChangeFirstName,
@@ -28,11 +27,13 @@ const EditProfile = ({
     };
 
     const editUserData = () => {
-        return firebase.firestore().collection('users').doc(authorizedUserUid).update({
-            [inputType]: chooseField(inputType)
-        })
-            .then(() => setNewFieldsInAuthorizedUserData(inputType, chooseField(inputType)))
-            .catch(err => console.log(err.message))
+
+        // TODO: handle this after completely removing of firebase
+        // return firebase.firestore().collection('users').doc(authorizedUserUid).update({
+        //     [inputType]: chooseField(inputType)
+        // })
+        //     .then(() => setNewFieldsInAuthorizedUserData(inputType, chooseField(inputType)))
+        //     .catch(err => console.log(err.message))
     };
 
     const onChange = event => {

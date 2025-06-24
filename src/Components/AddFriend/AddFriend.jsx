@@ -1,17 +1,18 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import firebase from 'firebase/app';
 import '../../App.css';
 import {addFriendFromProps} from "../../Redux/actions/authorization-actions";
 
 const AddFriend = ({authorizedUserUid, checkedTheme, friendsId, addFriendFromProps}) => {
     const addFriend = () => {
-        return firebase.firestore().collection('users').doc(authorizedUserUid).update({
-            friends: firebase.firestore.FieldValue.arrayUnion(friendsId)
-        })
-            .then(() => addFriendFromProps(friendsId))
-            .catch(err => console.log(err.message))
+
+        // TODO: handle this after completely removing of firebase
+        // return firebase.firestore().collection('users').doc(authorizedUserUid).update({
+        //     friends: firebase.firestore.FieldValue.arrayUnion(friendsId)
+        // })
+        //     .then(() => addFriendFromProps(friendsId))
+        //     .catch(err => console.log(err.message))
     };
 
     return (
