@@ -25,7 +25,11 @@ const UserPage: FC = () => {
 				<div className="flex-container">
 					{isLoading && <Loader />}
 					<div>
-						<img src={userData?.image} alt="" className="middle-avatar" />
+						<img
+							src={userData?.image}
+							alt="User avatar"
+							className="middle-avatar"
+						/>
 					</div>
 					<div>
 						<div> {`${userData?.firstName} ${userData?.lastName}`}</div>

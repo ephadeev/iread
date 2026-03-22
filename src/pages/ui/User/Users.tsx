@@ -14,27 +14,31 @@ const Users: FC = () => {
 			"Auth invariant violated: uid is null inside protected route",
 		);
 	}
-	const { data: usersFromProps, isLoading } = useGetUsersQuery(
+	const { data: users, isLoading } = useGetUsersQuery(
 		{ currentUserUid: uid },
 		{ skip: !uid },
 	);
 
-	const users = usersFromProps?.map((user) => {
-		return (
-			<User
-				firstName={user.firstName}
-				lastName={user.lastName}
-				userIndex={user.userId}
-				userAvatar={user.image}
-				areUsersLoading={isLoading}
-				key={user.userId}
-			/>
-		);
-	});
+	const { isAuthChecking, friends } = useAuthUser();
 
 	return (
 		<main className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
-			<div className="container user">{users}</div>
+			<div className="container user">
+				{users?.map((user) => {
+					return (
+						<User
+							firstName={user.firstName}
+							lastName={user.lastName}
+							userIndex={user.userId}
+							userAvatar={user.image}
+							areUsersLoading={isLoading}
+							isAuthChecking={isAuthChecking}
+							friends={friends}
+							key={user.userId}
+						/>
+					);
+				})}
+			</div>
 		</main>
 	);
 };
