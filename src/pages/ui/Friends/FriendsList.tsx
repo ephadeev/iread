@@ -1,29 +1,22 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC } from "react";
 import { Link } from "react-router";
-import { doc, getDoc, DocumentData } from "firebase/firestore";
-import stylesFriends from "./FriendsList.module.css";
-import { FirebaseFirestoreContext } from "@/app/index.tsx";
+import styles from "./FriendsList.module.css";
+import {useGetUserByIdQuery} from "@/entities/user";
 
 const FriendsList: FC<{ friendId: string }> = ({ friendId }) => {
-	const [friendObject, setFriendObject] = useState<DocumentData>();
-	const db = useContext(FirebaseFirestoreContext);
-
-	useEffect(() => {
-		db &&
-			getDoc(doc(db, "users", friendId))
-				.then((response) => setFriendObject(response.data()))
-				.catch((err) => console.log(err.message));
-	}, []);
+	const { data: userData } = useGetUserByIdQuery(friendId as string, {
+		skip: !friendId,
+	});
 
 	return (
-		<Link to={`/users/${friendId}`} className={stylesFriends.friend}>
+		<Link to={`/users/${friendId}`} className={styles.friend}>
 			<div>
 				<img
-					src={friendObject?.image}
+					src={userData?.image}
 					alt=""
-					className={stylesFriends.user__friendImage}
+					className={styles.user__friendImage}
 				/>
-				<span>{`${friendObject?.firstName} ${friendObject?.lastName}`}</span>
+				<span>{`${userData?.firstName} ${userData?.lastName}`}</span>
 			</div>
 		</Link>
 	);
