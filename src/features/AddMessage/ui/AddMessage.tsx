@@ -1,7 +1,5 @@
-import { FC, useContext, SubmitEvent, MouseEvent, ChangeEvent } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { FC, SubmitEvent, MouseEvent, ChangeEvent } from "react";
 import "@/app/App.css";
-import { FirebaseFirestoreContext } from "@/app/index.tsx";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -11,41 +9,29 @@ import {
 	getNewMessageText,
 } from "@/entities/message/model/messageSlice.ts";
 import { getCheckedTheme } from "@/shared/store/model/themeSlice.ts";
+import {useAddMessageMutation} from "@/entities/message";
 
 const AddMessage: FC<{ currentUserUid: string; friendsUid: string }> = ({
 	currentUserUid,
 	friendsUid,
 }) => {
-	const db = useContext(FirebaseFirestoreContext);
 	const dispatch = useAppDispatch();
 	const checkedTheme = useAppSelector(getCheckedTheme);
 	const messageText = useAppSelector(getNewMessageText);
+	const [addMessage] = useAddMessageMutation();
 
-	const addMessageHandler = (
-		messageText: string,
-		currentUserUid: string,
-		friendsUid: string,
-	) => {
-		db &&
-			addDoc(collection(db, "messages"), {
-				text: messageText,
-				receiver_id: friendsUid,
-				sender_id: currentUserUid,
-				time: new Date(),
-			}).catch((err) => console.log("Error adding document", err));
-	};
-
-	const addMessage = (event: SubmitEvent | MouseEvent) => {
+	const addMessageHandler = (event: SubmitEvent | MouseEvent) => {
 		event.preventDefault();
-		addMessageHandler(messageText, currentUserUid, friendsUid);
+		addMessage({text: messageText, sender_id: currentUserUid, receiver_id: friendsUid})
 	};
 
-	const onChange = (event: ChangeEvent<HTMLInputElement>) =>
+	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
 		dispatch(changeMessage(event.target.value));
+	};
 
 	return (
 		<div className="bgColorGray flex-container">
-			<form className="post__button" onSubmit={addMessage}>
+			<form className="post__button" onSubmit={addMessageHandler}>
 				<input
 					id="message"
 					type="text"
@@ -57,7 +43,7 @@ const AddMessage: FC<{ currentUserUid: string; friendsUid: string }> = ({
 					autoComplete="off"
 				/>
 			</form>
-			<button onClick={addMessage} className={`btn m15`}>
+			<button onClick={addMessageHandler} className={`btn m15`}>
 				<i className="fas fa-paper-plane"></i>
 			</button>
 		</div>
