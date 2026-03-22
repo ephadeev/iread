@@ -4,16 +4,14 @@ import ProfilePosts from "@/widgets/ProfilePost/ui/ProfilePosts.tsx";
 import EditProfile from "@/features/EditProfile/ui/EditProfile.tsx";
 import Loader from "@/shared/ui/Loader/Loader.tsx";
 import UploadImage from "@/features/UploadImage/ui/UploadImage.tsx";
-import { FC } from "react";
-import { useAppSelector } from "@/shared/store/lib/reduxHooks.ts";
-import { getCheckedTheme } from "@/shared/store/model/themeSlice.ts";
+import {FC, memo} from "react";
 import { IUser } from "@/entities/user/model/IUser.ts";
 
 const Profile: FC<{
 	authorizedUserData: IUser | undefined;
 	isLoading: boolean;
-}> = ({ authorizedUserData, isLoading }) => {
-	const checkedTheme = useAppSelector(getCheckedTheme);
+	checkedTheme: string;
+}> = memo(({ authorizedUserData, isLoading, checkedTheme }) => {
 
 	return (
 		<main className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
@@ -60,6 +58,6 @@ const Profile: FC<{
 			</div>
 		</main>
 	);
-};
+});
 
 export default Profile;
