@@ -9,7 +9,7 @@ import {
 	getNewMessageText,
 } from "@/entities/message/model/messageSlice.ts";
 import { getCheckedTheme } from "@/shared/store/model/themeSlice.ts";
-import {useAddMessageMutation} from "@/entities/message";
+import { useAddMessageMutation } from "@/entities/message";
 
 const AddMessage: FC<{ currentUserUid: string; friendsUid: string }> = ({
 	currentUserUid,
@@ -22,7 +22,11 @@ const AddMessage: FC<{ currentUserUid: string; friendsUid: string }> = ({
 
 	const addMessageHandler = (event: SubmitEvent | MouseEvent) => {
 		event.preventDefault();
-		addMessage({text: messageText, sender_id: currentUserUid, receiver_id: friendsUid})
+		addMessage({
+			text: messageText,
+			sender_id: currentUserUid,
+			receiver_id: friendsUid,
+		});
 	};
 
 	const onChange = (event: ChangeEvent<HTMLInputElement>) => {

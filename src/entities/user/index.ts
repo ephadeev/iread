@@ -1,4 +1,9 @@
-export type { IUser, UserWithId, IAuthUser, ICurrentUser } from "./model/IUser.ts";
+export type {
+	IUser,
+	UserWithId,
+	IAuthUser,
+	ICurrentUser,
+} from "./model/IUser.ts";
 export {
 	userApi,
 	useGetAuthorizedUserDataQuery,

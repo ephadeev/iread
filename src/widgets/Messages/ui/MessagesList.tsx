@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router";
 import styles from "./MessagesList.module.css";
-import {useGetUserByIdQuery} from "@/entities/user";
+import { useGetUserByIdQuery } from "@/entities/user";
 
 const MessagesList: FC<{ friendId: string }> = ({ friendId }) => {
 	const { data: userData } = useGetUserByIdQuery(friendId as string, {

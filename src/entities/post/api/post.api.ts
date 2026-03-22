@@ -13,11 +13,7 @@ import {
 	where,
 } from "firebase/firestore";
 import { db } from "@/app/index.tsx";
-import {
-	IPost,
-	IPostFromFirestore,
-	PostWithId,
-} from "../model/IPost.ts";
+import { IPost, IPostFromFirestore, PostWithId } from "../model/IPost.ts";
 
 export const createPostsCollection =
 	(): CollectionReference<IPostFromFirestore> => {
