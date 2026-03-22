@@ -1,70 +1,63 @@
-[Project structure (click to view)](https://jamboard.google.com/d/1MJVH1LLlIuduLO7OPEhAozOhxqBoDmjpLLMAds7iMaU/viewer "click to view")
+# iread
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![](https://img.shields.io/badge/architecture-%20Feature--Sliced%20Design-000000?style=flat)
 
-## Available Scripts
+## Contents
+- [Application architecture](#Application-architecture)
+- [State management](#State-management)
+- [Running locally](#Running-locally)
+- [Deployment](#Deployment)
+- [License](#License)
 
-In the project directory, you can run:
+## Application architecture
 
-### `npm start`
+<a href="./Application-architecture.svg">
+  <img alt="application architecture" width="390px" src="./Application-architecture.svg">
+</a>
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Application is a single repository monolith, consisting of frontend written in [React](https://react.dev/)
+and backend part made using [Google Firebase](https://firebase.google.com/). As a build tool I use [Vite](https://vite.dev).
+I developed the frontend side of application using [FSD](https://feature-sliced.design/) methodology with some
+simplifications. For example, inside pages layer we have ui and lib segments without slices.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Application layers:
+- app - everything that makes the app run — entrypoints, global styles: `index.tsx`, `App.tsx`, `index.css`, `App.css`, etc.
+- pages - large parts of a page in nested routing: `Activity`, `Authentication` and `Friends`, etc.
+- widgets - large self-contained chunks of functionality or UI, in our case that are: `Footer`, `Header`, `Nav`, etc.
+- features - reused implementations of entire product features, i.e. actions that bring business value to the user: `AddFriend`, `AddMessage`, `AddPost`, etc.
+- entities - business entities that the project works with: `Message`, `Post` and `User`.
+- shared - reusable functionality, especially when it's detached from the specifics of the project/business
 
-### `npm test`
+Folders inside every layer divide the layer by domain and by FSD it's called slices.
+Also, every slice and shared layer is divided by segments: ui, model and api.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Also, I configured [aliasing paths](https://dev.to/tilly/aliasing-in-vite-w-typescript-1lfo) in the project for all layers.
+For linting & formatting I use [Biome](https://biomejs.dev).
+For now not all Components were divided into [presentational and container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0).
 
-### `npm run build`
+## State management
+I decided to use [RTK](https://redux-toolkit.js.org/) with RTK Query for state management because I wanted to have a centralized state
+and the ability to see when, where, and how the application's state changed.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Running locally
+All the following commands should be executed from the root folder of the project.
+1. Install necessary dependencies:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```bash
+npm ci
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Start frontend in development mode:
 
-### `npm run eject`
+```bash
+npm run start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Deployment
+Frontend is deployed to [Google Firebase Hosting](https://firebase.google.com/products/hosting) using. 
+Deployment is triggered automatically when there are changes
+on the `main` branch.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## License
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Licensed under the MIT license.
