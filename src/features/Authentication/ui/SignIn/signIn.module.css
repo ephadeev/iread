@@ -1,0 +1,10 @@
+.label {
+	display: block;
+}
+
+.btn {
+}
+
+.btn:focus {
+	outline: 0;
+}
