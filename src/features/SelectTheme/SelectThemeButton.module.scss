@@ -1,5 +1,12 @@
+.header__border {
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+}
+
 .themes {
   position: relative;
+  cursor: pointer;
 }
 
 .radio {
