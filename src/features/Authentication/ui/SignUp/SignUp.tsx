@@ -35,6 +35,7 @@ const SignUp: FC = () => {
 		}
 	};
 
+	// TODO: add field: confirm password
 	return (
 		<form action={signUpHandler}>
 			<fieldset>

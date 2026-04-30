@@ -7,7 +7,6 @@ import { PostWithId } from "@/entities/post/model/IPost.ts";
 const Activity: FC<{ posts: PostWithId[]; checkedTheme: string }> = memo(
 	({ posts, checkedTheme }) => {
 		// TODO: need to show only posts with isPrivate=false
-		// TODO: on Avatar click open http://localhost:3000/user/id
 		// TODO: on Avatar mouseover show a little bit more info about user
 		return (
 			<main className={`wrapper bgColorDefault bgColor${checkedTheme}`}>

@@ -1,7 +1,7 @@
 import Profile from "./Profile.tsx";
 import { useAuthUser } from "@/entities/user/api/useAuthUser.ts";
-import {useAppSelector} from "@/shared/store/lib/reduxHooks.ts";
-import {getCheckedTheme} from "@/shared/store/model/themeSlice.ts";
+import { useAppSelector } from "@/shared/store/lib/reduxHooks.ts";
+import { getCheckedTheme } from "@/shared/store/model/themeSlice.ts";
 
 const ProfileContainer = () => {
 	const { authorizedUserData, isAuthChecking, isAuthorizedUsersDataLoading } =
