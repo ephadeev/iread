@@ -1,12 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
 import AddMessage from "./AddMessage";
 
 const { themeSelector, newMessageTextSelector } = vi.hoisted(() => ({
 	themeSelector: () => "theme",
 	newMessageTextSelector: () => "newMessageText",
 }));
+
+type Selector = typeof themeSelector | typeof newMessageTextSelector;
 
 const dispatchMock = vi.fn();
 const useAppSelectorMock = vi.fn();
@@ -41,7 +42,7 @@ vi.mock("@/entities/message", async () => {
 
 describe("AddMessage", () => {
 	it("dispatches changeMessage on input", async () => {
-		useAppSelectorMock.mockImplementation((selector) => {
+		useAppSelectorMock.mockImplementation((selector: Selector) => {
 			if (selector === themeSelector) return "Dark";
 			if (selector === newMessageTextSelector) return "";
 			return undefined;
@@ -57,7 +58,7 @@ describe("AddMessage", () => {
 	});
 
 	it("calls addMessage and clears input on submit when messageText exists", async () => {
-		useAppSelectorMock.mockImplementation((selector) => {
+		useAppSelectorMock.mockImplementation((selector: Selector) => {
 			if (selector === themeSelector) return "Dark";
 			if (selector === newMessageTextSelector) return "Hello";
 			return undefined;

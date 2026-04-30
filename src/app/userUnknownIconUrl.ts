@@ -4,8 +4,8 @@ import userUnknownIconUrl from "./user_unknown_icon.jpg";
 export const USER_UNKNOWN_ICON_URL = userUnknownIconUrl;
 
 export function handleUserAvatarError(e: {
-    currentTarget: HTMLImageElement;
+	currentTarget: HTMLImageElement;
 }): void {
-    e.currentTarget.onerror = null;
-    e.currentTarget.src = USER_UNKNOWN_ICON_URL;
+	e.currentTarget.onerror = null;
+	e.currentTarget.src = USER_UNKNOWN_ICON_URL;
 }

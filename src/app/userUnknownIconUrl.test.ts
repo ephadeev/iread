@@ -1,7 +1,6 @@
-import { describe, expect, it } from "vitest";
 import {
-	USER_UNKNOWN_ICON_URL,
 	handleUserAvatarError,
+	USER_UNKNOWN_ICON_URL,
 } from "./userUnknownIconUrl";
 
 describe("userUnknownIconUrl", () => {
