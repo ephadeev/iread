@@ -1,3 +1,7 @@
+@import "@fontsource/roboto/300.css";
+@import "@fontsource/roboto/400.css";
+@import "@fontsource/roboto/500.css";
+@import "@fontsource/roboto/700.css";
 @import "media.css";
 
 .App {
@@ -127,6 +131,7 @@
 	background-color: #ddd;
 	transition: 0.2s;
 }
+
 .bgColorDefault {
 	background-color: #276899;
 	transition: 0.2s;
