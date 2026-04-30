@@ -1,10 +1,16 @@
 import { FC } from "react";
 import { Link } from "react-router";
 import styles from "./FriendsList.module.css";
-import { useGetUserByIdQuery } from "@/entities/user";
+import { IUser, useGetUserByIdQuery } from "@/entities/user";
+import {
+	USER_UNKNOWN_ICON_URL,
+	handleUserAvatarError,
+} from "@/app/userUnknownIconUrl.ts";
 
-const FriendsList: FC<{ friendId: string }> = ({ friendId }) => {
-	const { data: userData } = useGetUserByIdQuery(friendId as string, {
+const FriendsList: FC<{ friendId: IUser["friends"][number] }> = ({
+	friendId,
+}) => {
+	const { data: userData } = useGetUserByIdQuery(friendId, {
 		skip: !friendId,
 	});
 
@@ -12,9 +18,10 @@ const FriendsList: FC<{ friendId: string }> = ({ friendId }) => {
 		<Link to={`/users/${friendId}`} className={styles.friend}>
 			<div>
 				<img
-					src={userData?.image}
+					src={userData?.image || USER_UNKNOWN_ICON_URL}
 					alt=""
 					className={styles.user__friendImage}
+					onError={handleUserAvatarError}
 				/>
 				<span>{`${userData?.firstName} ${userData?.lastName}`}</span>
 			</div>

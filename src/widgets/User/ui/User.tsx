@@ -3,6 +3,10 @@ import "@/app/App.css";
 import AddFriend from "@/features/AddFriend/ui/AddFriendButton.tsx";
 import DeleteFriend from "@/features/DeleteFriend/ui/DeleteFriendButton.tsx";
 import Loader from "@/shared/ui/Loader/Loader.tsx";
+import {
+	USER_UNKNOWN_ICON_URL,
+	handleUserAvatarError,
+} from "@/app/userUnknownIconUrl.ts";
 import { FC, memo } from "react";
 
 const User: FC<{
@@ -35,12 +39,10 @@ const User: FC<{
 							<>
 								<div>
 									<img
-										src={
-											userAvatar ||
-											"https://lookp.ru/images/user_unknown_icon.jpg"
-										}
+										src={userAvatar || USER_UNKNOWN_ICON_URL}
 										alt="Profile avatar"
 										className="small-avatar"
+										onError={handleUserAvatarError}
 									/>
 								</div>
 								<div className="user__name">

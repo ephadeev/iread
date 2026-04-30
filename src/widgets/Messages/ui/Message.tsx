@@ -1,4 +1,8 @@
 import "@/app/App.css";
+import {
+	USER_UNKNOWN_ICON_URL,
+	handleUserAvatarError,
+} from "@/app/userUnknownIconUrl.ts";
 import { FC } from "react";
 
 const Message: FC<{
@@ -16,7 +20,12 @@ const Message: FC<{
 			<div
 				className={`${isIncomingMessage ? "message--incoming" : "message-outgoing"} flex-container message__container br5`}
 			>
-				<img src={avatar} alt="" className="small-avatar" />
+				<img
+					src={avatar || USER_UNKNOWN_ICON_URL}
+					alt=""
+					className="small-avatar"
+					onError={handleUserAvatarError}
+				/>
 				<span className="message__text">{text}</span>
 				<span
 					className={`message__time colorDefault color${checkedTheme}`}

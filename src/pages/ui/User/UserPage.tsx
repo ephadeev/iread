@@ -6,6 +6,10 @@ import { useParams } from "react-router";
 import { useAppSelector } from "@/shared/store/lib/reduxHooks.ts";
 import { getCheckedTheme } from "@/shared/store/model/themeSlice.ts";
 import { useGetUserByIdQuery } from "@/entities/user/api/user.api.ts";
+import {
+	USER_UNKNOWN_ICON_URL,
+	handleUserAvatarError,
+} from "@/app/userUnknownIconUrl.ts";
 
 const UserPage: FC = () => {
 	const checkedTheme = useAppSelector(getCheckedTheme);
@@ -26,9 +30,10 @@ const UserPage: FC = () => {
 					{isLoading && <Loader />}
 					<div>
 						<img
-							src={userData?.image}
+							src={userData?.image || USER_UNKNOWN_ICON_URL}
 							alt="User avatar"
 							className="middle-avatar"
+							onError={handleUserAvatarError}
 						/>
 					</div>
 					<div>
@@ -36,11 +41,10 @@ const UserPage: FC = () => {
 						<div>Hometown: {userData?.Hometown}</div>
 						<div>
 							Friends:
-							{userData?.friends
-								? userData?.friends?.map((friendId: string, index: number) => (
-										<FriendsList friendId={friendId} key={index} />
-									))
-								: " It seems like there are no friends here..."}
+							{userData?.friends &&
+								userData?.friends?.map((friendId) => (
+									<FriendsList friendId={friendId} key={friendId} />
+								))}
 						</div>
 					</div>
 				</div>

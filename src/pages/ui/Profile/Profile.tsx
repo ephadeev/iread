@@ -5,59 +5,58 @@ import EditProfile from "@/features/EditProfile/ui/EditProfile.tsx";
 import Loader from "@/shared/ui/Loader/Loader.tsx";
 import UploadImage from "@/features/UploadImage/ui/UploadImage.tsx";
 import {FC, memo} from "react";
-import { IUser } from "@/entities/user/model/IUser.ts";
+import {IUser} from "@/entities/user/model/IUser.ts";
+import {handleUserAvatarError, USER_UNKNOWN_ICON_URL,} from "@/app/userUnknownIconUrl.ts";
 
 const Profile: FC<{
-	authorizedUserData: IUser | undefined;
-	isLoading: boolean;
-	checkedTheme: string;
-}> = memo(({ authorizedUserData, isLoading, checkedTheme }) => {
-
-	return (
-		<main className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
-			<div>
-				{isLoading ? (
-					<Loader />
-				) : (
-					<div className="container flex-container profile__container">
-						<div>
-							{authorizedUserData?.image && (
-								<img
-									src={authorizedUserData?.image}
-									alt="Profile avatar"
-									className={stylesProfile.profile__avatar}
-								/>
-							)}
-							<UploadImage />
-						</div>
-						<div className={stylesProfile.profile__information}>
-							<h4 className="profile__name">
-								{authorizedUserData?.firstName || (
-									<>
-										<span>First name: </span>
-										<EditProfile inputType="firstName" />
-									</>
-								)}
-								{authorizedUserData?.lastName || (
-									<>
-										<span>Last name: </span>
-										<EditProfile inputType="lastName" />
-									</>
-								)}
-							</h4>
-							<div>
-								Hometown:{" "}
-								{authorizedUserData?.Hometown || (
-									<EditProfile inputType="Hometown" />
-								)}
-							</div>
-						</div>
-					</div>
-				)}
-				<ProfilePosts />
-			</div>
-		</main>
-	);
+    authorizedUserData: IUser | undefined;
+    isLoading: boolean;
+    checkedTheme: string;
+}> = memo(({authorizedUserData, isLoading, checkedTheme}) => {
+    return (
+        <main className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
+            <div>
+                {isLoading ? (
+                    <Loader/>
+                ) : (
+                    <div className="container flex-container profile__container">
+                        <div>
+                            <img
+                                src={authorizedUserData?.image || USER_UNKNOWN_ICON_URL}
+                                alt="Profile avatar"
+                                className={stylesProfile.profile__avatar}
+                                onError={handleUserAvatarError}
+                            />
+                            <UploadImage/>
+                        </div>
+                        <div className={stylesProfile.profile__information}>
+                            <h4 className="profile__name">
+                                {authorizedUserData?.firstName || (
+                                    <>
+                                        <span>First name: </span>
+                                        <EditProfile inputType="firstName"/>
+                                    </>
+                                )}
+                                {authorizedUserData?.lastName || (
+                                    <>
+                                        <span>Last name: </span>
+                                        <EditProfile inputType="lastName"/>
+                                    </>
+                                )}
+                            </h4>
+                            <div>
+                                Hometown:{" "}
+                                {authorizedUserData?.Hometown || (
+                                    <EditProfile inputType="Hometown"/>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                )}
+                <ProfilePosts/>
+            </div>
+        </main>
+    );
 });
 
 export default Profile;
