@@ -6,6 +6,7 @@ import {
 	deleteDoc,
 	doc,
 	getDocs,
+	onSnapshot,
 	orderBy,
 	query,
 	QueryDocumentSnapshot,
@@ -29,35 +30,38 @@ export const createPostsCollection =
 		});
 	};
 
-export const getPosts = async () => {
-	const postsCollection = createPostsCollection();
-	const postsQuery = query(postsCollection, orderBy("time", "desc"));
-	const snapshot = await getDocs(postsQuery);
-	return snapshot.docs.map((post): PostWithId => {
-		const data = post.data();
-		return {
-			postId: post.id,
-			isPrivate: data.isPrivate,
-			text: data.text,
-			userId: data.userId,
-			time: data.time.toDate().getTime(),
-		};
-	});
-};
-
 export const postApi = createApi({
 	reducerPath: "postApi",
 	baseQuery: fakeBaseQuery(),
 	tagTypes: ["Post", "PostsById"],
 	endpoints: (build) => ({
-		getPosts: build.query<PostWithId[], void>({
-			queryFn: async () => {
-				try {
-					const posts: PostWithId[] = await getPosts();
-					return { data: posts };
-				} catch (error) {
-					return { error };
-				}
+		listenPosts: build.query<PostWithId[], void>({
+			queryFn: async () => ({ data: [] }),
+			onCacheEntryAdded: async (
+				_arg,
+				{ updateCachedData, cacheEntryRemoved },
+			) => {
+				const postsCollection = createPostsCollection();
+				const postsQuery = query(postsCollection, orderBy("time", "desc"));
+				const unsubscribe = onSnapshot(postsQuery, (snapshot) => {
+					const postsWithId: PostWithId[] = snapshot.docs.map(
+						(post): PostWithId => {
+							const data = post.data({ serverTimestamps: "estimate" });
+							const timestamp = data.time;
+							return {
+								postId: post.id,
+								isPrivate: data.isPrivate,
+								text: data.text,
+								userId: data.userId,
+								time: timestamp ? timestamp.toDate().getTime() : Date.now(),
+							};
+						},
+					);
+					updateCachedData(() => postsWithId);
+				});
+
+				await cacheEntryRemoved;
+				unsubscribe();
 			},
 			providesTags: ["Post"],
 		}),
@@ -103,7 +107,7 @@ export const postApi = createApi({
 					return { error };
 				}
 			},
-			invalidatesTags: ["Post", "PostsById"],
+			invalidatesTags: ["PostsById"],
 		}),
 		deletePost: build.mutation<void, string>({
 			queryFn: async (postId) => {
@@ -115,13 +119,13 @@ export const postApi = createApi({
 					return { error };
 				}
 			},
-			invalidatesTags: ["Post", "PostsById"],
+			invalidatesTags: ["PostsById"],
 		}),
 	}),
 });
 
 export const {
-	useGetPostsQuery,
+	useListenPostsQuery,
 	useGetPostsByIdQuery,
 	useAddPostMutation,
 	useDeletePostMutation,

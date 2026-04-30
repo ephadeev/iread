@@ -7,7 +7,7 @@ export {
 export { default as messageReducer } from "./model/messageSlice.ts";
 export {
 	messageApi,
-	useGetMessagesQuery,
+	useListenMessagesQuery,
 	useAddMessageMutation,
 	useDeleteMessageMutation,
 } from "./api/message.api.ts";

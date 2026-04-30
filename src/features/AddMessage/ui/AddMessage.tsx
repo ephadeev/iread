@@ -1,4 +1,4 @@
-import { FC, SubmitEvent, MouseEvent, ChangeEvent } from "react";
+import { ChangeEvent, FC, MouseEvent, SubmitEvent } from "react";
 import "@/app/App.css";
 import {
 	useAppDispatch,
@@ -20,13 +20,16 @@ const AddMessage: FC<{ currentUserUid: string; friendsUid: string }> = ({
 	const messageText = useAppSelector(getNewMessageText);
 	const [addMessage] = useAddMessageMutation();
 
-	const addMessageHandler = (event: SubmitEvent | MouseEvent) => {
+	const addMessageHandler = async (event: SubmitEvent | MouseEvent) => {
 		event.preventDefault();
-		addMessage({
-			text: messageText,
-			sender_id: currentUserUid,
-			receiver_id: friendsUid,
-		});
+		if (messageText) {
+			await addMessage({
+				text: messageText,
+				sender_id: currentUserUid,
+				receiver_id: friendsUid,
+			}).unwrap();
+			dispatch(changeMessage(""));
+		}
 	};
 
 	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
