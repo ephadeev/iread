@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
 import MessagesPage from "./MessagesPage";
 
 const { themeSelector } = vi.hoisted(() => ({
@@ -54,7 +53,7 @@ vi.mock("@/features/AddMessage/ui/AddMessage.tsx", async () => {
 describe("MessagesPage", () => {
 	it("renders 'Chat not found' when receiverId missing", () => {
 		useParamsMock.mockReturnValue({ index: undefined });
-		useAppSelectorMock.mockImplementation((selector) => {
+		useAppSelectorMock.mockImplementation((selector: typeof themeSelector) => {
 			if (selector === themeSelector) return "Dark";
 			return undefined;
 		});
@@ -71,7 +70,7 @@ describe("MessagesPage", () => {
 
 	it("throws when uid is null inside protected route", () => {
 		useParamsMock.mockReturnValue({ index: "u2" });
-		useAppSelectorMock.mockImplementation((selector) => {
+		useAppSelectorMock.mockImplementation((selector: typeof themeSelector) => {
 			if (selector === themeSelector) return "Dark";
 			return undefined;
 		});
