@@ -7,7 +7,7 @@ export {
 export { default as postReducer } from "./model/postSlice.ts";
 export {
 	postApi,
-	useGetPostsQuery,
+	useListenPostsQuery,
 	useGetPostsByIdQuery,
 	useAddPostMutation,
 	useDeletePostMutation,
