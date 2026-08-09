@@ -9,6 +9,9 @@ const useParamsMock = vi.fn();
 vi.mock("react-router", async () => {
 	return {
 		useParams: () => useParamsMock(),
+		Link: ({ children, to }: { children: React.ReactNode; to: string }) => (
+			<a href={to}>{children}</a>
+		),
 	};
 });
 
@@ -26,9 +29,9 @@ vi.mock("@/entities/user/api/useAuthUser.ts", async () => {
 	return { useAuthUser: () => useAuthUserMock() };
 });
 
-const useGetUsersQueryMock = vi.fn();
+const useGetUserByIdQueryMock = vi.fn();
 vi.mock("@/entities/user/api/user.api.ts", async () => {
-	return { useGetUsersQuery: (...a: any[]) => useGetUsersQueryMock(...a) };
+	return { useGetUserByIdQuery: (...a: any[]) => useGetUserByIdQueryMock(...a) };
 });
 
 const useListenMessagesQueryMock = vi.fn();
@@ -58,8 +61,8 @@ describe("MessagesPage", () => {
 			return undefined;
 		});
 		useAuthUserMock.mockReturnValue({ uid: "me", image: "/me.jpg" });
-		useGetUsersQueryMock.mockReturnValue({
-			selectedUser: undefined,
+		useGetUserByIdQueryMock.mockReturnValue({
+			data: undefined,
 			isLoading: false,
 		});
 		useListenMessagesQueryMock.mockReturnValue({ data: [], isLoading: false });

@@ -1,26 +1,23 @@
-import "@/app/App.css";
+import {Box, Container, List} from '@mui/material';
 import MessagesList from "@/widgets/Messages/ui/MessagesList.tsx";
-import { useAppSelector } from "@/shared/store/lib/reduxHooks.ts";
-import { getCheckedTheme } from "@/shared/store/model/themeSlice.ts";
-import { FC } from "react";
-import { useAuthUser } from "@/entities/user/api/useAuthUser.ts";
+import {FC} from "react";
+import {useAuthUser} from "@/entities/user/api/useAuthUser.ts";
 
 const Messages: FC = () => {
-	const checkedTheme = useAppSelector(getCheckedTheme);
-	const { friends } = useAuthUser();
-	const messagesHandler = friends?.map((friend: string) => (
-		<MessagesList friendId={friend} key={friend} />
-	));
+    const {friends} = useAuthUser();
 
-	return (
-		<main className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
-			<div className="container bgColorGray">
-				{friends.length !== 0
-					? messagesHandler
-					: " If you want to write a message to someone, then it's time to add someone to your friends list..."}
-			</div>
-		</main>
-	);
+    return (
+        <Box component='main' sx={{minHeight: 'calc(100vh - 120px - 10px - 24px)'}}>
+            <Container maxWidth='xl'>
+                {friends.length !== 0 &&
+                    <List>
+                        {friends?.map((friend: string, i) => (
+                            <MessagesList friendId={friend} key={friend} withDivider={i !== friends.length - 1}/>
+                        ))}
+                    </List>}
+            </Container>
+        </Box>
+    );
 };
 
 export default Messages;
