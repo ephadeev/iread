@@ -7,7 +7,7 @@ export type {
 export {
 	userApi,
 	useGetAuthorizedUserDataQuery,
-	useGetUsersQuery,
+	useGetUsersInfiniteQuery,
 	useGetUserByIdQuery,
 	useCreateUserProfileMutation,
 	useUploadProfileImageMutation,
