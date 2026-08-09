@@ -1,84 +1,68 @@
-import { ChangeEvent, FC } from "react";
-import {
-	useAppDispatch,
-	useAppSelector,
-} from "@/shared/store/lib/reduxHooks.ts";
-import { getCheckedTheme } from "@/shared/store/model/themeSlice.ts";
-import {
-	changeFirstName,
-	changeHometown,
-	changeLastName,
-	getFirstName,
-	getHometown,
-	getLastName,
-} from "@/shared/store/model/profileSlice.ts";
-import { useAuthUser } from "@/entities/user/api/useAuthUser.ts";
-import { useUpdateAuthorizedUserDataMutation } from "@/entities/user/api/user.api.ts";
-import { IUser } from "@/entities/user/model/IUser.ts";
+import {ChangeEvent, FC} from "react";
+import {useAuthUser} from "@/entities/user/api/useAuthUser.ts";
+import {useUpdateAuthorizedUserDataMutation} from "@/entities/user/api/user.api.ts";
+import {IUser} from "@/entities/user/model/IUser.ts";
+import {Box, Button, TextField, Typography} from "@mui/material";
+import SaveIcon from "@mui/icons-material/Save";
 
-const EditProfile: FC<{ inputType: keyof IUser }> = ({ inputType }) => {
-	const checkedTheme = useAppSelector(getCheckedTheme);
-	const firstName = useAppSelector(getFirstName);
-	const lastName = useAppSelector(getLastName);
-	const hometown = useAppSelector(getHometown);
-	const dispatch = useAppDispatch();
-	const { uid } = useAuthUser();
-	if (!uid) {
-		throw new Error(
-			"Auth invariant violated: uid is null inside protected route",
-		);
-	}
-	const [updateAuthorizedUserData] = useUpdateAuthorizedUserDataMutation();
+const EditProfile: FC<{
+    fieldName: keyof IUser;
+    fieldValue: string;
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void
+}> = ({fieldName, fieldValue, onChange}) => {
+    const {uid} = useAuthUser();
+    if (!uid) {
+        throw new Error(
+            "Auth invariant violated: uid is null inside protected route",
+        );
+    }
+    const [updateAuthorizedUserData] = useUpdateAuthorizedUserDataMutation();
 
-	const chooseField = (inputType: string): string => {
-		switch (inputType) {
-			case "firstName":
-				return firstName;
-			case "lastName":
-				return lastName;
-			case "Hometown":
-				return hometown;
-			default:
-				return "";
-		}
-	};
+    const updateAuthorizedUserDataHandler = async (formData: FormData) => {
+        const fieldValue = formData.get(fieldName);
+        if (typeof fieldValue !== 'string') return;
 
-	const editUserData = async () => {
-		await updateAuthorizedUserData({
-			currentUserUid: uid,
-			fieldName: inputType,
-			fieldValue: chooseField(inputType),
-		});
-	};
+        try {
+            await updateAuthorizedUserData({
+                currentUserUid: uid,
+                fieldName: fieldName,
+                fieldValue: fieldValue
+            }).unwrap();
+        } catch (error) {
+            console.error(`Error while changing ${fieldName}:`, error);
+        }
+    }
 
-	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-		switch (inputType) {
-			case "firstName":
-				return dispatch(changeFirstName(event.target.value));
-			case "lastName":
-				return dispatch(changeLastName(event.target.value));
-			case "Hometown":
-				return dispatch(changeHometown(event.target.value));
-			default:
-				return;
-		}
-	};
-
-	return (
-		<div>
-			<input
-				id={chooseField(inputType)}
-				placeholder={inputType}
-				name={chooseField(inputType)}
-				type="text"
-				onChange={onChange}
-				value={chooseField(inputType)}
-				autoComplete="off"
-				className={`br5 btDefault bt${checkedTheme}`}
-			/>
-			<button onClick={editUserData}>save</button>
-		</div>
-	);
+    return (
+        <Box
+            component='form'
+            action={updateAuthorizedUserDataHandler}
+            noValidate={true}
+            sx={{display: 'flex', alignItems: 'center', mb: '20px'}}
+        >
+            {/*TODO: reformat fieldName in human readable format*/}
+            <Typography sx={{mr: '20px'}}>Change {fieldName}:</Typography>
+            <TextField
+                id={fieldName}
+                type='text'
+                name={fieldName}
+                size='small'
+                onChange={onChange}
+                value={fieldValue}
+                autoComplete='off'
+                label={'new ' + fieldName}
+                required={true}
+                sx={{flexGrow: 1, mr: '20px'}}
+            />
+            <Button
+                variant='contained'
+                color='warning'
+                type='submit'
+            >
+                <SaveIcon sx={{marginRight: '5px'}}/>Save
+            </Button>
+        </Box>
+    );
 };
 
 export default EditProfile;
