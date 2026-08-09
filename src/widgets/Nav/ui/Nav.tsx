@@ -1,86 +1,72 @@
-import "@/app/App.css";
-import { NavLink } from "react-router";
-import { FC } from "react";
-import { useAppSelector } from "@/shared/store/lib/reduxHooks.ts";
-import { getCheckedTheme } from "@/shared/store/model/themeSlice.ts";
-import { useAuthUser } from "@/entities/user/api/useAuthUser.ts";
+import {NavLink} from "react-router";
+import {FC} from "react";
+import {Link, List, ListItem, Stack} from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import EmailIcon from '@mui/icons-material/Email';
+import GroupIcon from '@mui/icons-material/Group';
+import GroupsIcon from '@mui/icons-material/Groups';
+
+
+import {useAuthUser} from "@/entities/user/api/useAuthUser.ts";
 
 const Nav: FC = () => {
-	const checkedTheme = useAppSelector(getCheckedTheme);
-	const { isAuthenticated } = useAuthUser();
+    const {isAuthenticated} = useAuthUser();
 
-	return (
-		<nav className={`bgColorDefault bgColor${checkedTheme}`}>
-			<div className="container nav__container flex-container">
-				{isAuthenticated && (
-					<NavLink
-						to="/profile"
-						className={({ isActive }) =>
-							"links " + isActive && `colorDefault color${checkedTheme}`
-						}
-					>
-						<i className="fas fa-user-circle"></i>
-						<span className="nav__text"> Profile</span>
-					</NavLink>
-				)}
-				{isAuthenticated && (
-					<NavLink
-						to="/messages"
-						className={({ isActive }) =>
-							"links " + isActive && `colorDefault color${checkedTheme}`
-						}
-					>
-						<i className="fas fa-comments"></i>
-						<span className="nav__text"> Messages</span>
-					</NavLink>
-				)}
-				{isAuthenticated && (
-					<NavLink
-						to="/activity"
-						className={({ isActive }) =>
-							"links " + isActive && `colorDefault color${checkedTheme}`
-						}
-					>
-						<i className="fas fa-envelope"></i>
-						<span className="nav__text"> Activity</span>
-					</NavLink>
-				)}
-				{isAuthenticated && (
-					<NavLink
-						to="/users"
-						className={({ isActive }) =>
-							"links " + isActive && `colorDefault color${checkedTheme}`
-						}
-					>
-						<i className="fas fa-users"></i>
-						<span className="nav__text"> Users</span>
-					</NavLink>
-				)}
-				{isAuthenticated && (
-					<NavLink
-						to="/friends"
-						className={({ isActive }) =>
-							"links " + isActive && `colorDefault color${checkedTheme}`
-						}
-					>
-						<i className="fas fa-user-friends"></i>
-						<span className="nav__text"> Friends</span>
-					</NavLink>
-				)}
-				{!isAuthenticated && (
-					<NavLink
-						to="/authentication"
-						className={({ isActive }) =>
-							"links " + isActive && `colorDefault color${checkedTheme}`
-						}
-					>
-						<i className="fas fa-user"></i>
-						<span> Login</span>
-					</NavLink>
-				)}
-			</div>
-		</nav>
-	);
+    return (
+        <Stack component='nav'>
+            <List sx={{display: 'flex'}}>
+                {isAuthenticated && (
+                    <ListItem sx={{justifyContent: 'center'}}>
+                        <Link component={NavLink} to="/profile"
+                              sx={{display: 'flex', alignItems: "center"}}>
+                            <AccountCircleIcon fontSize='small'/>Profile
+                        </Link>
+                    </ListItem>
+                )}
+                {isAuthenticated && (
+                    <ListItem sx={{justifyContent: 'center'}}>
+                        <Link component={NavLink} to="/messages"
+                              sx={{display: 'flex', alignItems: "center"}}>
+                            <QuestionAnswerIcon fontSize='small'/>Messages
+                        </Link>
+                    </ListItem>
+                )}
+                {isAuthenticated && (
+                    <ListItem sx={{justifyContent: 'center'}}>
+                        <Link component={NavLink} to="/activity"
+                              sx={{display: 'flex', alignItems: "center"}}>
+                            <EmailIcon fontSize='small'/>Activity
+                        </Link>
+                    </ListItem>
+                )}
+                {isAuthenticated && (
+                    <ListItem sx={{justifyContent: 'center'}}>
+                        <Link component={NavLink} to="/users"
+                              sx={{display: 'flex', alignItems: "center"}}>
+                            <GroupsIcon fontSize='small'/>Users
+                        </Link>
+                    </ListItem>
+                )}
+                {isAuthenticated && (
+                    <ListItem sx={{justifyContent: 'center'}}>
+                        <Link component={NavLink} to="/friends"
+                              sx={{display: 'flex', alignItems: "center"}}>
+                            <GroupIcon fontSize='small'/>Friends
+                        </Link>
+                    </ListItem>
+                )}
+                {!isAuthenticated && (
+                    <ListItem sx={{justifyContent: 'center'}}>
+                        <Link component={NavLink} to="/authentication"
+                              sx={{display: 'flex', alignItems: "center"}}>
+                            <i className="fas fa-user"></i>Login
+                        </Link>
+                    </ListItem>
+                )}
+            </List>
+        </Stack>
+    );
 };
 
 export default Nav;
