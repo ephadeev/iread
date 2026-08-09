@@ -1,56 +1,57 @@
-import { FC } from "react";
-import "@/app/App.css";
+import {FC} from "react";
+import {Avatar, Box, Container, List, Typography} from '@mui/material';
 import FriendsList from "../Friends/FriendsList.tsx";
 import Loader from "@/shared/ui/Loader/Loader.tsx";
-import { useParams } from "react-router";
-import { useAppSelector } from "@/shared/store/lib/reduxHooks.ts";
-import { getCheckedTheme } from "@/shared/store/model/themeSlice.ts";
-import { useGetUserByIdQuery } from "@/entities/user/api/user.api.ts";
-import {
-	USER_UNKNOWN_ICON_URL,
-	handleUserAvatarError,
-} from "@/app/userUnknownIconUrl.ts";
+import {useParams} from "react-router";
+import {useGetUserByIdQuery} from "@/entities/user/api/user.api.ts";
+import {handleUserAvatarError, USER_UNKNOWN_ICON_URL,} from "@/app/userUnknownIconUrl.ts";
 
 const UserPage: FC = () => {
-	const checkedTheme = useAppSelector(getCheckedTheme);
-	const { index: selectedUserId } = useParams();
-	const { data: userData, isLoading } = useGetUserByIdQuery(
-		selectedUserId as string,
-		{ skip: !selectedUserId },
-	);
+    const {index: selectedUserId} = useParams();
+    const {data: userData, isLoading} = useGetUserByIdQuery(
+        selectedUserId as string,
+        {skip: !selectedUserId},
+    );
 
-	if (!userData && !isLoading) {
-		return <Loader />;
-	}
+    if (!userData && !isLoading) {
+        return <Loader/>;
+    }
 
-	return (
-		<div className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
-			<div className="container bgColorGray">
-				<div className="flex-container">
-					{isLoading && <Loader />}
-					<div>
-						<img
-							src={userData?.image || USER_UNKNOWN_ICON_URL}
-							alt="User avatar"
-							className="middle-avatar"
-							onError={handleUserAvatarError}
-						/>
-					</div>
-					<div>
-						<div> {`${userData?.firstName} ${userData?.lastName}`}</div>
-						<div>Hometown: {userData?.Hometown}</div>
-						<div>
-							Friends:
-							{userData?.friends &&
-								userData?.friends?.map((friendId) => (
-									<FriendsList friendId={friendId} key={friendId} />
-								))}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+    return (
+        <Box component='main'>
+            <Container maxWidth='xl'>
+                {isLoading && <Loader/>}
+                <Avatar
+                    src={userData?.image || USER_UNKNOWN_ICON_URL}
+                    alt="User avatar"
+                    variant='rounded'
+                    sx={{
+                        height: 200,
+                        width: 200,
+                        fontSize: 50
+                    }}
+                    slotProps={{
+                        img: {onError: handleUserAvatarError},
+                    }}
+                />
+                <Typography> {`${userData?.firstName} ${userData?.lastName}`}</Typography>
+                {userData?.hometown && <Typography>Hometown: {userData?.hometown}</Typography>}
+                <Box>
+                    <Typography>Friends:</Typography>
+                    <List>
+                        {userData?.friends &&
+                            userData?.friends?.map((friendId, i) => (
+                                <FriendsList
+                                    friendId={friendId}
+                                    key={friendId}
+                                    withDivider={i !== userData?.friends?.length - 1}
+                                />
+                            ))}
+                    </List>
+                </Box>
+            </Container>
+        </Box>
+    );
 };
 
 export default UserPage;
