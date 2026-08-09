@@ -1,65 +1,61 @@
-import stylesProfile from "./Profile.module.css";
-import "@/app/App.css";
 import ProfilePosts from "@/widgets/ProfilePost/ui/ProfilePosts.tsx";
-import EditProfile from "@/features/EditProfile/ui/EditProfile.tsx";
 import Loader from "@/shared/ui/Loader/Loader.tsx";
 import UploadImage from "@/features/UploadImage/ui/UploadImage.tsx";
-import { FC, memo } from "react";
-import { IUser } from "@/entities/user/model/IUser.ts";
-import {
-	handleUserAvatarError,
-	USER_UNKNOWN_ICON_URL,
-} from "@/app/userUnknownIconUrl.ts";
+import {FC, memo} from "react";
+import {IUser} from "@/entities/user/model/IUser.ts";
+import {handleUserAvatarError, USER_UNKNOWN_ICON_URL,} from "@/app/userUnknownIconUrl.ts";
+import {Avatar, Box, ButtonBase, Container, Typography} from "@mui/material";
 
 const Profile: FC<{
-	authorizedUserData: IUser | undefined;
-	isLoading: boolean;
-	checkedTheme: string;
-}> = memo(({ authorizedUserData, isLoading, checkedTheme }) => {
-	return (
-		<main className={`wrapper bgColorDefault bgColor${checkedTheme}`}>
-			<div>
-				{isLoading ? (
-					<Loader />
-				) : (
-					<div className="container flex-container profile__container">
-						<div>
-							<img
-								src={authorizedUserData?.image || USER_UNKNOWN_ICON_URL}
-								alt="Profile avatar"
-								className={stylesProfile.profile__avatar}
-								onError={handleUserAvatarError}
-							/>
-							<UploadImage />
-						</div>
-						<div className={stylesProfile.profile__information}>
-							<h4 className="profile__name">
-								{authorizedUserData?.firstName || (
-									<>
-										<span>First name: </span>
-										<EditProfile inputType="firstName" />
-									</>
-								)}
-								{authorizedUserData?.lastName || (
-									<>
-										<span>Last name: </span>
-										<EditProfile inputType="lastName" />
-									</>
-								)}
-							</h4>
-							<div>
-								Hometown:{" "}
-								{authorizedUserData?.Hometown || (
-									<EditProfile inputType="Hometown" />
-								)}
-							</div>
-						</div>
-					</div>
-				)}
-				<ProfilePosts />
-			</div>
-		</main>
-	);
+    authorizedUserData: IUser | undefined;
+    isLoading: boolean;
+}> = memo(({authorizedUserData, isLoading}) => {
+    return (
+        <Box component='main' sx={{minHeight: 'calc(100vh - 120px - 10px - 24px)'}}>
+            {isLoading ? (
+                <Loader/>
+            ) : (
+                <Container maxWidth='xl'>
+                    <ButtonBase
+                        component='label'
+                        tabIndex={-1} // prevent label from tab focus
+                        aria-label="Profile avatar"
+                    >
+                        <Avatar
+                            src={authorizedUserData?.image || USER_UNKNOWN_ICON_URL}
+                            alt='Upload new avatar'
+                            variant='rounded'
+                            slotProps={{
+                                img: {onError: handleUserAvatarError},
+                            }}
+                            sx={{
+                                height: 200,
+                                width: 200,
+                                fontSize: 50
+                            }}
+                        >
+                            {authorizedUserData?.firstName[0]}{authorizedUserData?.lastName[0]}
+                        </Avatar>
+                        <UploadImage/>
+                    </ButtonBase>
+                    <Box>
+                        <Typography>{authorizedUserData?.firstName} {authorizedUserData?.lastName}</Typography>
+                        <Typography>from {authorizedUserData?.hometown}</Typography>
+                    </Box>
+                    {/*TODO: 100 books | 9.2K pages*/}
+                    {/*TODO: 3 among 6 of your following | more than 50% of your following*/}
+                    {/*TODO: 1 Reading | 115 Plan to read | 40 Dropped*/}
+                    {/*TODO: Daily Stats*/}
+                    {/*TODO: Recent Activity*/}
+                    {/*TODO: Today*/}
+                    {/*TODO: Yesterday*/}
+                    {/*TODO: 03 May*/}
+                    {/*TODO: Recommendations*/}
+                    <ProfilePosts/>
+                </Container>
+            )}
+        </Box>
+    );
 });
 
 export default Profile;
