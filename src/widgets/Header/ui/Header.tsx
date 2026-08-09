@@ -1,43 +1,74 @@
-import { useState } from "react";
+import {useState} from "react";
+import {NavLink} from "react-router";
+import Nav from "@/widgets/Nav/ui/Nav.tsx";
 import "@/app/App.css";
-import stylesHeader from "./Header.module.css";
-import { useAppSelector } from "@/shared/store/lib/reduxHooks.ts";
-import { getCheckedTheme } from "@/shared/store/model/themeSlice.ts";
 import SignOutContainer from "@/features/Authentication/ui/SignOut/SignOutContainer.tsx";
-import SelectThemeButtonContainer from "@/features/SelectTheme/SelectThemeButtonContainer.tsx";
+import {AppBar, Avatar, Box, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography} from '@mui/material';
 
 const Header = () => {
-	const [areSettingsVisible, setAreSettingsVisible] = useState<boolean>(false);
-	const checkedTheme = useAppSelector(getCheckedTheme);
+    const [areSettingsVisible, setAreSettingsVisible] = useState<boolean>(false);
 
-	const toggleSettings = () => {
-		setAreSettingsVisible((prevState) => !prevState);
-	};
+    const toggleSettings = () => {
+        setAreSettingsVisible((prevState) => !prevState);
+    };
 
-	return (
-		<header
-			className={`${stylesHeader.header} bgColorDefault bgColor${checkedTheme}`}
-		>
-			<div className="container header__container flex-container">
-				<div className="header__logo">
-					<i className="fas fa-book-open"></i>
-				</div>
+    return (
+        <>
+            <AppBar position='static' sx={{marginBottom: '10px'}}>
+                <Container maxWidth='xl'>
+                    <Toolbar disableGutters={true}>
+                        <Typography
+                            variant='h4'
+                            noWrap
+                            sx={{
+                                flexGrow: 1,
+                                fontFamily: 'Kaushan Script'
+                            }}
+                        >
+                            iRead
+                        </Typography>
 
-				<div className="header__title">iRead</div>
-
-				<div className="header__settings">
-					<i className="fas fa-cog" onClick={toggleSettings}></i>
-				</div>
-
-				{areSettingsVisible && (
-					<div className={stylesHeader.header__contentVisible}>
-						<SignOutContainer />
-						<SelectThemeButtonContainer />
-					</div>
-				)}
-			</div>
-		</header>
-	);
+                        <Box sx={{flexGrow: 0}}>
+                            <Tooltip title='Open settings'>
+                                <IconButton onClick={toggleSettings} sx={{p: 0}}>
+                                    <Avatar alt='first name last name' src=''/>
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right'
+                                }}
+                                open={areSettingsVisible}
+                                onClose={toggleSettings}
+                            >
+                                <MenuItem onClick={toggleSettings} component={NavLink} to='/profile'>
+                                    <Typography>Profile</Typography>
+                                </MenuItem>
+                                <MenuItem onClick={toggleSettings} component={NavLink} to='/achievements'>
+                                    <Typography>Achievements</Typography>
+                                </MenuItem>
+                                <MenuItem onClick={toggleSettings} component={NavLink} to='/notes'>
+                                    <Typography>Notes</Typography>
+                                </MenuItem>
+                                <MenuItem onClick={toggleSettings}>
+                                    <Typography>Select theme</Typography>
+                                </MenuItem>
+                                <MenuItem onClick={toggleSettings} component={NavLink} to='/settings'>
+                                    <Typography>Settings</Typography>
+                                </MenuItem>
+                                <MenuItem onClick={toggleSettings}>
+                                    <SignOutContainer/>
+                                </MenuItem>
+                            </Menu>
+                        </Box>
+                    </Toolbar>
+                    <Nav/>
+                </Container>
+            </AppBar>
+        </>
+    );
 };
 
 export default Header;
